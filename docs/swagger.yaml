@@ -11,6 +11,11 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: ""
+servers:
+  - url: https://api.example.com/v1
+    description: Production server (uses live data)
+  - url: https://sandbox-api.example.com:8443/v1
+    description: Sandbox server (uses test data)
 basePath: "/v1"
 tags:
 - name: "user"
