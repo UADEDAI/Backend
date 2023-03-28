@@ -25,7 +25,6 @@ tags:
     url: "https://github.com/UADEDAI/Backend"
 schemes:
 - "https"
-- "http"
 paths:
   /user/createWithArray:
     post:
