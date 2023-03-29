@@ -1,5 +1,5 @@
 ---
-openapi: "3.0.3"
+swagger: '2.0'
 info:
   description: "This is the API Documentation for UADEDAI CinemApp"
   version: "0.0.1"
@@ -34,7 +34,6 @@ externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"
 paths:
-  $ref: ./paths/user.yaml
+  $ref: ./paths/index.yaml
 definitions:
-  $ref: ./definitions/ApiResponse.yaml
-  $ref: ./definitions/User.yaml
+  $ref: ./definitions/index.yaml
