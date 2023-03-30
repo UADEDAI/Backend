@@ -1,6 +1,0 @@
-CommonResponse:
-  $ref: ./CommonResponse.yaml
-Contact:
-  $ref: ./Contact.yaml
-Product:
-  $ref: ./Product.yaml
