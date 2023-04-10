@@ -1,0 +1,23 @@
+type: object
+properties:
+  id:
+    type: integer
+  title:
+    type: string
+  description:
+    type: string
+  duratiom:
+    type: number
+  release_date:
+    type: string
+    format: date
+  genre:
+    type: string
+  director:
+    type: string
+  cast:
+    type: string
+  score:
+    type: integer
+  certificate:
+    type: string

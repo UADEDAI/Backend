@@ -1,4 +1,4 @@
-# User API
+# User Endpoints
 /user:
   get:
     $ref: ./user/user-list.yaml
@@ -13,7 +13,7 @@
   delete:
     $ref: ./user/user-delete.yaml
 
-# Cinema API
+# Cinema Endpoints
 /cinema:
   get:
     $ref: ./cinema/cinema-list.yaml
@@ -27,3 +27,12 @@
     $ref: ./cinema/cinema-update.yaml
   delete:
     $ref: ./cinema/cinema-delete.yaml
+
+# Movie Endpoints
+/movie:
+  get:
+    $ref: ./movie/movie-list.yaml
+
+/movie/{movie_id}:
+  get: 
+    $ref: ./movie/movie-get.yaml

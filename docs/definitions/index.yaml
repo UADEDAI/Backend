@@ -4,3 +4,5 @@ User:
   $ref: ./User.yaml
 Cinema:
   $ref: ./Cinema.yaml
+Movie:
+  $ref: ./Movie.yaml

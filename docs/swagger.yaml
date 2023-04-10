@@ -406,6 +406,73 @@
           }
         }
       }
+    },
+    "/movie": {
+      "get": {
+        "tags": [
+          "Movie"
+        ],
+        "summary": "Get all the Movies",
+        "description": "Get all the Movies",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Movies fetched successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Movie"
+              }
+            }
+          },
+          "400": {
+            "description": "Error in fetching Movies",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      }
+    },
+    "/movie/{movie_id}": {
+      "get": {
+        "tags": [
+          "Movie"
+        ],
+        "summary": "Get a Movie",
+        "description": "Get a Movie with the id specified in parameter",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Movie id that needs to be fetched",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie fetched successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Movie"
+            }
+          },
+          "400": {
+            "description": "Error in fetching Movie",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -478,6 +545,42 @@
         },
         "enabled": {
           "type": "boolean"
+        }
+      }
+    },
+    "Movie": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "duratiom": {
+          "type": "number"
+        },
+        "release_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "genre": {
+          "type": "string"
+        },
+        "director": {
+          "type": "string"
+        },
+        "cast": {
+          "type": "string"
+        },
+        "score": {
+          "type": "integer"
+        },
+        "certificate": {
+          "type": "string"
         }
       }
     }
