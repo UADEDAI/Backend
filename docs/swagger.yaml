@@ -229,42 +229,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer"
-                  },
-                  "name": {
-                    "type": "string"
-                  },
-                  "street": {
-                    "type": "string"
-                  },
-                  "street_num": {
-                    "type": "integer"
-                  },
-                  "state": {
-                    "type": "string"
-                  },
-                  "country": {
-                    "type": "string"
-                  },
-                  "city": {
-                    "type": "string"
-                  },
-                  "latitude": {
-                    "type": "number"
-                  },
-                  "longitude": {
-                    "type": "number"
-                  },
-                  "price": {
-                    "type": "float"
-                  },
-                  "enabled": {
-                    "type": "boolean"
-                  }
-                }
+                "$ref": "#/definitions/Cinema"
               }
             }
           },
@@ -297,7 +262,7 @@
             "required": true,
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1cinema/get/responses/200/schema/items"
+              "$ref": "#/definitions/Cinema"
             }
           }
         ],
@@ -343,7 +308,7 @@
             "description": "Cinema fetched successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1cinema/get/responses/200/schema/items"
+              "$ref": "#/definitions/Cinema"
             }
           },
           "400": {
@@ -382,7 +347,7 @@
             "required": true,
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1cinema/get/responses/200/schema/items"
+              "$ref": "#/definitions/Cinema"
             }
           }
         ],
@@ -477,6 +442,44 @@
         "email",
         "password"
       ]
+    },
+    "Cinema": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "street_num": {
+          "type": "integer"
+        },
+        "state": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "number"
+        },
+        "longitude": {
+          "type": "number"
+        },
+        "price": {
+          "type": "float"
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      }
     }
   }
 }

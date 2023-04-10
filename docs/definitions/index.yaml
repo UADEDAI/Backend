@@ -2,3 +2,5 @@ CommonResponse:
   $ref: ./CommonResponse.yaml
 User:
   $ref: ./User.yaml
+Cinema:
+  $ref: ./Cinema.yaml
