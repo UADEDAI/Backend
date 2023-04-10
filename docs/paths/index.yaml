@@ -1,3 +1,18 @@
+# User API
+/user:
+  get:
+    $ref: ./user/user-list.yaml
+  post:
+    $ref: ./user/user-save.yaml
+
+/user/{id}:
+  get:
+    $ref: ./user/user-get.yaml
+  put:
+    $ref: ./user/user-update.yaml
+  delete:
+    $ref: ./user/user-delete.yaml
+
 # Contact API
 /contact:
   get:

@@ -1,0 +1,35 @@
+tags :
+  - User
+summary: Update a User
+description: Update a User
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  - 
+    in: path
+    name: id
+    description: User id that needs to be updated
+    required: true
+    type: string
+  - 
+    in: body
+    name: body
+    description: User object
+    required: true
+    schema:
+      type: object
+      $ref: ../../definitions/User.yaml
+  
+responses:
+  200:
+    description: User updated successfully
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml
+  400:
+    description: Error in updating User
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

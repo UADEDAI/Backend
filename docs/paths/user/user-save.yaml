@@ -1,0 +1,29 @@
+tags :
+  - User
+summary: Save a new User
+description: Save a new User
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  - 
+    in: body
+    name: body
+    description: User object
+    required: true
+    schema:
+      type: object
+      $ref: ../../definitions/User.yaml
+  
+responses:
+  200:
+    description: User saved successfully
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml
+  400:
+    description: Error in saving User
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

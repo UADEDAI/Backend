@@ -1,0 +1,18 @@
+tags :
+  - User
+summary: Get all the users
+description: Get all the users
+produces:
+  - application/json
+responses:
+  200:
+    description: users fetched successfully
+    schema:
+      type: array
+      items:
+        $ref: ../../definitions/User.yaml
+  400:
+    description: Error in fetching users
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml
