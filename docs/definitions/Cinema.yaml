@@ -19,6 +19,6 @@ properties:
   longitude:
     type: number
   price:
-    type: float
+    type: number
   enabled:
     type: boolean
