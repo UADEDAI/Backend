@@ -1,0 +1,26 @@
+tags :
+  - Cinema
+summary: Delete a Cinema
+description: Delete a Cinema with the id specified in parameter
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  - 
+    in: path
+    name: id
+    description: Cinema id that needs to be deleted
+    required: true
+    type: string
+responses:
+  200:
+    description: Cinema deleted successfully
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml
+  400:
+    description: Error in deleting Cinema
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

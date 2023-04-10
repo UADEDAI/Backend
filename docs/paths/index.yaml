@@ -12,3 +12,18 @@
     $ref: ./user/user-update.yaml
   delete:
     $ref: ./user/user-delete.yaml
+
+# Cinema API
+/cinema:
+  get:
+    $ref: ./cinema/cinema-list.yaml
+  post:
+    $ref: ./cinema/cinema-save.yaml
+
+/cinema/{id}:
+  get:
+    $ref: ./cinema/cinema-get.yaml
+  put:
+    $ref: ./cinema/cinema-update.yaml
+  delete:
+    $ref: ./cinema/cinema-delete.yaml

@@ -6,5 +6,12 @@ properties:
     type: string
   email:
     type: string
+    format: email
+  password:
+    type: string
   company:
     type: string
+required:
+  - name
+  - email
+  - password

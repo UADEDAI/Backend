@@ -1,0 +1,29 @@
+tags :
+  - Cinema
+summary: Save a new Cinema
+description: Save a new Cinema
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  - 
+    in: body
+    name: body
+    description: Cinema object
+    required: true
+    schema:
+      type: object
+      $ref: ../../definitions/Cinema.yaml
+  
+responses:
+  200:
+    description: Cinema saved successfully
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml
+  400:
+    description: Error in saving Cinema
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

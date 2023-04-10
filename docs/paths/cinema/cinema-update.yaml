@@ -1,0 +1,35 @@
+tags :
+  - Cinema
+summary: Update a Cinema
+description: Update a Cinema
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  - 
+    in: path
+    name: id
+    description: Cinema id that needs to be updated
+    required: true
+    type: string
+  - 
+    in: body
+    name: body
+    description: Cinema object
+    required: true
+    schema:
+      type: object
+      $ref: ../../definitions/Cinema.yaml
+  
+responses:
+  200:
+    description: Cinema updated successfully
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml
+  400:
+    description: Error in updating Cinema
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

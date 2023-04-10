@@ -1,0 +1,18 @@
+tags :
+  - Cinema
+summary: Get all the Cinemas
+description: Get all the Cinemas
+produces:
+  - application/json
+responses:
+  200:
+    description: Cinemas fetched successfully
+    schema:
+      type: array
+      items:
+        $ref: ../../definitions/Cinema.yaml
+  400:
+    description: Error in fetching Cinemas
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

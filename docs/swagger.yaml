@@ -24,14 +24,14 @@
         "tags": [
           "User"
         ],
-        "summary": "Get all the users",
-        "description": "Get all the users",
+        "summary": "Get all the Users",
+        "description": "Get all the Users",
         "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
-            "description": "users fetched successfully",
+            "description": "Users fetched successfully",
             "schema": {
               "type": "array",
               "items": {
@@ -40,7 +40,7 @@
             }
           },
           "400": {
-            "description": "Error in fetching users",
+            "description": "Error in fetching Users",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"
@@ -212,6 +212,235 @@
           }
         }
       }
+    },
+    "/cinema": {
+      "get": {
+        "tags": [
+          "Cinema"
+        ],
+        "summary": "Get all the Cinemas",
+        "description": "Get all the Cinemas",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Cinemas fetched successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "street": {
+                    "type": "string"
+                  },
+                  "street_num": {
+                    "type": "integer"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "latitude": {
+                    "type": "number"
+                  },
+                  "longitude": {
+                    "type": "number"
+                  },
+                  "price": {
+                    "type": "float"
+                  },
+                  "enabled": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in fetching Cinemas",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Cinema"
+        ],
+        "summary": "Save a new Cinema",
+        "description": "Save a new Cinema",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Cinema object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/paths/~1cinema/get/responses/200/schema/items"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cinema saved successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "400": {
+            "description": "Error in saving Cinema",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      }
+    },
+    "/cinema/{id}": {
+      "get": {
+        "tags": [
+          "Cinema"
+        ],
+        "summary": "Get a Cinema",
+        "description": "Get a Cinema with the id specified in parameter",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Cinema id that needs to be fetched",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cinema fetched successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/paths/~1cinema/get/responses/200/schema/items"
+            }
+          },
+          "400": {
+            "description": "Error in fetching Cinema",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Cinema"
+        ],
+        "summary": "Update a Cinema",
+        "description": "Update a Cinema",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Cinema id that needs to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Cinema object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/paths/~1cinema/get/responses/200/schema/items"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cinema updated successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "400": {
+            "description": "Error in updating Cinema",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Cinema"
+        ],
+        "summary": "Delete a Cinema",
+        "description": "Delete a Cinema with the id specified in parameter",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Cinema id that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cinema deleted successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "400": {
+            "description": "Error in deleting Cinema",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -233,12 +462,21 @@
           "type": "string"
         },
         "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "password": {
           "type": "string"
         },
         "company": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "name",
+        "email",
+        "password"
+      ]
     }
   }
 }
