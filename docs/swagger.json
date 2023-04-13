@@ -505,9 +505,8 @@
         }
       },
       "required": [
-        "name",
-        "email",
-        "password"
+        "username",
+        "email"
       ]
     },
     "Cinema": {

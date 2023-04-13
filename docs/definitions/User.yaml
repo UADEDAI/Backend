@@ -12,6 +12,5 @@ properties:
   company:
     type: string
 required:
-  - name
+  - username
   - email
-  - password

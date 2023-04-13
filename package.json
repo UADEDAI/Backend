@@ -3,6 +3,7 @@
     "husky": "^8.0.3"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build": "swagger-cli bundle docs/index.yaml --outfile docs/swagger.json"
   }
 }
