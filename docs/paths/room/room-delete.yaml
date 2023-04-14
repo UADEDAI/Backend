@@ -9,12 +9,6 @@ consumes:
 parameters:
   - 
     in: path
-    name: cinema_id
-    description: Cinema id that needs to be fetched
-    required: true
-    type: string
-  - 
-    in: path
     name: id
     description: Room id that needs to be deleted
     required: true
@@ -24,9 +18,9 @@ responses:
     description: Room deleted successfully
     schema:
       type: object
-      $ref: ../../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/CommonResponse.yaml
   400:
     description: Error in deleting Room
     schema:
       type: object
-      $ref: ../../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/CommonResponse.yaml

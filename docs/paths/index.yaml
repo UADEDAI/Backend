@@ -29,19 +29,19 @@
     $ref: ./cinema/cinema-delete.yaml
 
 # Cinema Rooms
-/cinema/{cinema_id}/rooms:
+/room:
   get:
-    $ref: ./cinema/room/room-list.yaml
+    $ref: ./room/room-list.yaml
   post:
-    $ref: ./cinema/room/room-save.yaml
+    $ref: ./room/room-save.yaml
 
-/cinemas/{cinema_id}/rooms/{room_id}:
+/room/{room_id}:
   get:
-    $ref: ./cinema/room/room-get.yaml
+    $ref: ./room/room-get.yaml
   put:
-    $ref: ./cinema/room/room-update.yaml
+    $ref: ./room/room-update.yaml
   delete:
-    $ref: ./cinema/room/room-delete.yaml
+    $ref: ./room/room-delete.yaml
 
 # Movie Endpoints
 /movie:

@@ -9,12 +9,6 @@ consumes:
 parameters:
   - 
     in: path
-    name: cinema_id
-    description: Cinema id that needs to be fetched
-    required: true
-    type: string
-  - 
-    in: path
     name: id
     description: Room id that needs to be updated
     required: true
@@ -26,16 +20,16 @@ parameters:
     required: true
     schema:
       type: object
-      $ref: ../../../definitions/Room.yaml
+      $ref: ../../definitions/Room.yaml
   
 responses:
   200:
     description: Room updated successfully
     schema:
       type: object
-      $ref: ../../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/CommonResponse.yaml
   400:
     description: Error in updating Room
     schema:
       type: object
-      $ref: ../../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/CommonResponse.yaml

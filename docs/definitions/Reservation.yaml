@@ -2,13 +2,13 @@ type: object
 properties:
   id:
     type: integer
-  userId:
+  user_id:
     type: integer
-  movieId:
+  movie_id:
     type: integer
-  createdAt:
+  created_at:
     type: string
-  updatedAt:
+  updated_at:
     type: string
   active:
     type: integer

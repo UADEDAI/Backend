@@ -407,7 +407,7 @@
         }
       }
     },
-    "/cinema/{cinema_id}/rooms": {
+    "/room": {
       "get": {
         "tags": [
           "Room"
@@ -425,7 +425,10 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "id": {
+                  "cinema_id": {
+                    "type": "integer"
+                  },
+                  "room_id": {
                     "type": "integer"
                   },
                   "name": {
@@ -467,20 +470,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "cinema_id",
-            "description": "Cinema id that needs to be fetched",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "Room object",
             "required": true,
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1cinema~1%7Bcinema_id%7D~1rooms/get/responses/200/schema/items"
+              "$ref": "#/paths/~1room/get/responses/200/schema/items"
             }
           }
         ],
@@ -502,7 +498,7 @@
         }
       }
     },
-    "/cinemas/{cinema_id}/rooms/{room_id}": {
+    "/room/{room_id}": {
       "get": {
         "tags": [
           "Room"
@@ -513,13 +509,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "cinema_id",
-            "description": "Cinema id that needs to be fetched",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "path",
             "name": "id",
@@ -533,7 +522,7 @@
             "description": "Room fetched successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1cinema~1%7Bcinema_id%7D~1rooms/get/responses/200/schema/items"
+              "$ref": "#/paths/~1room/get/responses/200/schema/items"
             }
           },
           "400": {
@@ -560,13 +549,6 @@
         "parameters": [
           {
             "in": "path",
-            "name": "cinema_id",
-            "description": "Cinema id that needs to be fetched",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "id",
             "description": "Room id that needs to be updated",
             "required": true,
@@ -579,7 +561,7 @@
             "required": true,
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1cinema~1%7Bcinema_id%7D~1rooms/get/responses/200/schema/items"
+              "$ref": "#/paths/~1room/get/responses/200/schema/items"
             }
           }
         ],
@@ -613,13 +595,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "path",
-            "name": "cinema_id",
-            "description": "Cinema id that needs to be fetched",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "path",
             "name": "id",
@@ -828,16 +803,16 @@
         "id": {
           "type": "integer"
         },
-        "userId": {
+        "user_id": {
           "type": "integer"
         },
-        "movieId": {
+        "movie_id": {
           "type": "integer"
         },
-        "createdAt": {
+        "created_at": {
           "type": "string"
         },
-        "updatedAt": {
+        "updated_at": {
           "type": "string"
         },
         "active": {
