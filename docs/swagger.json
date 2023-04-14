@@ -280,6 +280,200 @@
         }
       }
     },
+    "/reservation": {
+      "get": {
+        "tags": [
+          "Reservation"
+        ],
+        "summary": "Get all the Reservations",
+        "description": "Get all the Reservations",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Reservations fetched successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Reservation"
+              }
+            }
+          },
+          "400": {
+            "description": "Error in fetching Reservations",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Reservation"
+        ],
+        "summary": "Save a new Reservation",
+        "description": "Save a new Reservation",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Reservation object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Reservation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reservation saved successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "400": {
+            "description": "Error in saving Reservation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      }
+    },
+    "/reservation/{reservation_id}": {
+      "get": {
+        "tags": [
+          "Reservation"
+        ],
+        "summary": "Get a Reservation",
+        "description": "Get a Reservation with the id specified in parameter",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Reservation id that needs to be fetched",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reservation fetched successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Reservation"
+            }
+          },
+          "400": {
+            "description": "Error in fetching Reservation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Reservation"
+        ],
+        "summary": "Update a Reservation",
+        "description": "Update a Reservation",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Reservation id that needs to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Reservation object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Reservation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reservation updated successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "400": {
+            "description": "Error in updating Reservation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Reservation"
+        ],
+        "summary": "Delete a Reservation",
+        "description": "Delete a Reservation with the id specified in parameter",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Reservation id that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reservation deleted successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "400": {
+            "description": "Error in deleting Reservation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      }
+    },
     "/room": {
       "get": {
         "tags": [

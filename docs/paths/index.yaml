@@ -22,6 +22,20 @@
   get: 
     $ref: ./movie/movie-get.yaml
 
+# Reservations
+/reservation:
+  get:
+    $ref: ./reservation/reservation-list.yaml
+  post:
+    $ref: ./reservation/reservation-save.yaml
+/reservation/{reservation_id}:
+  get:
+    $ref: ./reservation/reservation-get.yaml
+  put:
+    $ref: ./reservation/reservation-update.yaml
+  delete:
+    $ref: ./reservation/reservation-delete.yaml
+
 # Cinema Rooms
 /room:
   get:
