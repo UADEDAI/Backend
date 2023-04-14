@@ -28,6 +28,21 @@
   delete:
     $ref: ./cinema/cinema-delete.yaml
 
+# Cinema Rooms
+/cinema/{cinema_id}/rooms:
+  get:
+    $ref: ./cinema/room/room-list.yaml
+  post:
+    $ref: ./cinema/room/room-save.yaml
+
+/cinemas/{cinema_id}/rooms/{room_id}:
+  get:
+    $ref: ./cinema/room/room-get.yaml
+  put:
+    $ref: ./cinema/room/room-update.yaml
+  delete:
+    $ref: ./cinema/room/room-delete.yaml
+
 # Movie Endpoints
 /movie:
   get:

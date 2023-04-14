@@ -1,0 +1,32 @@
+tags :
+  - Room
+summary: Delete a Room
+description: Delete a Room with the id specified in parameter
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  - 
+    in: path
+    name: cinema_id
+    description: Cinema id that needs to be fetched
+    required: true
+    type: string
+  - 
+    in: path
+    name: id
+    description: Room id that needs to be deleted
+    required: true
+    type: string
+responses:
+  200:
+    description: Room deleted successfully
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml
+  400:
+    description: Error in deleting Room
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

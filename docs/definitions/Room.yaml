@@ -1,0 +1,12 @@
+type: object
+properties:
+  id:
+    type: integer
+  name:
+    type: string
+  rows:
+    type: integer
+  seats:
+    type: integer
+  enabled:
+    type: boolean

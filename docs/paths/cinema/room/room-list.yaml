@@ -1,0 +1,18 @@
+tags :
+  - Room
+summary: Get all the Rooms
+description: Get all the Rooms
+produces:
+  - application/json
+responses:
+  200:
+    description: Rooms fetched successfully
+    schema:
+      type: array
+      items:
+        $ref: ../../definitions/Room.yaml
+  400:
+    description: Error in fetching Rooms
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

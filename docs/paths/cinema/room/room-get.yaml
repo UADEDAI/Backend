@@ -1,0 +1,31 @@
+tags :
+  - Room
+summary: Get a Room
+description: Get a Room with the id specified in parameter
+produces:
+  - application/json
+parameters:
+  - 
+    in: path
+    name: cinema_id
+    description: Cinema id that needs to be fetched
+    required: true
+    type: string
+  - 
+    in: path
+    name: id
+    description: Room id that needs to be fetched
+    required: true
+    type: string
+
+responses:
+  200:
+    description: Room fetched successfully
+    schema:
+      type: object
+      $ref: ../../definitions/Room.yaml
+  400:
+    description: Error in fetching Room
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml
