@@ -1,0 +1,18 @@
+tags :
+  - Screening
+summary: Get all the Screenings
+description: Get all the Screenings
+produces:
+  - application/json
+responses:
+  200:
+    description: Screenings fetched successfully
+    schema:
+      type: array
+      items:
+        $ref: ../../definitions/Screening.yaml
+  400:
+    description: Error in fetching Screenings
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

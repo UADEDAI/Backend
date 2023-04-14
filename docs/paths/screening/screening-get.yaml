@@ -1,0 +1,25 @@
+tags :
+  - Screening
+summary: Get a Screening
+description: Get a Screening with the id specified in parameter
+produces:
+  - application/json
+parameters:
+  - 
+    in: path
+    name: id
+    description: Screening id that needs to be fetched
+    required: true
+    type: string
+
+responses:
+  200:
+    description: Screening fetched successfully
+    schema:
+      type: object
+      $ref: ../../definitions/Screening.yaml
+  400:
+    description: Error in fetching Screening
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

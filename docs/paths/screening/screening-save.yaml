@@ -1,0 +1,29 @@
+tags :
+  - Screening
+summary: Save a new Screening
+description: Save a new Screening
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  - 
+    in: body
+    name: body
+    description: Screening object
+    required: true
+    schema:
+      type: object
+      $ref: ../../definitions/Screening.yaml
+  
+responses:
+  200:
+    description: Screening saved successfully
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml
+  400:
+    description: Error in saving Screening
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

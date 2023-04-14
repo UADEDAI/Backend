@@ -1,0 +1,35 @@
+tags :
+  - Screening
+summary: Update a Screening
+description: Update a Screening
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  - 
+    in: path
+    name: id
+    description: Screening id that needs to be updated
+    required: true
+    type: string
+  - 
+    in: body
+    name: body
+    description: Screening object
+    required: true
+    schema:
+      type: object
+      $ref: ../../definitions/Screening.yaml
+  
+responses:
+  200:
+    description: Screening updated successfully
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml
+  400:
+    description: Error in updating Screening
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

@@ -37,6 +37,21 @@
   delete:
     $ref: ./room/room-delete.yaml
 
+# Screenings
+/room/{room_id}/screening:
+  get:
+    $ref: ./room/screening-list.yaml
+  post:
+    $ref: ./room/screening-save.yaml
+
+/room/{room_id}/screening/{screening_id}}:
+  get:
+    $ref: ./room/screening-get.yaml
+  put:
+    $ref: ./room/screening-update.yaml
+  delete:
+    $ref: ./room/screening-delete.yaml
+
 # User Endpoints
 /user:
   get:

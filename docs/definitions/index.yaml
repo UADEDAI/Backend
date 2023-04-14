@@ -8,7 +8,7 @@ Reservation:
   $ref: ./Reservation.yaml
 Room:
   $ref: ./Room.yaml
-Schedule:
-  $ref: ./Schedule.yaml
+Screening:
+  $ref: ./Screening.yaml
 User:
   $ref: ./User.yaml
