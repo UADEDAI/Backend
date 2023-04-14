@@ -20,16 +20,16 @@ parameters:
     required: true
     schema:
       type: object
-      $ref: ../../definitions/Room.yaml
+      $ref: ../../../definitions/Room.yaml
   
 responses:
   200:
     description: Room saved successfully
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../../definitions/CommonResponse.yaml
   400:
     description: Error in saving Room
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../../definitions/CommonResponse.yaml

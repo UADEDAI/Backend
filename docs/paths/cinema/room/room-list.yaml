@@ -10,9 +10,9 @@ responses:
     schema:
       type: array
       items:
-        $ref: ../../definitions/Room.yaml
+        $ref: ../../../definitions/Room.yaml
   400:
     description: Error in fetching Rooms
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../../definitions/CommonResponse.yaml
