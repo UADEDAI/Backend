@@ -12,6 +12,15 @@
     $ref: ./cinema/cinema-update.yaml
   delete:
     $ref: ./cinema/cinema-delete.yaml
+  
+# Movie Endpoints
+/movie:
+  get:
+    $ref: ./movie/movie-list.yaml
+
+/movie/{movie_id}:
+  get: 
+    $ref: ./movie/movie-get.yaml
 
 # Cinema Rooms
 /room:
@@ -27,15 +36,6 @@
     $ref: ./room/room-update.yaml
   delete:
     $ref: ./room/room-delete.yaml
-
-# Movie Endpoints
-/movie:
-  get:
-    $ref: ./movie/movie-list.yaml
-
-/movie/{movie_id}:
-  get: 
-    $ref: ./movie/movie-get.yaml
 
 # User Endpoints
 /user:
