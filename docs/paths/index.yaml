@@ -1,18 +1,3 @@
-# User Endpoints
-/user:
-  get:
-    $ref: ./user/user-list.yaml
-  post:
-    $ref: ./user/user-save.yaml
-
-/user/{id}:
-  get:
-    $ref: ./user/user-get.yaml
-  put:
-    $ref: ./user/user-update.yaml
-  delete:
-    $ref: ./user/user-delete.yaml
-
 # Cinema Endpoints
 /cinema:
   get:
@@ -51,3 +36,18 @@
 /movie/{movie_id}:
   get: 
     $ref: ./movie/movie-get.yaml
+
+# User Endpoints
+/user:
+  get:
+    $ref: ./user/user-list.yaml
+  post:
+    $ref: ./user/user-save.yaml
+
+/user/{id}:
+  get:
+    $ref: ./user/user-get.yaml
+  put:
+    $ref: ./user/user-update.yaml
+  delete:
+    $ref: ./user/user-delete.yaml
