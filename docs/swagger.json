@@ -474,6 +474,200 @@
         }
       }
     },
+    "/screening": {
+      "get": {
+        "tags": [
+          "Screening"
+        ],
+        "summary": "Get all the Screenings",
+        "description": "Get all the Screenings",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Screenings fetched successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Screening"
+              }
+            }
+          },
+          "400": {
+            "description": "Error in fetching Screenings",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Screening"
+        ],
+        "summary": "Save a new Screening",
+        "description": "Save a new Screening",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Screening object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Screening"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Screening saved successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "400": {
+            "description": "Error in saving Screening",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      }
+    },
+    "/screening/{screening_id}}": {
+      "get": {
+        "tags": [
+          "Screening"
+        ],
+        "summary": "Get a Screening",
+        "description": "Get a Screening with the id specified in parameter",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Screening id that needs to be fetched",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Screening fetched successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Screening"
+            }
+          },
+          "400": {
+            "description": "Error in fetching Screening",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Screening"
+        ],
+        "summary": "Update a Screening",
+        "description": "Update a Screening",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Screening id that needs to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Screening object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Screening"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Screening updated successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "400": {
+            "description": "Error in updating Screening",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Screening"
+        ],
+        "summary": "Delete a Screening",
+        "description": "Delete a Screening with the id specified in parameter",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Screening id that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Screening deleted successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          },
+          "400": {
+            "description": "Error in deleting Screening",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      }
+    },
     "/user": {
       "get": {
         "tags": [
@@ -764,6 +958,9 @@
         "movie_id": {
           "type": "integer"
         },
+        "screening_id": {
+          "type": "integer"
+        },
         "created_at": {
           "type": "string"
         },
@@ -800,7 +997,7 @@
         }
       }
     },
-    "Schedule": {
+    "Screening": {
       "definitions": {
         "Schedule": {
           "type": "object",

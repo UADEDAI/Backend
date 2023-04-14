@@ -1,0 +1,18 @@
+tags :
+  - Reservation
+summary: Get all the Reservations
+description: Get all the Reservations
+produces:
+  - application/json
+responses:
+  200:
+    description: Reservations fetched successfully
+    schema:
+      type: array
+      items:
+        $ref: ../../definitions/Reservation.yaml
+  400:
+    description: Error in fetching Reservations
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

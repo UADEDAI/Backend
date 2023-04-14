@@ -1,0 +1,25 @@
+tags :
+  - Reservation
+summary: Get a Reservation
+description: Get a Reservation with the id specified in parameter
+produces:
+  - application/json
+parameters:
+  - 
+    in: path
+    name: id
+    description: Reservation id that needs to be fetched
+    required: true
+    type: string
+
+responses:
+  200:
+    description: Reservation fetched successfully
+    schema:
+      type: object
+      $ref: ../../definitions/Reservation.yaml
+  400:
+    description: Error in fetching Reservation
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

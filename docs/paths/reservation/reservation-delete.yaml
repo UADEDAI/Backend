@@ -1,0 +1,26 @@
+tags :
+  - Reservation
+summary: Delete a Reservation
+description: Delete a Reservation with the id specified in parameter
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  - 
+    in: path
+    name: id
+    description: Reservation id that needs to be deleted
+    required: true
+    type: string
+responses:
+  200:
+    description: Reservation deleted successfully
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml
+  400:
+    description: Error in deleting Reservation
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

@@ -1,0 +1,35 @@
+tags :
+  - Reservation
+summary: Update a Reservation
+description: Update a Reservation
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  - 
+    in: path
+    name: id
+    description: Reservation id that needs to be updated
+    required: true
+    type: string
+  - 
+    in: body
+    name: body
+    description: Reservation object
+    required: true
+    schema:
+      type: object
+      $ref: ../../definitions/Reservation.yaml
+  
+responses:
+  200:
+    description: Reservation updated successfully
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml
+  400:
+    description: Error in updating Reservation
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

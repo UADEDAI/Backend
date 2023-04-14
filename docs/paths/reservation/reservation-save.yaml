@@ -1,0 +1,29 @@
+tags :
+  - Reservation
+summary: Save a new Reservation
+description: Save a new Reservation
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  - 
+    in: body
+    name: body
+    description: Reservation object
+    required: true
+    schema:
+      type: object
+      $ref: ../../definitions/Reservation.yaml
+  
+responses:
+  200:
+    description: Reservation saved successfully
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml
+  400:
+    description: Error in saving Reservation
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml
