@@ -998,31 +998,27 @@
       }
     },
     "Screening": {
-      "definitions": {
-        "Schedule": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer"
-            },
-            "cinema_id": {
-              "type": "integer"
-            },
-            "room_id": {
-              "type": "integer"
-            },
-            "movie_id": {
-              "type": "integer"
-            },
-            "start_time": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "end_time": {
-              "type": "string",
-              "format": "date-time"
-            }
-          }
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "cinema_id": {
+          "type": "integer"
+        },
+        "room_id": {
+          "type": "integer"
+        },
+        "movie_id": {
+          "type": "integer"
+        },
+        "start_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end_time": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
