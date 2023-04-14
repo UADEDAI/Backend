@@ -6,7 +6,7 @@ properties:
     type: string
   description:
     type: string
-  duratiom:
+  duration:
     type: number
   release_date:
     type: string

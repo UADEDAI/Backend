@@ -1,0 +1,16 @@
+type: object
+properties:
+  id:
+    type: integer
+  userId:
+    type: integer
+  movieId:
+    type: integer
+  createdAt:
+    type: string
+  updatedAt:
+    type: string
+  active:
+    type: integer
+    minimum: 0
+    maximum: 1
