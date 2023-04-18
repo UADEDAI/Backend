@@ -2,15 +2,15 @@ type: object
 properties:
   id:
     type: integer
-  cinema_id:
+  cinemaId:
     type: integer
-  room_id:
+  roomId:
     type: integer
-  movie_id:
+  movieId:
     type: integer
-  start_time:
+  startAt:
     type: string
     format: date-time
-  end_time:
+  endAt:
     type: string
     format: date-time

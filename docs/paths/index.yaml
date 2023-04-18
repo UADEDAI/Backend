@@ -18,7 +18,7 @@
   get:
     $ref: ./movie/movie-list.yaml
 
-/movie/{movie_id}:
+/movie/{id}:
   get: 
     $ref: ./movie/movie-get.yaml
 
@@ -28,7 +28,7 @@
     $ref: ./reservation/reservation-list.yaml
   post:
     $ref: ./reservation/reservation-save.yaml
-/reservation/{reservation_id}:
+/reservation/{id}:
   get:
     $ref: ./reservation/reservation-get.yaml
   put:
@@ -43,7 +43,7 @@
   post:
     $ref: ./room/room-save.yaml
 
-/room/{room_id}:
+/room/{id}:
   get:
     $ref: ./room/room-get.yaml
   put:
@@ -58,7 +58,7 @@
   post:
     $ref: ./screening/screening-save.yaml
 
-/screening/{screening_id}}:
+/screening/{id}:
   get:
     $ref: ./screening/screening-get.yaml
   put:

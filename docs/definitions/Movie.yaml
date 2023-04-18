@@ -8,7 +8,7 @@ properties:
     type: string
   duration:
     type: number
-  release_date:
+  releaseDate:
     type: string
     format: date
   genre:

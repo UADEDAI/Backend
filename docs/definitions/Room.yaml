@@ -1,8 +1,8 @@
 type: object
 properties:
-  cinema_id:
+  cinemaId:
     type: integer
-  room_id:
+  roomId:
     type: integer
   name:
     type: string

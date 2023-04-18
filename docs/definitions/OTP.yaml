@@ -4,10 +4,6 @@ properties:
     type: integer
   userId:
     type: integer
-  movieId:
-    type: integer
-  screeningId:
-    type: integer
   createdAt:
     type: string
   updatedAt:
@@ -15,6 +11,7 @@ properties:
   active:
     type: integer
     minimum: 0
-    maximum: 10
+    maximum: 1
 required:
   - id
+  - userId

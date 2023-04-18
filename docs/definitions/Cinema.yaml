@@ -6,7 +6,7 @@ properties:
     type: string
   street:
     type: string
-  street_num:
+  streetNum:
     type: integer
   state:
     type: string

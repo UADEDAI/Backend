@@ -5,6 +5,6 @@
   "scripts": {
     "prepare": "husky install",
     "doc:build": "swagger-cli bundle docs/index.yaml --outfile docs/swagger.json",
-    "doc:serve": "npx http-server docs/ --cors"
+    "doc:serve": "swagger-cli bundle docs/index.yaml --outfile docs/swagger.json && npx http-server docs/ --cors -c-1"
   }
 }
