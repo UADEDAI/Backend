@@ -10,7 +10,7 @@ responses:
     schema:
       type: array
       items:
-        $ref: ../../definitions/Screening.yaml
+        $ref: ../../definitions/screening/Screening.yaml
   400:
     description: Error in fetching Screenings
     schema:

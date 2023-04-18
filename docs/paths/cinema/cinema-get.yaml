@@ -16,7 +16,7 @@ responses:
     description: Cinema fetched successfully
     schema:
       type: object
-      $ref: ../../definitions/Cinema.yaml
+      $ref: ../../definitions/cinema/Cinema.yaml
   400:
     description: Error in fetching Cinema
     schema:

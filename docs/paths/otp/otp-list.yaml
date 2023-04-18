@@ -1,0 +1,18 @@
+tags :
+  - OTP
+summary: Get all the OTPs
+description: Get all the OTPs
+produces:
+  - application/json
+responses:
+  200:
+    description: OTPs fetched successfully
+    schema:
+      type: array
+      items:
+        $ref: ../../definitions/otp/OTP.yaml
+  400:
+    description: Error in fetching OTPs
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

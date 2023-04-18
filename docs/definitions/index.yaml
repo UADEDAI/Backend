@@ -1,14 +1,14 @@
 CommonResponse:
   $ref: ./CommonResponse.yaml
 Cinema:
-  $ref: ./Cinema.yaml
+  $ref: ./cinema/Cinema.yaml
 Movie:
-  $ref: ./Movie.yaml
+  $ref: ./movie/Movie.yaml
 Reservation:
-  $ref: ./Reservation.yaml
+  $ref: ./reservation/Reservation.yaml
 Room:
-  $ref: ./Room.yaml
+  $ref: ./room/Room.yaml
 Screening:
-  $ref: ./Screening.yaml
+  $ref: ./screening/Screening.yaml
 User:
-  $ref: ./User.yaml
+  $ref: ./user/User.yaml

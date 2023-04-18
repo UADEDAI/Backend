@@ -10,7 +10,7 @@ responses:
     schema:
       type: array
       items:
-        $ref: ../../definitions/Reservation.yaml
+        $ref: ../../definitions/reservation/Reservation.yaml
   400:
     description: Error in fetching Reservations
     schema:

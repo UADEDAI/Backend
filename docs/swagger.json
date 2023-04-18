@@ -1043,11 +1043,64 @@
             "description": "User deleted successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "$ref": "#/definitions/User"
             }
           },
           "400": {
             "description": "Error in deleting User",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
+            }
+          }
+        }
+      }
+    },
+    "/otp": {
+      "get": {
+        "tags": [
+          "OTP"
+        ],
+        "summary": "Get all the OTPs",
+        "description": "Get all the OTPs",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OTPs fetched successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "userId": {
+                    "type": "integer"
+                  },
+                  "createdAt": {
+                    "type": "string"
+                  },
+                  "updatedAt": {
+                    "type": "string"
+                  },
+                  "active": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                "required": [
+                  "id",
+                  "userId"
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Error in fetching OTPs",
             "schema": {
               "type": "object",
               "$ref": "#/definitions/CommonResponse"

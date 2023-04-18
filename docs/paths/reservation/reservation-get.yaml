@@ -17,7 +17,7 @@ responses:
     description: Reservation fetched successfully
     schema:
       type: object
-      $ref: ../../definitions/Reservation.yaml
+      $ref: ../../definitions/reservation/Reservation.yaml
   400:
     description: Error in fetching Reservation
     schema:

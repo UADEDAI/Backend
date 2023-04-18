@@ -80,3 +80,8 @@
     $ref: ./user/user-update.yaml
   delete:
     $ref: ./user/user-delete.yaml
+
+# OTP Endpoints
+/otp:
+  get:
+    $ref: ./otp/otp-list.yaml

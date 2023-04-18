@@ -14,7 +14,7 @@ parameters:
     required: true
     schema:
       type: object
-      $ref: ../../definitions/Room.yaml
+      $ref: ../../definitions/room/Room.yaml
   
 responses:
   200:

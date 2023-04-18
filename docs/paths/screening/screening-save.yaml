@@ -14,7 +14,7 @@ parameters:
     required: true
     schema:
       type: object
-      $ref: ../../definitions/Screening.yaml
+      $ref: ../../definitions/screening/Screening.yaml
   
 responses:
   200:

@@ -20,7 +20,7 @@ parameters:
     required: true
     schema:
       type: object
-      $ref: ../../definitions/User.yaml
+      $ref: ../../definitions/user/User.yaml
   
 responses:
   200:

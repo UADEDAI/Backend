@@ -17,7 +17,7 @@ responses:
     description: Room fetched successfully
     schema:
       type: object
-      $ref: ../../definitions/Room.yaml
+      $ref: ../../definitions/room/Room.yaml
   400:
     description: Error in fetching Room
     schema:

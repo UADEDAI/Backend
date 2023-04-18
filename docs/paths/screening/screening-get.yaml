@@ -17,7 +17,7 @@ responses:
     description: Screening fetched successfully
     schema:
       type: object
-      $ref: ../../definitions/Screening.yaml
+      $ref: ../../definitions/screening/Screening.yaml
   400:
     description: Error in fetching Screening
     schema:

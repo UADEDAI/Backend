@@ -16,7 +16,7 @@ responses:
     description: User fetched successfully
     schema:
       type: object
-      $ref: ../../definitions/User.yaml
+      $ref: ../../definitions/user/User.yaml
   400:
     description: Error in fetching User
     schema:

@@ -10,7 +10,7 @@ responses:
     schema:
       type: array
       items:
-        $ref: ../../definitions/Movie.yaml
+        $ref: ../../definitions/movie/Movie.yaml
   400:
     description: Error in fetching Movies
     schema:

@@ -10,7 +10,7 @@ responses:
     schema:
       type: array
       items:
-        $ref: ../../definitions/Cinema.yaml
+        $ref: ../../definitions/cinema/Cinema.yaml
   400:
     description: Error in fetching Cinemas
     schema:

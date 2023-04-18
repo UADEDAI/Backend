@@ -16,7 +16,7 @@ responses:
     description: Movie fetched successfully
     schema:
       type: object
-      $ref: ../../definitions/Movie.yaml
+      $ref: ../../definitions/movie/Movie.yaml
   400:
     description: Error in fetching Movie
     schema:
