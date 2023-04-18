@@ -1,0 +1,35 @@
+tags :
+  - OTP
+summary: Update a OTP
+description: Update a OTP
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  - 
+    in: path
+    name: id
+    description: OTP id that needs to be updated
+    required: true
+    type: string
+  - 
+    in: body
+    name: body
+    description: OTP object
+    required: true
+    schema:
+      type: object
+      $ref: ../../definitions/otp/otp-update.yaml
+  
+responses:
+  200:
+    description: OTP updated successfully
+    schema:
+      type: object
+      $ref: ../../definitions/otp/otp.yaml
+  400:
+    description: Error in updating OTP
+    schema:
+      type: object
+      $ref: ../../definitions/CommonResponse.yaml

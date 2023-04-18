@@ -85,3 +85,10 @@
 /otp:
   get:
     $ref: ./otp/otp-list.yaml
+  post:
+    $ref: ./otp/otp-save.yaml
+/otp/{id}:
+  delete:
+    $ref: ./otp/otp-delete.yaml
+  patch:
+    $ref: ./otp/otp-update.yaml

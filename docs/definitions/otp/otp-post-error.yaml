@@ -1,0 +1,8 @@
+type: object
+properties:
+  message:
+    type: string
+    example: "There was a server error creating the OTP for the userId: 1"
+  code:
+    type: integer
+    example: 500

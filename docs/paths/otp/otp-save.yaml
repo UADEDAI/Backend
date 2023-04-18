@@ -1,0 +1,29 @@
+tags :
+  - OTP
+summary: Save a new OTP
+description: Save a new OTP
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  - 
+    in: body
+    name: body
+    description: OTP object
+    required: true
+    schema:
+      type: object
+      $ref: ../../definitions/otp/otp-post.yaml
+  
+responses:
+  200:
+    description: OTP saved successfully
+    schema:
+      type: object
+      $ref: ../../definitions/otp/otp.yaml
+  500:
+    description: Error in saving OTP
+    schema:
+      type: object
+      $ref: ../../definitions/otp/otp-post-error.yaml

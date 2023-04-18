@@ -1,0 +1,8 @@
+type: object
+properties:
+  message:
+    type: string
+    example: "There was a server error fetching the list of OTPs"
+  code:
+    type: integer
+    example: 500

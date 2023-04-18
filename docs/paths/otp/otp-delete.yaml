@@ -1,0 +1,26 @@
+tags :
+  - OTP
+summary: Delete a OTP
+description: Delete a OTP with the id specified in parameter
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  - 
+    in: path
+    name: id
+    description: OTP id that needs to be deleted
+    required: true
+    type: string
+responses:
+  200:
+    description: OTP deleted successfully
+    schema:
+      type: object
+      $ref: ../../definitions/otp/otp-delete.yaml
+  500:
+    description: Error in deleting User
+    schema:
+      type: object
+      $ref: ../../definitions/otp/otp-delete-error.yaml

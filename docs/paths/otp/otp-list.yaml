@@ -10,9 +10,9 @@ responses:
     schema:
       type: array
       items:
-        $ref: ../../definitions/otp/OTP.yaml
-  400:
+        $ref: ../../definitions/otp/otp.yaml
+  500:
     description: Error in fetching OTPs
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/otp/otp-list-error.yaml
