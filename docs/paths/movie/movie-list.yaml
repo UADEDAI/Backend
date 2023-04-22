@@ -11,8 +11,8 @@ responses:
       type: array
       items:
         $ref: ../../definitions/movie/Movie.yaml
-  400:
+  500:
     description: Error in fetching Movies
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/movie/movie-list-error.yaml

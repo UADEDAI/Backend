@@ -21,4 +21,4 @@ responses:
     description: Error in fetching Cinema
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/cinema/cinema-get-error.yaml

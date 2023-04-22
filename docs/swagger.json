@@ -43,7 +43,16 @@
             "description": "Error in fetching Cinemas",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error fetching the list of Cinemas"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -77,14 +86,68 @@
             "description": "Cinema saved successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Hoyts Palermo"
+                },
+                "street": {
+                  "type": "string",
+                  "example": "Av. Santa Fe"
+                },
+                "streetNum": {
+                  "type": "integer",
+                  "example": "3650"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "CABA"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "Argentina"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Buenos Aires"
+                },
+                "latitude": {
+                  "type": "number",
+                  "example": -58.41030317402696
+                },
+                "longitude": {
+                  "type": "number",
+                  "example": -34.586202705534404
+                },
+                "price": {
+                  "type": "number",
+                  "example": 940
+                },
+                "enabled": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
             }
           },
           "400": {
             "description": "Error in saving Cinema",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error creating the Cinema"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -121,7 +184,16 @@
             "description": "Error in fetching Cinema",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error fetching the Cinema with id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -162,14 +234,14 @@
             "description": "Cinema updated successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "$ref": "#/paths/~1cinema/post/responses/200/schema"
             }
           },
           "400": {
             "description": "Error in updating Cinema",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "$ref": "#/paths/~1cinema/post/responses/400/schema"
             }
           }
         }
@@ -200,14 +272,68 @@
             "description": "Cinema deleted successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Hoyts Palermo"
+                },
+                "street": {
+                  "type": "string",
+                  "example": "Av. Santa Fe"
+                },
+                "streetNum": {
+                  "type": "integer",
+                  "example": "3650"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "CABA"
+                },
+                "country": {
+                  "type": "string",
+                  "example": "Argentina"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Buenos Aires"
+                },
+                "latitude": {
+                  "type": "number",
+                  "example": -58.41030317402696
+                },
+                "longitude": {
+                  "type": "number",
+                  "example": -34.586202705534404
+                },
+                "price": {
+                  "type": "number",
+                  "example": 940
+                },
+                "enabled": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
             }
           },
           "400": {
             "description": "Error in deleting Cinema",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error deleting Cinema with id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -233,11 +359,20 @@
               }
             }
           },
-          "400": {
+          "500": {
             "description": "Error in fetching Movies",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error fetching the list of Movies"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -274,7 +409,16 @@
             "description": "Error in fetching Movie",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error fetching the Movie with id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -1072,30 +1216,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "example": 1
-                  },
-                  "userId": {
-                    "type": "integer",
-                    "example": 1
-                  },
-                  "createdAt": {
-                    "type": "string",
-                    "example": "2023-04-07T19:14:13.000Z"
-                  },
-                  "updatedAt": {
-                    "type": "string",
-                    "example": "2023-04-07T19:14:13.000Z"
-                  },
-                  "active": {
-                    "type": "integer",
-                    "minimum": 0,
-                    "maximum": 1
-                  }
-                }
+                "$ref": "#/definitions/OTP"
               }
             }
           },
@@ -1151,7 +1272,7 @@
             "description": "OTP saved successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1otp/get/responses/200/schema/items"
+              "$ref": "#/definitions/OTP"
             }
           },
           "500": {
@@ -1276,7 +1397,7 @@
             "description": "OTP updated successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1otp/get/responses/200/schema/items"
+              "$ref": "#/definitions/OTP"
             }
           },
           "400": {
@@ -1303,37 +1424,48 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "integer"
+          "type": "integer",
+          "example": 1
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "example": "Hoyts Palermo"
         },
         "street": {
-          "type": "string"
+          "type": "string",
+          "example": "Av. Santa Fe"
         },
         "streetNum": {
-          "type": "integer"
+          "type": "integer",
+          "example": "3650"
         },
         "state": {
-          "type": "string"
+          "type": "string",
+          "example": "CABA"
         },
         "country": {
-          "type": "string"
+          "type": "string",
+          "example": "Argentina"
         },
         "city": {
-          "type": "string"
+          "type": "string",
+          "example": "Buenos Aires"
         },
         "latitude": {
-          "type": "number"
+          "type": "number",
+          "example": -58.41030317402696
         },
         "longitude": {
-          "type": "number"
+          "type": "number",
+          "example": -34.586202705534404
         },
         "price": {
-          "type": "number"
+          "type": "number",
+          "example": 940
         },
         "enabled": {
-          "type": "boolean"
+          "type": "boolean",
+          "example": true
         }
       }
     },
@@ -1341,35 +1473,71 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "integer"
+          "type": "integer",
+          "example": 1
         },
         "title": {
-          "type": "string"
+          "type": "string",
+          "example": "The Batman"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "example": "The film sees Batman , who has been fighting crime in Gotham City for two years, uncover corruption while pursuing the Riddler (Dano), a serial killer who targets Gotham's corrupt elite."
         },
         "duration": {
-          "type": "number"
+          "type": "number",
+          "example": 120
         },
         "releaseDate": {
           "type": "string",
-          "format": "date"
+          "format": "date",
+          "example": "2022-03-04"
         },
         "genre": {
-          "type": "string"
+          "type": "string",
+          "example": "Action"
         },
         "director": {
-          "type": "string"
+          "type": "string",
+          "example": "Matt Reeves"
         },
         "cast": {
-          "type": "string"
+          "type": "string",
+          "example": "Robert Pattinson, Zoë Kravitz, Paul Dano, Jeffrey Wright, John Turturro, Peter Sarsgaard, Barry Keoghan, Jayme Lawson, Andy Serkis, Colin Farrell"
         },
         "score": {
-          "type": "integer"
+          "type": "integer",
+          "example": 8
         },
         "certificate": {
-          "type": "string"
+          "type": "string",
+          "example": "PG-13"
+        }
+      }
+    },
+    "OTP": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "userId": {
+          "type": "integer",
+          "example": 1
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2023-04-07T19:14:13.000Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2023-04-07T19:14:13.000Z"
+        },
+        "active": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
         }
       }
     },

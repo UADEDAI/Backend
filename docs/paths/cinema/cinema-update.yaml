@@ -27,9 +27,9 @@ responses:
     description: Cinema updated successfully
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/cinema/cinema-post.yaml
   400:
     description: Error in updating Cinema
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/cinema/cinema-post-error.yaml

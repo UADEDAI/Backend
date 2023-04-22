@@ -21,9 +21,9 @@ responses:
     description: Cinema saved successfully
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/cinema/cinema-post.yaml
   400:
     description: Error in saving Cinema
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/cinema/cinema-post-error.yaml

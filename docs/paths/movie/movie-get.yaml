@@ -21,4 +21,4 @@ responses:
     description: Error in fetching Movie
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/movie/movie-get-error.yaml

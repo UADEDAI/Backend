@@ -15,4 +15,4 @@ responses:
     description: Error in fetching Cinemas
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/cinema/cinema-list-error.yaml
