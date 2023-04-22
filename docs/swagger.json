@@ -39,7 +39,7 @@
               }
             }
           },
-          "400": {
+          "500": {
             "description": "Error in fetching Cinemas",
             "schema": {
               "type": "object",
@@ -134,7 +134,7 @@
               }
             }
           },
-          "400": {
+          "500": {
             "description": "Error in saving Cinema",
             "schema": {
               "type": "object",
@@ -180,7 +180,7 @@
               "$ref": "#/definitions/Cinema"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in fetching Cinema",
             "schema": {
               "type": "object",
@@ -237,11 +237,20 @@
               "$ref": "#/paths/~1cinema/post/responses/200/schema"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in updating Cinema",
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1cinema/post/responses/400/schema"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error updating the Cinema witd id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -320,7 +329,7 @@
               }
             }
           },
-          "400": {
+          "500": {
             "description": "Error in deleting Cinema",
             "schema": {
               "type": "object",
@@ -405,7 +414,7 @@
               "$ref": "#/definitions/Movie"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in fetching Movie",
             "schema": {
               "type": "object",
@@ -419,6 +428,216 @@
                   "example": 500
                 }
               }
+            }
+          }
+        }
+      }
+    },
+    "/otp": {
+      "get": {
+        "tags": [
+          "OTP"
+        ],
+        "summary": "Get all the OTPs",
+        "description": "Get all the OTPs",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OTPs fetched successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OTP"
+              }
+            }
+          },
+          "500": {
+            "description": "Error in fetching OTPs",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error fetching the list of OTPs"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "OTP"
+        ],
+        "summary": "Save a new OTP",
+        "description": "Save a new OTP",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "OTP object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "integer",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OTP saved successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/OTP"
+            }
+          },
+          "500": {
+            "description": "Error in saving OTP",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error creating the OTP for the userId: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/otp/{id}": {
+      "delete": {
+        "tags": [
+          "OTP"
+        ],
+        "summary": "Delete a OTP",
+        "description": "Delete a OTP with the id specified in parameter",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "OTP id that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OTP deleted successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "userId": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "active": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in deleting User",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error deleting OTP with id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "OTP"
+        ],
+        "summary": "Update a OTP",
+        "description": "Update a OTP",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "OTP id that needs to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "OTP object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "active": {
+                  "type": "integer",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OTP updated successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/OTP"
+            }
+          },
+          "400": {
+            "description": "Error in updating OTP",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/CommonResponse"
             }
           }
         }
@@ -444,11 +663,20 @@
               }
             }
           },
-          "400": {
+          "500": {
             "description": "Error in fetching Reservations",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error fetching the list of Reservations"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -482,14 +710,23 @@
             "description": "Reservation saved successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "$ref": "#/definitions/Reservation"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in saving Reservation",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error creating the Reservation"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -522,11 +759,20 @@
               "$ref": "#/definitions/Reservation"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in fetching Reservation",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error fetching the Reservation with id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -567,14 +813,23 @@
             "description": "Reservation updated successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "$ref": "#/definitions/Reservation"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in updating Reservation",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error updating the Reservation with id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -605,14 +860,23 @@
             "description": "Reservation deleted successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "$ref": "#/definitions/Reservation"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in deleting Reservation",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error deleting Reservation with id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -1199,216 +1463,6 @@
           }
         }
       }
-    },
-    "/otp": {
-      "get": {
-        "tags": [
-          "OTP"
-        ],
-        "summary": "Get all the OTPs",
-        "description": "Get all the OTPs",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OTPs fetched successfully",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/OTP"
-              }
-            }
-          },
-          "500": {
-            "description": "Error in fetching OTPs",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "There was a server error fetching the list of OTPs"
-                },
-                "code": {
-                  "type": "integer",
-                  "example": 500
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "OTP"
-        ],
-        "summary": "Save a new OTP",
-        "description": "Save a new OTP",
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "OTP object",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "userId": {
-                  "type": "integer",
-                  "example": 1
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OTP saved successfully",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/OTP"
-            }
-          },
-          "500": {
-            "description": "Error in saving OTP",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "There was a server error creating the OTP for the userId: 1"
-                },
-                "code": {
-                  "type": "integer",
-                  "example": 500
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/otp/{id}": {
-      "delete": {
-        "tags": [
-          "OTP"
-        ],
-        "summary": "Delete a OTP",
-        "description": "Delete a OTP with the id specified in parameter",
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "OTP id that needs to be deleted",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OTP deleted successfully",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer",
-                  "example": 1
-                },
-                "userId": {
-                  "type": "integer",
-                  "example": 1
-                },
-                "active": {
-                  "type": "integer",
-                  "minimum": 0,
-                  "maximum": 1
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Error in deleting User",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "There was a server error deleting OTP with id: 1"
-                },
-                "code": {
-                  "type": "integer",
-                  "example": 500
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "OTP"
-        ],
-        "summary": "Update a OTP",
-        "description": "Update a OTP",
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "OTP id that needs to be updated",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "OTP object",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "active": {
-                  "type": "integer",
-                  "example": 1
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OTP updated successfully",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/OTP"
-            }
-          },
-          "400": {
-            "description": "Error in updating OTP",
-            "schema": {
-              "type": "object",
-              "$ref": "#/definitions/CommonResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1545,27 +1599,34 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "integer"
+          "type": "integer",
+          "example": 1
         },
         "userId": {
-          "type": "integer"
+          "type": "integer",
+          "example": 1
         },
         "movieId": {
-          "type": "integer"
+          "type": "integer",
+          "example": 1
         },
         "screeningId": {
-          "type": "integer"
+          "type": "integer",
+          "example": 1
         },
         "createdAt": {
-          "type": "string"
+          "type": "string",
+          "example": "2023-04-07T19:14:13.000Z"
         },
         "updatedAt": {
-          "type": "string"
+          "type": "string",
+          "example": "2023-04-07T19:14:13.000Z"
         },
         "active": {
           "type": "integer",
           "minimum": 0,
-          "maximum": 10
+          "maximum": 10,
+          "example": 9
         }
       },
       "required": [

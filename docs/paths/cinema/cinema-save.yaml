@@ -22,7 +22,7 @@ responses:
     schema:
       type: object
       $ref: ../../definitions/cinema/cinema-post.yaml
-  400:
+  500:
     description: Error in saving Cinema
     schema:
       type: object

@@ -19,7 +19,7 @@ responses:
     schema:
       type: object
       $ref: ../../definitions/cinema/cinema-delete.yaml
-  400:
+  500:
     description: Error in deleting Cinema
     schema:
       type: object

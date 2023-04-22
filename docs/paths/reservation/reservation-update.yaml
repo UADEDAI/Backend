@@ -27,9 +27,9 @@ responses:
     description: Reservation updated successfully
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
-  400:
+      $ref: ../../definitions/reservation/Reservation.yaml
+  500:
     description: Error in updating Reservation
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/reservation/reservation-update-error.yaml

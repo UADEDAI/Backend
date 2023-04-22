@@ -18,9 +18,9 @@ responses:
     description: Reservation deleted successfully
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
-  400:
+      $ref: ../../definitions/reservation/Reservation.yaml
+  500:
     description: Error in deleting Reservation
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/reservation/reservation-delete-error.yaml

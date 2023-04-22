@@ -21,9 +21,9 @@ responses:
     description: Reservation saved successfully
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
-  400:
+      $ref: ../../definitions/reservation/Reservation.yaml
+  500:
     description: Error in saving Reservation
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/reservation/reservation-post-error.yaml

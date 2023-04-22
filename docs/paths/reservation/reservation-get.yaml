@@ -18,8 +18,8 @@ responses:
     schema:
       type: object
       $ref: ../../definitions/reservation/Reservation.yaml
-  400:
+  500:
     description: Error in fetching Reservation
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/reservation/reservation-get-error.yaml

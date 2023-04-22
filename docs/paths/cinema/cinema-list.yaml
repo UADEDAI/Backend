@@ -11,7 +11,7 @@ responses:
       type: array
       items:
         $ref: ../../definitions/cinema/Cinema.yaml
-  400:
+  500:
     description: Error in fetching Cinemas
     schema:
       type: object
