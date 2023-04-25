@@ -2,15 +2,21 @@ type: object
 properties:
   id:
     type: integer
+    example: 1
   cinemaId:
     type: integer
+    example: 1
   roomId:
     type: integer
+    example: 1
   movieId:
     type: integer
+    example: 1 
   startAt:
     type: string
     format: date-time
+    example: "2023-04-24T19:15:00.000Z"
   endAt:
     type: string
     format: date-time
+    example: "2023-04-24T22:00:00.000Z"

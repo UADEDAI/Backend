@@ -21,9 +21,9 @@ responses:
     description: Screening saved successfully
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
-  400:
+      $ref: ../../definitions/screening/Screening.yaml
+  500:
     description: Error in saving Screening
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/screening/screening-post-error.yaml

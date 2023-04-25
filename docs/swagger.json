@@ -19,6 +19,115 @@
   "host": "localhost:3000",
   "basePath": "/api",
   "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Log in the user and retrieve a JWT token",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "credentials",
+            "schema": {
+              "type": "object",
+              "required": [
+                "username",
+                "password"
+              ],
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "description": "The user's username"
+                },
+                "password": {
+                  "type": "string",
+                  "format": "password",
+                  "description": "The user's password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "access_token": {
+                  "type": "string",
+                  "description": "The JWT token to use for authentication"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Log out the user and revoke their JWT token",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Refresh the user's JWT token",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "access_token": {
+                  "type": "string",
+                  "description": "The new JWT token to use for authentication"
+                }
+              }
+            }
+          }
+        },
+        "JWT": {
+          "type": "apiKey",
+          "name": "Authorization",
+          "in": "header",
+          "description": "JWT-based authentication"
+        }
+      }
+    },
     "/cinema": {
       "get": {
         "tags": [
@@ -633,11 +742,20 @@
               "$ref": "#/definitions/OTP"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in updating OTP",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error updating the OTP for the userId: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -902,11 +1020,20 @@
               }
             }
           },
-          "400": {
+          "500": {
             "description": "Error in fetching Rooms",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error fetching the list of Rooms"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -940,14 +1067,23 @@
             "description": "Room saved successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "$ref": "#/definitions/Room"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in saving Room",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error creating the Room"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -980,11 +1116,20 @@
               "$ref": "#/definitions/Room"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in fetching Room",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error fetching the Room with id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -1025,14 +1170,23 @@
             "description": "Room updated successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "$ref": "#/definitions/Room"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in updating Room",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error updating the Room witd id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -1063,14 +1217,23 @@
             "description": "Room deleted successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "$ref": "#/definitions/Room"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in deleting Room",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error deleting Room with id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -1096,11 +1259,20 @@
               }
             }
           },
-          "400": {
+          "500": {
             "description": "Error in fetching Screenings",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error fetching the list of Screenings"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -1134,14 +1306,23 @@
             "description": "Screening saved successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "$ref": "#/definitions/Screening"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in saving Screening",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error creating the Screening"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -1174,11 +1355,20 @@
               "$ref": "#/definitions/Screening"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in fetching Screening",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error fetching the Screening with id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -1219,14 +1409,23 @@
             "description": "Screening updated successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "$ref": "#/definitions/Screening"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in updating Screening",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error updating the Screening witd id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -1257,14 +1456,23 @@
             "description": "Screening deleted successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "$ref": "#/definitions/Screening"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in deleting Screening",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error deleting Screening with id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -1290,11 +1498,20 @@
               }
             }
           },
-          "400": {
+          "500": {
             "description": "Error in fetching Users",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error fetching the list of Users"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -1328,14 +1545,23 @@
             "description": "User saved successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "$ref": "#/definitions/User"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in saving User",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error creating the User"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -1368,11 +1594,20 @@
               "$ref": "#/definitions/User"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in fetching User",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error fetching the User with id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -1413,14 +1648,23 @@
             "description": "User updated successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "$ref": "#/definitions/User"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in updating User",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error updating the User witd id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -1454,11 +1698,20 @@
               "$ref": "#/definitions/User"
             }
           },
-          "400": {
+          "500": {
             "description": "Error in deleting User",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/CommonResponse"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error deleting User with id: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
             }
           }
         }
@@ -1637,22 +1890,28 @@
       "type": "object",
       "properties": {
         "cinemaId": {
-          "type": "integer"
+          "type": "integer",
+          "example": 1
         },
         "roomId": {
-          "type": "integer"
+          "type": "integer",
+          "example": 1
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "example": "Room 1"
         },
         "rows": {
-          "type": "integer"
+          "type": "integer",
+          "example": 10
         },
         "seats": {
-          "type": "integer"
+          "type": "integer",
+          "example": 20
         },
         "enabled": {
-          "type": "boolean"
+          "type": "boolean",
+          "example": true
         }
       }
     },
@@ -1660,24 +1919,30 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "integer"
+          "type": "integer",
+          "example": 1
         },
         "cinemaId": {
-          "type": "integer"
+          "type": "integer",
+          "example": 1
         },
         "roomId": {
-          "type": "integer"
+          "type": "integer",
+          "example": 1
         },
         "movieId": {
-          "type": "integer"
+          "type": "integer",
+          "example": 1
         },
         "startAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "example": "2023-04-24T19:15:00.000Z"
         },
         "endAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "example": "2023-04-24T22:00:00.000Z"
         }
       }
     },

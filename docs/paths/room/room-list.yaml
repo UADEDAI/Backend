@@ -11,8 +11,8 @@ responses:
       type: array
       items:
         $ref: ../../definitions/room/Room.yaml
-  400:
+  500:
     description: Error in fetching Rooms
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/room/room-list-error.yaml

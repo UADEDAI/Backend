@@ -18,9 +18,9 @@ responses:
     description: Screening deleted successfully
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
-  400:
+      $ref: ../../definitions/screening/Screening.yaml
+  500:
     description: Error in deleting Screening
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/screening/screening-delete-error.yaml

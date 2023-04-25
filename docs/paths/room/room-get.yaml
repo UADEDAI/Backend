@@ -18,8 +18,8 @@ responses:
     schema:
       type: object
       $ref: ../../definitions/room/Room.yaml
-  400:
+  500:
     description: Error in fetching Room
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/room/room-get-error.yaml

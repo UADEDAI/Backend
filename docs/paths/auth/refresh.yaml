@@ -1,0 +1,21 @@
+tags:
+  - Auth
+summary: Refresh the user's JWT token
+produces:
+  - application/json
+security:
+  - JWT: []
+responses:
+  200:
+    description: OK
+    schema:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: The new JWT token to use for authentication
+JWT:
+  type: apiKey
+  name: Authorization
+  in: header
+  description: JWT-based authentication

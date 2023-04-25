@@ -1,0 +1,35 @@
+type: object
+properties:
+  id:
+    type: integer
+    example: 1
+  name:
+    type: string
+    example: Hoyts Palermo
+  street:
+    type: string
+    example: "Av. Santa Fe"
+  streetNum:
+    type: integer
+    example: "3650"
+  state:
+    type: string
+    example: "CABA"
+  country:
+    type: string
+    example: "Argentina"
+  city:
+    type: string
+    example: "Buenos Aires"
+  latitude:
+    type: number
+    example: -58.41030317402696
+  longitude:
+    type: number
+    example: -34.586202705534404
+  price:
+    type: number
+    example: 940
+  enabled:
+    type: boolean
+    example: true

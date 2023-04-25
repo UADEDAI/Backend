@@ -11,8 +11,8 @@ responses:
       type: array
       items:
         $ref: ../../definitions/screening/Screening.yaml
-  400:
+  500:
     description: Error in fetching Screenings
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/screening/screening-list-error.yaml

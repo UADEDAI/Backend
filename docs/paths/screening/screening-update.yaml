@@ -27,9 +27,9 @@ responses:
     description: Screening updated successfully
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
-  400:
+      $ref: ../../definitions/screening/Screening.yaml
+  500:
     description: Error in updating Screening
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/screening/screening-update-error.yaml

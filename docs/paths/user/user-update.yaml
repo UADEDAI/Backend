@@ -27,9 +27,9 @@ responses:
     description: User updated successfully
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
-  400:
+      $ref: ../../definitions/user/User.yaml
+  500:
     description: Error in updating User
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/user/user-update-error.yaml

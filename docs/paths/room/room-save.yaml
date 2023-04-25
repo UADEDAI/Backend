@@ -21,9 +21,9 @@ responses:
     description: Room saved successfully
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
-  400:
+      $ref: ../../definitions/room/Room.yaml
+  500:
     description: Error in saving Room
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/room/room-post-error.yaml

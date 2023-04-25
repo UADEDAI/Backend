@@ -11,8 +11,8 @@ responses:
       type: array
       items:
         $ref: ../../definitions/user/User.yaml
-  400:
+  500:
     description: Error in fetching Users
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/user/user-list-error.yaml

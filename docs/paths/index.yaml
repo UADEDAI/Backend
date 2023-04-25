@@ -1,3 +1,24 @@
+#Auth Endpoints
+/auth/login:
+  post:
+    $ref: ./auth/login.yaml
+
+/auth/logout:
+  post:
+    $ref: ./auth/logout.yaml
+
+/auth/refresh:
+  post:
+    $ref: ./auth/refresh.yaml
+
+#/auth/register:
+#  post:
+#    $ref: ./auth/register.yaml
+#
+#/auth/token:
+#  post:
+#    $ref: ./auth/token.yaml
+
 # Cinema Endpoints
 /cinema:
   get:

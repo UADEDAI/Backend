@@ -28,8 +28,8 @@ responses:
     schema:
       type: object
       $ref: ../../definitions/otp/otp.yaml
-  400:
+  500:
     description: Error in updating OTP
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/otp/otp-update-error.yaml

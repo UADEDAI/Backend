@@ -1,0 +1,10 @@
+tags:
+  - Auth
+summary: Log out the user and revoke their JWT token
+produces:
+  - application/json
+security:
+  - JWT: []
+responses:
+  204:
+    description: No Content

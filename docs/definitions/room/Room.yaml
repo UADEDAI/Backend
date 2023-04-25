@@ -2,13 +2,19 @@ type: object
 properties:
   cinemaId:
     type: integer
+    example: 1
   roomId:
     type: integer
+    example: 1
   name:
     type: string
+    example: "Room 1"
   rows:
     type: integer
+    example: 10
   seats:
     type: integer
+    example: 20
   enabled:
     type: boolean
+    example: true

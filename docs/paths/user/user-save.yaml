@@ -21,9 +21,9 @@ responses:
     description: User saved successfully
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
-  400:
+      $ref: ../../definitions/user/User.yaml
+  500:
     description: Error in saving User
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/user/user-post-error.yaml

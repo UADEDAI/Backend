@@ -19,8 +19,8 @@ responses:
     schema:
       type: object
       $ref: ../../definitions/user/User.yaml
-  400:
+  500:
     description: Error in deleting User
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/user/user-delete-error.yaml

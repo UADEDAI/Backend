@@ -18,9 +18,9 @@ responses:
     description: Room deleted successfully
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
-  400:
+      $ref: ../../definitions/room/Room.yaml
+  500:
     description: Error in deleting Room
     schema:
       type: object
-      $ref: ../../definitions/CommonResponse.yaml
+      $ref: ../../definitions/room/room-delete-error.yaml
