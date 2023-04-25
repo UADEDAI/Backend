@@ -4,6 +4,8 @@ summary: Get all the Users
 description: Get all the Users
 produces:
   - application/json
+security:
+  - JWT: []
 responses:
   200:
     description: Users fetched successfully

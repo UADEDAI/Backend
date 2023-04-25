@@ -178,6 +178,11 @@
         "consumes": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "parameters": [
           {
             "in": "body",
@@ -319,6 +324,11 @@
         "consumes": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -375,6 +385,11 @@
         ],
         "consumes": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {
@@ -710,6 +725,11 @@
         "consumes": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -811,6 +831,11 @@
         "consumes": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "parameters": [
           {
             "in": "body",
@@ -907,6 +932,11 @@
         "consumes": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -963,6 +993,11 @@
         ],
         "consumes": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {
@@ -1049,6 +1084,11 @@
         ],
         "consumes": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {
@@ -1146,6 +1186,11 @@
         "consumes": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1202,6 +1247,11 @@
         ],
         "consumes": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {
@@ -1288,6 +1338,11 @@
         ],
         "consumes": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {
@@ -1385,6 +1440,11 @@
         "consumes": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1440,7 +1500,12 @@
           "application/json"
         ],
         "consumes": [
-          "application/json"
+          "application/json\\"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {
@@ -1488,6 +1553,11 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Users fetched successfully",
@@ -1527,6 +1597,11 @@
         ],
         "consumes": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {
@@ -1577,6 +1652,11 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -1623,6 +1703,11 @@
         ],
         "consumes": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {
@@ -1680,6 +1765,11 @@
         ],
         "consumes": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {

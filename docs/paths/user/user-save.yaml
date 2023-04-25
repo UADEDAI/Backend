@@ -6,6 +6,8 @@ produces:
   - application/json
 consumes:
   - application/json
+security:
+  - JWT: []
 parameters:
   - 
     in: body
