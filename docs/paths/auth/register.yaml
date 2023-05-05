@@ -1,0 +1,60 @@
+tags:
+  - Auth
+summary: Register the user and in case of an owner user it should also send an OTP via email
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  - in: body
+    name: credentials
+    schema:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          description: The user's email address
+          example: some@email.com
+        username:
+          type: string
+          description: The user's name
+          example: John Doe
+        company:
+          type: string
+          description: The user's company name
+          example: Hoyts
+        password:
+          type: string
+          format: password
+          description: The user's password
+          example: easyPassword123
+responses:
+  200:
+    description: User registration successful
+    schema:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: User registration successful.
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            email:
+              type: string
+              example: newuser@example.com
+            createdAt:
+              type: string
+              format: date-time
+              example: '2023-05-04T10:30:00Z'
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...

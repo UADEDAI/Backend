@@ -1,0 +1,28 @@
+tags:
+  - Auth
+summary: Validate an OTP
+description: Validate an OTP
+produces:
+  - application/json
+consumes:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    description: OTP object
+    required: true
+    schema:
+      type: object
+      $ref: ../../definitions/otp/otp-validate.yaml
+
+responses:
+  200:
+    description: OTP validated successfully
+    schema:
+      type: object
+      $ref: ../../definitions/otp/otp.yaml
+  500:
+    description: Error validating OTP
+    schema:
+      type: object
+      $ref: ../../definitions/otp/otp-validate-error.yaml

@@ -6,14 +6,16 @@ properties:
   userId:
     type: integer
     example: 1
+  code:
+    type: string
+    example: W23R03
   createdAt:
     type: string
-    example: "2023-04-07T19:14:13.000Z"
+    example: '2023-04-07T19:14:13.000Z'
   updatedAt:
     type: string
-    example: "2023-04-07T19:14:13.000Z"
+    example: '2023-04-07T19:14:13.000Z'
   active:
     type: integer
     minimum: 0
     maximum: 1
-

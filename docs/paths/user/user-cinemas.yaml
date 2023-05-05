@@ -1,0 +1,26 @@
+tags:
+  - User
+summary: Get a User's cinemas
+description: Get a User's cinemas
+produces:
+  - application/json
+security:
+  - JWT: []
+parameters:
+  - in: path
+    name: id
+    description: User id that needs to be fetched
+    required: true
+    type: string
+responses:
+  200:
+    description: User fetched successfully
+    schema:
+      type: array
+      items:
+        $ref: ../../definitions/cinema/Cinema.yaml
+  500:
+    description: Error in fetching User
+    schema:
+      type: object
+      $ref: ../../definitions/user/user-get-error.yaml

@@ -5,7 +5,7 @@ properties:
     example: 1
   title:
     type: string
-    example: "The Batman"
+    example: 'The Batman'
   description:
     type: string
     example: "The film sees Batman , who has been fighting crime in Gotham City for two years, uncover corruption while pursuing the Riddler (Dano), a serial killer who targets Gotham's corrupt elite."
@@ -15,19 +15,22 @@ properties:
   releaseDate:
     type: string
     format: date
-    example: "2022-03-04"
+    example: '2022-03-04'
   genre:
     type: string
-    example: "Action"
+    example: 'Action'
   director:
     type: string
-    example: "Matt Reeves"
+    example: 'Matt Reeves'
   cast:
     type: string
-    example: "Robert Pattinson, Zoë Kravitz, Paul Dano, Jeffrey Wright, John Turturro, Peter Sarsgaard, Barry Keoghan, Jayme Lawson, Andy Serkis, Colin Farrell"
+    example: 'Robert Pattinson, Zoë Kravitz, Paul Dano, Jeffrey Wright, John Turturro, Peter Sarsgaard, Barry Keoghan, Jayme Lawson, Andy Serkis, Colin Farrell'
   score:
     type: integer
     example: 8
   certificate:
     type: string
-    example: "PG-13"
+    example: 'PG-13'
+  imageUrl:
+    type: string
+    example: unsplash.com/example

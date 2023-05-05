@@ -1,4 +1,4 @@
-tags :
+tags:
   - Room
 summary: Save a new Room
 description: Save a new Room
@@ -9,15 +9,14 @@ consumes:
 security:
   - JWT: []
 parameters:
-  - 
-    in: body
+  - in: body
     name: body
     description: Room object
     required: true
     schema:
       type: object
-      $ref: ../../definitions/room/Room.yaml
-  
+      $ref: ../../definitions/room/room-post.yaml
+
 responses:
   200:
     description: Room saved successfully

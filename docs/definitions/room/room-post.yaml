@@ -1,8 +1,5 @@
 type: object
 properties:
-  id:
-    type: integer
-    example: 1
   cinemaId:
     type: integer
     example: 1

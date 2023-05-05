@@ -1,6 +1,6 @@
 type: object
 properties:
-  id:
+  userId:
     type: integer
     example: 1
   name:
@@ -8,19 +8,22 @@ properties:
     example: Hoyts Palermo
   street:
     type: string
-    example: "Av. Santa Fe"
+    example: 'Av. Santa Fe'
   streetNum:
     type: integer
-    example: "3650"
+    example: '3650'
   state:
     type: string
-    example: "CABA"
+    example: 'CABA'
   country:
     type: string
-    example: "Argentina"
+    example: 'Argentina'
   city:
     type: string
-    example: "Buenos Aires"
+    example: 'Buenos Aires'
+  neighborhood:
+    type: string
+    example: 'Palermo'
   latitude:
     type: number
     example: -58.41030317402696

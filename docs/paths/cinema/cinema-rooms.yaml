@@ -1,0 +1,18 @@
+tags:
+  - Cinema
+summary: Get all the Cinema's Rooms
+description: Get all the Cinema's Rooms
+produces:
+  - application/json
+responses:
+  200:
+    description: Rooms fetched successfully
+    schema:
+      type: array
+      items:
+        $ref: ../../definitions/room/Room.yaml
+  500:
+    description: Error in fetching Rooms
+    schema:
+      type: object
+      $ref: ../../definitions/room/room-list-error.yaml

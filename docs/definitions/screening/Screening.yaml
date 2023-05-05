@@ -11,12 +11,15 @@ properties:
     example: 1
   movieId:
     type: integer
-    example: 1 
+    example: 1
+  format:
+    type: string
+    example: subtitled
   startAt:
     type: string
     format: date-time
-    example: "2023-04-24T19:15:00.000Z"
+    example: '2023-04-24T19:15:00.000Z'
   endAt:
     type: string
     format: date-time
-    example: "2023-04-24T22:00:00.000Z"
+    example: '2023-04-24T22:00:00.000Z'

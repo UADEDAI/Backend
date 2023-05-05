@@ -86,8 +86,21 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "User logout successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User logout successful."
+                }
+              }
+            }
           }
         }
       }
@@ -125,6 +138,286 @@
           "name": "Authorization",
           "in": "header",
           "description": "JWT-based authentication"
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Register the user and in case of an owner user it should also send an OTP via email",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "credentials",
+            "schema": {
+              "type": "object",
+              "required": [
+                "email"
+              ],
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "description": "The user's email address",
+                  "example": "some@email.com"
+                },
+                "username": {
+                  "type": "string",
+                  "description": "The user's name",
+                  "example": "John Doe"
+                },
+                "company": {
+                  "type": "string",
+                  "description": "The user's company name",
+                  "example": "Hoyts"
+                },
+                "password": {
+                  "type": "string",
+                  "format": "password",
+                  "description": "The user's password",
+                  "example": "easyPassword123"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User registration successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User registration successful."
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "newuser@example.com"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-05-04T10:30:00Z"
+                    }
+                  }
+                },
+                "token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/reset": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Reset the user's password, an email should be sent to the users email",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "credentials",
+            "schema": {
+              "type": "object",
+              "required": [
+                "email"
+              ],
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "description": "The user's email address",
+                  "example": "some@email.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password reset successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Password reset successfully."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/recover": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Recover user password with OTP sent via email",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "credentials",
+            "schema": {
+              "type": "object",
+              "required": [
+                "email"
+              ],
+              "properties": {
+                "password": {
+                  "type": "string",
+                  "format": "password",
+                  "description": "The user's password",
+                  "example": "easyPassword123"
+                },
+                "code": {
+                  "type": "string",
+                  "description": "The OTP sent via email",
+                  "example": "AS34T9"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User password reset was successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User password reset was successful."
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "newuser@example.com"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-05-04T10:30:00Z"
+                    }
+                  }
+                },
+                "token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/validate": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Validate an OTP",
+        "description": "Validate an OTP",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "OTP object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "code": {
+                  "type": "string",
+                  "example": "W23R03"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OTP validated successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/OTP"
+            }
+          },
+          "500": {
+            "description": "Error validating OTP",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error validating the OTP for the userId: 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -201,7 +494,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "id": {
+                "userId": {
                   "type": "integer",
                   "example": 1
                 },
@@ -228,6 +521,10 @@
                 "city": {
                   "type": "string",
                   "example": "Buenos Aires"
+                },
+                "neighborhood": {
+                  "type": "string",
+                  "example": "Palermo"
                 },
                 "latitude": {
                   "type": "number",
@@ -472,6 +769,36 @@
         }
       }
     },
+    "/cinema/{id}/rooms": {
+      "get": {
+        "tags": [
+          "Cinema"
+        ],
+        "summary": "Get all the Cinema's Rooms",
+        "description": "Get all the Cinema's Rooms",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Rooms fetched successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Room"
+              }
+            }
+          },
+          "500": {
+            "description": "Error in fetching Rooms",
+            "schema": {
+              "type": "object",
+              "$ref": "#/paths/~1room/get/responses/500/schema"
+            }
+          }
+        }
+      }
+    },
     "/movie": {
       "get": {
         "tags": [
@@ -619,6 +946,10 @@
                 "userId": {
                   "type": "integer",
                   "example": 1
+                },
+                "code": {
+                  "type": "string",
+                  "example": "W23R03"
                 }
               }
             }
@@ -1098,7 +1429,28 @@
             "required": true,
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/Room"
+              "properties": {
+                "cinemaId": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Room 1"
+                },
+                "rows": {
+                  "type": "integer",
+                  "example": 10
+                },
+                "seats": {
+                  "type": "integer",
+                  "example": 20
+                },
+                "enabled": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
             }
           }
         ],
@@ -1284,6 +1636,123 @@
                   "example": 500
                 }
               }
+            }
+          }
+        }
+      }
+    },
+    "/room/{id}/movies": {
+      "get": {
+        "tags": [
+          "Room"
+        ],
+        "summary": "Get all the room's Movies",
+        "description": "Get all the room's Movies",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Room id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movies fetched successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Movie"
+              }
+            }
+          },
+          "500": {
+            "description": "Error in fetching Movies",
+            "schema": {
+              "type": "object",
+              "$ref": "#/paths/~1movie/get/responses/500/schema"
+            }
+          }
+        }
+      }
+    },
+    "/room/{id}/premiers": {
+      "get": {
+        "tags": [
+          "Room"
+        ],
+        "summary": "Get all the room's Movies premiered for this specific room",
+        "description": "Get all the room's Movies premiered for this specific room",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Room id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movies fetched successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Movie"
+              }
+            }
+          },
+          "500": {
+            "description": "Error in fetching Movies",
+            "schema": {
+              "type": "object",
+              "$ref": "#/paths/~1movie/get/responses/500/schema"
+            }
+          }
+        }
+      }
+    },
+    "/room/{id}/coming-soon": {
+      "get": {
+        "tags": [
+          "Room"
+        ],
+        "summary": "Get all the room's coming soon Movies",
+        "description": "Get all the room's coming soon Movies",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Room id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movies fetched successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Movie"
+              }
+            }
+          },
+          "500": {
+            "description": "Error in fetching Movies",
+            "schema": {
+              "type": "object",
+              "$ref": "#/paths/~1movie/get/responses/500/schema"
             }
           }
         }
@@ -1724,7 +2193,25 @@
             "required": true,
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/User"
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "company": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "username",
+                "email"
+              ]
             }
           }
         ],
@@ -1785,7 +2272,16 @@
             "description": "User deleted successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/User"
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "email": {
+                  "type": "string",
+                  "example": "test@email.com"
+                }
+              }
             }
           },
           "500": {
@@ -1806,6 +2302,50 @@
           }
         }
       }
+    },
+    "/user/${id}/cinemas": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get a User's cinemas",
+        "description": "Get a User's cinemas",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "User id that needs to be fetched",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User fetched successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Cinema"
+              }
+            }
+          },
+          "500": {
+            "description": "Error in fetching User",
+            "schema": {
+              "type": "object",
+              "$ref": "#/paths/~1user~1%7Bid%7D/get/responses/500/schema"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1820,7 +2360,7 @@
     "Cinema": {
       "type": "object",
       "properties": {
-        "id": {
+        "userId": {
           "type": "integer",
           "example": 1
         },
@@ -1847,6 +2387,10 @@
         "city": {
           "type": "string",
           "example": "Buenos Aires"
+        },
+        "neighborhood": {
+          "type": "string",
+          "example": "Palermo"
         },
         "latitude": {
           "type": "number",
@@ -1909,6 +2453,10 @@
         "certificate": {
           "type": "string",
           "example": "PG-13"
+        },
+        "imageUrl": {
+          "type": "string",
+          "example": "unsplash.com/example"
         }
       }
     },
@@ -1922,6 +2470,10 @@
         "userId": {
           "type": "integer",
           "example": 1
+        },
+        "code": {
+          "type": "string",
+          "example": "W23R03"
         },
         "createdAt": {
           "type": "string",
@@ -1979,11 +2531,11 @@
     "Room": {
       "type": "object",
       "properties": {
-        "cinemaId": {
+        "id": {
           "type": "integer",
           "example": 1
         },
-        "roomId": {
+        "cinemaId": {
           "type": "integer",
           "example": 1
         },
@@ -2023,6 +2575,10 @@
         "movieId": {
           "type": "integer",
           "example": 1
+        },
+        "format": {
+          "type": "string",
+          "example": "subtitled"
         },
         "startAt": {
           "type": "string",

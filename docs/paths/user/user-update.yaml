@@ -1,4 +1,4 @@
-tags :
+tags:
   - User
 summary: Update a User
 description: Update a User
@@ -9,21 +9,19 @@ consumes:
 security:
   - JWT: []
 parameters:
-  - 
-    in: path
+  - in: path
     name: id
     description: User id that needs to be updated
     required: true
     type: string
-  - 
-    in: body
+  - in: body
     name: body
     description: User object
     required: true
     schema:
       type: object
-      $ref: ../../definitions/user/User.yaml
-  
+      $ref: ../../definitions/user/user-update.yaml
+
 responses:
   200:
     description: User updated successfully

@@ -11,10 +11,22 @@
   post:
     $ref: ./auth/refresh.yaml
 
-#/auth/register:
-#  post:
-#    $ref: ./auth/register.yaml
-#
+/auth/register:
+  post:
+    $ref: ./auth/register.yaml
+
+/auth/reset:
+  post:
+    $ref: ./auth/reset.yaml
+
+/auth/recover:
+  post:
+    $ref: ./auth/recover.yaml
+
+/auth/validate:
+  post:
+    $ref: ./otp/otp-validate.yaml
+
 #/auth/token:
 #  post:
 #    $ref: ./auth/token.yaml
@@ -33,14 +45,18 @@
     $ref: ./cinema/cinema-update.yaml
   delete:
     $ref: ./cinema/cinema-delete.yaml
-  
+
+/cinema/{id}/rooms:
+  get:
+    $ref: ./cinema/cinema-rooms.yaml
+
 # Movie Endpoints
 /movie:
   get:
     $ref: ./movie/movie-list.yaml
 
 /movie/{id}:
-  get: 
+  get:
     $ref: ./movie/movie-get.yaml
 
 # OTP Endpoints
@@ -84,6 +100,18 @@
   delete:
     $ref: ./room/room-delete.yaml
 
+/room/{id}/movies:
+  get:
+    $ref: ./room/room-movies.yaml
+
+/room/{id}/premiers:
+  get:
+    $ref: ./room/room-premiers.yaml
+
+/room/{id}/coming-soon:
+  get:
+    $ref: ./room/room-coming-soon.yaml
+
 # Screenings
 /screening:
   get:
@@ -113,3 +141,6 @@
     $ref: ./user/user-update.yaml
   delete:
     $ref: ./user/user-delete.yaml
+/user/${id}/cinemas:
+  get:
+    $ref: ./user/user-cinemas.yaml

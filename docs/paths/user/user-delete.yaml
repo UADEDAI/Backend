@@ -1,4 +1,4 @@
-tags :
+tags:
   - User
 summary: Delete a User
 description: Delete a User with the id specified in parameter
@@ -9,8 +9,7 @@ consumes:
 security:
   - JWT: []
 parameters:
-  - 
-    in: path
+  - in: path
     name: id
     description: User id that needs to be deleted
     required: true
@@ -20,7 +19,7 @@ responses:
     description: User deleted successfully
     schema:
       type: object
-      $ref: ../../definitions/user/User.yaml
+      $ref: ../../definitions/user/user-delete.yaml
   500:
     description: Error in deleting User
     schema:

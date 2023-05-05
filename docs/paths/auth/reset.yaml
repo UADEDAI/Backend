@@ -1,0 +1,31 @@
+tags:
+  - Auth
+summary: Reset the user's password, an email should be sent to the users email
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  - in: body
+    name: credentials
+    schema:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          description: The user's email address
+          example: some@email.com
+responses:
+  200:
+    description: Password reset successful
+    schema:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: Password reset successfully.

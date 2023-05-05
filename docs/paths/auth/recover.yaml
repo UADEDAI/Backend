@@ -1,0 +1,52 @@
+tags:
+  - Auth
+summary: Recover user password with OTP sent via email
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  - in: body
+    name: credentials
+    schema:
+      type: object
+      required:
+        - email
+      properties:
+        password:
+          type: string
+          format: password
+          description: The user's password
+          example: easyPassword123
+        code:
+          type: string
+          description: The OTP sent via email
+          example: AS34T9
+responses:
+  200:
+    description: User password reset was successful
+    schema:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: User password reset was successful.
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            email:
+              type: string
+              example: newuser@example.com
+            updatedAt:
+              type: string
+              format: date-time
+              example: '2023-05-04T10:30:00Z'
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
