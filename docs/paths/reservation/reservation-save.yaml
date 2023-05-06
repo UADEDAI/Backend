@@ -1,4 +1,4 @@
-tags :
+tags:
   - Reservation
 summary: Save a new Reservation
 description: Save a new Reservation
@@ -9,15 +9,14 @@ consumes:
 security:
   - JWT: []
 parameters:
-  - 
-    in: body
+  - in: body
     name: body
     description: Reservation object
     required: true
     schema:
       type: object
-      $ref: ../../definitions/reservation/Reservation.yaml
-  
+      $ref: ../../definitions/reservation/reservation-save.yaml
+
 responses:
   200:
     description: Reservation saved successfully

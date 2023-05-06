@@ -1,4 +1,4 @@
-tags :
+tags:
   - Screening
 summary: Save a new Screening
 description: Save a new Screening
@@ -9,15 +9,14 @@ consumes:
 security:
   - JWT: []
 parameters:
-  - 
-    in: body
+  - in: body
     name: body
     description: Screening object
     required: true
     schema:
       type: object
-      $ref: ../../definitions/screening/Screening.yaml
-  
+      $ref: ../../definitions/screening/screening-save.yaml
+
 responses:
   200:
     description: Screening saved successfully

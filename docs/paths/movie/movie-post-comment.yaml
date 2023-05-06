@@ -1,0 +1,28 @@
+tags:
+  - Movie
+summary: Get all the Movies Comments
+description: Get all the Movies Comments
+produces:
+  - application/json
+security:
+  - JWT: []
+parameters:
+  - in: body
+    name: body
+    description: Comment object
+    required: true
+    schema:
+      type: object
+      $ref: ../../definitions/comments/comment-post.yaml
+responses:
+  200:
+    description: Comment created successfully
+    schema:
+      type: array
+      items:
+        $ref: ../../definitions/comments/Comment.yaml
+  500:
+    description: Error in creating Comments
+    schema:
+      type: object
+      $ref: ../../definitions/comments/comment-post-error.yaml

@@ -1,8 +1,5 @@
 type: object
 properties:
-  id:
-    type: integer
-    example: 1
   userId:
     type: integer
     example: 1
@@ -14,12 +11,6 @@ properties:
     items:
       type: string
     example: ['F8A7', 'F8A8']
-  createdAt:
-    type: string
-    example: '2023-04-07T19:14:13.000Z'
-  updatedAt:
-    type: string
-    example: '2023-04-07T19:14:13.000Z'
   active:
     type: integer
     minimum: 0

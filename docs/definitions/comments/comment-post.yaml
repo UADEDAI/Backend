@@ -1,0 +1,17 @@
+type: object
+properties:
+  userId:
+    type: integer
+    example: 1
+  movieId:
+    type: integer
+    example: 1
+  title:
+    type: string
+    example: No es una gran pelicula
+  body:
+    type: string
+    example: La verdad es que es una pelicula muy aburrida y se hace muy larga, en especial el final es bastante malo
+  rating:
+    type: integer
+    example: 3

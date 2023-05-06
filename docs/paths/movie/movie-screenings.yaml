@@ -1,0 +1,20 @@
+tags:
+  - Movie
+summary: Get all the Movies Screenings near the user
+description: Get all the Movies Screenings near the user
+produces:
+  - application/json
+security:
+  - JWT: []
+responses:
+  200:
+    description: Comments fetched successfully
+    schema:
+      type: array
+      items:
+        $ref: ../../definitions/screening/Screening.yaml
+  500:
+    description: Error in fetching Comments
+    schema:
+      type: object
+      $ref: ../../definitions/screening/screening-get-error.yaml

@@ -59,6 +59,16 @@
   get:
     $ref: ./movie/movie-get.yaml
 
+/movie/{id}/comments:
+  get:
+    $ref: ./movie/movie-comments.yaml
+  post:
+    $ref: ./movie/movie-post-comment.yaml
+
+/movie/{id}/screenings:
+  get:
+    $ref: ./movie/movie-screenings.yaml
+
 # OTP Endpoints
 /otp:
   get:

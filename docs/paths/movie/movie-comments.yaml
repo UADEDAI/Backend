@@ -1,0 +1,20 @@
+tags:
+  - Movie
+summary: Get all the Movies Comments
+description: Get all the Movies Comments
+produces:
+  - application/json
+security:
+  - JWT: []
+responses:
+  200:
+    description: Comments fetched successfully
+    schema:
+      type: array
+      items:
+        $ref: ../../definitions/comments/Comment.yaml
+  500:
+    description: Error in fetching Comments
+    schema:
+      type: object
+      $ref: ../../definitions/comments/comment-get-error.yaml

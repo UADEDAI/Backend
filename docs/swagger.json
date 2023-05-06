@@ -884,6 +884,196 @@
         }
       }
     },
+    "/movie/{id}/comments": {
+      "get": {
+        "tags": [
+          "Movie"
+        ],
+        "summary": "Get all the Movies Comments",
+        "description": "Get all the Movies Comments",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comments fetched successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "userId": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "movieId": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "No es una gran pelicula"
+                  },
+                  "body": {
+                    "type": "string",
+                    "example": "La verdad es que es una pelicula muy aburrida y se hace muy larga, en especial el final es bastante malo"
+                  },
+                  "rating": {
+                    "type": "integer",
+                    "example": 3
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2023-04-24T19:15:00.000Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2023-04-24T19:15:00.000Z"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in fetching Comments",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error fetching the Comments"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Movie"
+        ],
+        "summary": "Get all the Movies Comments",
+        "description": "Get all the Movies Comments",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Comment object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "movieId": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "title": {
+                  "type": "string",
+                  "example": "No es una gran pelicula"
+                },
+                "body": {
+                  "type": "string",
+                  "example": "La verdad es que es una pelicula muy aburrida y se hace muy larga, en especial el final es bastante malo"
+                },
+                "rating": {
+                  "type": "integer",
+                  "example": 3
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment created successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/paths/~1movie~1%7Bid%7D~1comments/get/responses/200/schema/items"
+              }
+            }
+          },
+          "500": {
+            "description": "Error in creating Comments",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error creating the Comment"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movie/{id}/screenings": {
+      "get": {
+        "tags": [
+          "Movie"
+        ],
+        "summary": "Get all the Movies Screenings near the user",
+        "description": "Get all the Movies Screenings near the user",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comments fetched successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Screening"
+              }
+            }
+          },
+          "500": {
+            "description": "Error in fetching Comments",
+            "schema": {
+              "type": "object",
+              "$ref": "#/paths/~1screening~1%7Bid%7D/get/responses/500/schema"
+            }
+          }
+        }
+      }
+    },
     "/otp": {
       "get": {
         "tags": [
@@ -1175,7 +1365,35 @@
             "required": true,
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/Reservation"
+              "properties": {
+                "userId": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "screeningId": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "seats": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": [
+                    "F8A7",
+                    "F8A8"
+                  ]
+                },
+                "active": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1,
+                  "example": 1
+                }
+              },
+              "required": [
+                "id"
+              ]
             }
           }
         ],
@@ -1821,7 +2039,34 @@
             "required": true,
             "schema": {
               "type": "object",
-              "$ref": "#/definitions/Screening"
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "roomId": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "movieId": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "format": {
+                  "type": "string",
+                  "example": "subtitled"
+                },
+                "startAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2023-04-24T19:15:00.000Z"
+                },
+                "endAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2023-04-24T22:00:00.000Z"
+                }
+              }
             }
           }
         ],
@@ -2501,13 +2746,19 @@
           "type": "integer",
           "example": 1
         },
-        "movieId": {
-          "type": "integer",
-          "example": 1
-        },
         "screeningId": {
           "type": "integer",
           "example": 1
+        },
+        "seats": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "F8A7",
+            "F8A8"
+          ]
         },
         "createdAt": {
           "type": "string",
@@ -2520,8 +2771,8 @@
         "active": {
           "type": "integer",
           "minimum": 0,
-          "maximum": 10,
-          "example": 9
+          "maximum": 1,
+          "example": 1
         }
       },
       "required": [
@@ -2564,10 +2815,6 @@
           "type": "integer",
           "example": 1
         },
-        "cinemaId": {
-          "type": "integer",
-          "example": 1
-        },
         "roomId": {
           "type": "integer",
           "example": 1
@@ -2589,6 +2836,30 @@
           "type": "string",
           "format": "date-time",
           "example": "2023-04-24T22:00:00.000Z"
+        },
+        "availableSeats": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "F1A1",
+            "F1A2",
+            "F1A3",
+            "F2A6",
+            "F4A7",
+            "F3A8"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2023-04-24T19:15:00.000Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2023-04-24T19:15:00.000Z"
         }
       }
     },
