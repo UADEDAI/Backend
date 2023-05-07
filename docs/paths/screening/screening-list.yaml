@@ -4,6 +4,8 @@ summary: Get all the Screenings
 description: Get all the Screenings
 produces:
   - application/json
+security:
+  - JWT: []
 responses:
   200:
     description: Screenings fetched successfully

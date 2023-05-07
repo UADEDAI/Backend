@@ -242,6 +242,11 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "parameters": [
           {
             "in": "body",
@@ -431,6 +436,11 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Cinemas fetched successfully",
@@ -573,6 +583,11 @@
         "description": "Get a Cinema with the id specified in parameter",
         "produces": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {
@@ -779,6 +794,11 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Rooms fetched successfully",
@@ -808,6 +828,11 @@
         "description": "Get all the Movies",
         "produces": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {
@@ -973,6 +998,11 @@
         "description": "Get a Movie with the id specified in parameter",
         "produces": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {
@@ -1468,6 +1498,11 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Reservations fetched successfully",
@@ -1580,6 +1615,11 @@
         "description": "Get a Reservation with the id specified in parameter",
         "produces": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {
@@ -1741,6 +1781,11 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Rooms fetched successfully",
@@ -1855,6 +1900,11 @@
         "description": "Get a Room with the id specified in parameter",
         "produces": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {
@@ -2016,6 +2066,11 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -2054,6 +2109,11 @@
         "description": "Get all the room's Movies premiered for this specific room",
         "produces": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {
@@ -2094,6 +2154,11 @@
         "produces": [
           "application/json"
         ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -2132,6 +2197,11 @@
         "description": "Get all the Screenings",
         "produces": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "responses": {
           "200": {
@@ -2253,6 +2323,11 @@
         "description": "Get a Screening with the id specified in parameter",
         "produces": [
           "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
         ],
         "parameters": [
           {

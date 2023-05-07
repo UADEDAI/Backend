@@ -4,6 +4,8 @@ summary: Get all the Rooms
 description: Get all the Rooms
 produces:
   - application/json
+security:
+  - JWT: []
 responses:
   200:
     description: Rooms fetched successfully

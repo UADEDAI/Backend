@@ -4,6 +4,8 @@ summary: Get all the room's Movies premiered for this specific room
 description: Get all the room's Movies premiered for this specific room
 produces:
   - application/json
+security:
+  - JWT: []
 parameters:
   - in: path
     name: id

@@ -5,6 +5,8 @@ consumes:
   - application/json
 produces:
   - application/json
+security:
+  - JWT: []
 parameters:
   - in: body
     name: credentials

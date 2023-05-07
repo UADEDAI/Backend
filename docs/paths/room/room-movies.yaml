@@ -4,6 +4,8 @@ summary: Get all the room's Movies
 description: Get all the room's Movies
 produces:
   - application/json
+security:
+  - JWT: []
 parameters:
   - in: path
     name: id

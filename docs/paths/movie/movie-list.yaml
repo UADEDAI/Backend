@@ -4,6 +4,8 @@ summary: Get all the Movies
 description: Get all the Movies
 produces:
   - application/json
+security:
+  - JWT: []
 parameters:
   - 
     in: query

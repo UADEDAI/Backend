@@ -4,6 +4,8 @@ summary: Get all the Reservations
 description: Get all the Reservations
 produces:
   - application/json
+security:
+  - JWT: []
 responses:
   200:
     description: Reservations fetched successfully

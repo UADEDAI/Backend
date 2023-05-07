@@ -4,6 +4,8 @@ summary: Get all the Cinemas
 description: Get all the Cinemas
 produces:
   - application/json
+security:
+  - JWT: []
 responses:
   200:
     description: Cinemas fetched successfully

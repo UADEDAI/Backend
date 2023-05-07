@@ -4,6 +4,8 @@ summary: Get a Movie
 description: Get a Movie with the id specified in parameter
 produces:
   - application/json
+security:
+  - JWT: []
 parameters:
   - 
     in: path

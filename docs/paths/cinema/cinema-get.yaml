@@ -4,6 +4,8 @@ summary: Get a Cinema
 description: Get a Cinema with the id specified in parameter
 produces:
   - application/json
+security:
+  - JWT: []
 parameters:
   - 
     in: path
