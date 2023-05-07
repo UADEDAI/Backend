@@ -11,10 +11,3 @@ properties:
     items:
       type: string
     example: ['F8A7', 'F8A8']
-  active:
-    type: integer
-    minimum: 0
-    maximum: 1
-    example: 1
-required:
-  - id

@@ -11,6 +11,11 @@ properties:
     type: string
   company:
     type: string
+  role:
+    type: string
+    enum:
+      - owner
+      - client
 required:
   - username
   - email

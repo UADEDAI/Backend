@@ -1,3 +1,4 @@
+
 CommonResponse:
   $ref: ./CommonResponse.yaml
 Cinema:

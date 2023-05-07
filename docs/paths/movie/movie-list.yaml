@@ -4,13 +4,48 @@ summary: Get all the Movies
 description: Get all the Movies
 produces:
   - application/json
+parameters:
+  - 
+    in: query
+    name: lat
+    description: Latitude of the user
+    type: string
+  - 
+    in: query
+    name: long
+    description: longitude of the user
+    type: string
+  - 
+    in: query
+    name: title
+    description: Movie Title Filter
+    type: string
+  - 
+    in: query
+    name: distance
+    description: Distance between user and cinema Filter
+    type: string
+  - 
+    in: query
+    name: cinema
+    description: Cinema Filter
+    type: string
+  - 
+    in: query
+    name: genre
+    description: Movie Genre Filter
+    type: string
+  - 
+    in: query
+    name: score
+    description: Movie Score Filter
+    type: string
 responses:
   200:
     description: Movies fetched successfully
     schema:
-      type: array
-      items:
-        $ref: ../../definitions/movie/Movie.yaml
+      type: object
+      $ref: ../../definitions/movie/movie-list.yaml
   500:
     description: Error in fetching Movies
     schema:

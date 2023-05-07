@@ -32,13 +32,13 @@
 #    $ref: ./auth/token.yaml
 
 # Cinema Endpoints
-/cinema:
+/cinemas:
   get:
     $ref: ./cinema/cinema-list.yaml
   post:
     $ref: ./cinema/cinema-save.yaml
 
-/cinema/{id}:
+/cinemas/{id}:
   get:
     $ref: ./cinema/cinema-get.yaml
   put:
@@ -46,26 +46,26 @@
   delete:
     $ref: ./cinema/cinema-delete.yaml
 
-/cinema/{id}/rooms:
+/cinemas/{id}/rooms:
   get:
     $ref: ./cinema/cinema-rooms.yaml
 
 # Movie Endpoints
-/movie:
+/movies:
   get:
     $ref: ./movie/movie-list.yaml
 
-/movie/{id}:
+/movies/{id}:
   get:
     $ref: ./movie/movie-get.yaml
 
-/movie/{id}/comments:
+/movies/{id}/comments:
   get:
     $ref: ./movie/movie-comments.yaml
   post:
     $ref: ./movie/movie-post-comment.yaml
 
-/movie/{id}/screenings:
+/movies/{id}/screenings:
   get:
     $ref: ./movie/movie-screenings.yaml
 
@@ -82,12 +82,12 @@
     $ref: ./otp/otp-update.yaml
 
 # Reservations
-/reservation:
+/reservations:
   get:
     $ref: ./reservation/reservation-list.yaml
   post:
     $ref: ./reservation/reservation-save.yaml
-/reservation/{id}:
+/reservations/{id}:
   get:
     $ref: ./reservation/reservation-get.yaml
   put:
@@ -96,13 +96,13 @@
     $ref: ./reservation/reservation-delete.yaml
 
 # Cinema Rooms
-/room:
+/rooms:
   get:
     $ref: ./room/room-list.yaml
   post:
     $ref: ./room/room-save.yaml
 
-/room/{id}:
+/rooms/{id}:
   get:
     $ref: ./room/room-get.yaml
   put:
@@ -110,26 +110,26 @@
   delete:
     $ref: ./room/room-delete.yaml
 
-/room/{id}/movies:
+/rooms/{id}/movies:
   get:
     $ref: ./room/room-movies.yaml
 
-/room/{id}/premiers:
+/rooms/{id}/premiers:
   get:
     $ref: ./room/room-premiers.yaml
 
-/room/{id}/coming-soon:
+/rooms/{id}/coming-soon:
   get:
     $ref: ./room/room-coming-soon.yaml
 
 # Screenings
-/screening:
+/screenings:
   get:
     $ref: ./screening/screening-list.yaml
   post:
     $ref: ./screening/screening-save.yaml
 
-/screening/{id}:
+/screenings/{id}:
   get:
     $ref: ./screening/screening-get.yaml
   put:
@@ -138,19 +138,19 @@
     $ref: ./screening/screening-delete.yaml
 
 # User Endpoints
-/user:
+/users:
   get:
     $ref: ./user/user-list.yaml
   post:
     $ref: ./user/user-save.yaml
 
-/user/{id}:
+/users/{id}:
   get:
     $ref: ./user/user-get.yaml
   put:
     $ref: ./user/user-update.yaml
   delete:
     $ref: ./user/user-delete.yaml
-/user/${id}/cinemas:
+/users/${id}/cinemas:
   get:
     $ref: ./user/user-cinemas.yaml

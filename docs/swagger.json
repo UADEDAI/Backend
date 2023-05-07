@@ -421,7 +421,7 @@
         }
       }
     },
-    "/cinema": {
+    "/cinemas": {
       "get": {
         "tags": [
           "Cinema"
@@ -564,7 +564,7 @@
         }
       }
     },
-    "/cinema/{id}": {
+    "/cinemas/{id}": {
       "get": {
         "tags": [
           "Cinema"
@@ -650,7 +650,7 @@
             "description": "Cinema updated successfully",
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1cinema/post/responses/200/schema"
+              "$ref": "#/paths/~1cinemas/post/responses/200/schema"
             }
           },
           "500": {
@@ -769,7 +769,7 @@
         }
       }
     },
-    "/cinema/{id}/rooms": {
+    "/cinemas/{id}/rooms": {
       "get": {
         "tags": [
           "Cinema"
@@ -793,13 +793,13 @@
             "description": "Error in fetching Rooms",
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1room/get/responses/500/schema"
+              "$ref": "#/paths/~1rooms/get/responses/500/schema"
             }
           }
         }
       }
     },
-    "/movie": {
+    "/movies": {
       "get": {
         "tags": [
           "Movie"
@@ -809,13 +809,139 @@
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "lat",
+            "description": "Latitude of the user",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "long",
+            "description": "longitude of the user",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "title",
+            "description": "Movie Title Filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "distance",
+            "description": "Distance between user and cinema Filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "cinema",
+            "description": "Cinema Filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "genre",
+            "description": "Movie Genre Filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "score",
+            "description": "Movie Score Filter",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Movies fetched successfully",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Movie"
+              "type": "object",
+              "properties": {
+                "showing": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "example": {
+                      "id": 1,
+                      "title": "The Batman",
+                      "description": "The film sees Batman , who has been fighting crime in Gotham City for two years, uncover corruption while pursuing the Riddler (Dano), a serial killer who targets Gotham's corrupt elite.",
+                      "duration": 120,
+                      "releaseDate": "2022-03-04",
+                      "genre": "Action",
+                      "director": "Matt Reeves",
+                      "cast": "Robert Pattinson, Zoë Kravitz, Paul Dano, Jeffrey Wright, John Turturro, Peter Sarsgaard, Barry Keoghan, Jayme Lawson, Andy Serkis, Colin Farrell",
+                      "score": 8,
+                      "certificate": "PG-13",
+                      "imageUrl": "unsplash.com/example",
+                      "createdAt": "2023-04-24T19:15:00.000Z",
+                      "updatedAt": "2023-04-24T19:15:00.000Z"
+                    }
+                  }
+                },
+                "comingSoon": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "example": {
+                      "id": 2,
+                      "title": "Spiderman: Far From Home",
+                      "description": "Following the events of Avengers: Endgame (2019), Spider-Man must step up to take on new threats in a world that has changed forever.",
+                      "duration": 120,
+                      "releaseDate": "2019-03-04",
+                      "genre": "Action",
+                      "director": "Jon Watts",
+                      "cast": "Tom Holland, Samuel L. Jackson, Jake Gyllenhaal, Marisa Tomei, Jon Favreau, Zendaya, Jacob Batalon, Tony Revolori, Angourie Rice, Remy Hii, Martin Starr, J. B. Smoove, Cobie Smulders, Numan Acar, Jorge Lendeborg Jr., Hemky Madera, Toni Garrn",
+                      "certificate": "PG-13",
+                      "imageUrl": "unsplash.com/example",
+                      "createdAt": "2023-04-24T19:15:00.000Z",
+                      "updatedAt": "2023-04-24T19:15:00.000Z"
+                    }
+                  }
+                },
+                "showingPagination": {
+                  "type": "object",
+                  "properties": {
+                    "page": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "limit": {
+                      "type": "integer",
+                      "example": 10
+                    },
+                    "totalPages": {
+                      "type": "integer",
+                      "example": 20
+                    },
+                    "totalResults": {
+                      "type": "integer",
+                      "example": 200
+                    }
+                  }
+                },
+                "comingSoonPagination": {
+                  "type": "object",
+                  "properties": {
+                    "page": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "limit": {
+                      "type": "integer",
+                      "example": 5
+                    },
+                    "totalPages": {
+                      "type": "integer",
+                      "example": 20
+                    },
+                    "totalResults": {
+                      "type": "integer",
+                      "example": 100
+                    }
+                  }
+                }
               }
             }
           },
@@ -838,7 +964,7 @@
         }
       }
     },
-    "/movie/{id}": {
+    "/movies/{id}": {
       "get": {
         "tags": [
           "Movie"
@@ -884,7 +1010,7 @@
         }
       }
     },
-    "/movie/{id}/comments": {
+    "/movies/{id}/comments": {
       "get": {
         "tags": [
           "Movie"
@@ -1014,10 +1140,8 @@
           "200": {
             "description": "Comment created successfully",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/paths/~1movie~1%7Bid%7D~1comments/get/responses/200/schema/items"
-              }
+              "type": "object",
+              "$ref": "#/paths/~1movies~1%7Bid%7D~1comments/get/responses/200/schema/items"
             }
           },
           "500": {
@@ -1039,19 +1163,51 @@
         }
       }
     },
-    "/movie/{id}/screenings": {
+    "/movies/{id}/screenings": {
       "get": {
         "tags": [
           "Movie"
         ],
-        "summary": "Get all the Movies Screenings near the user",
-        "description": "Get all the Movies Screenings near the user",
+        "summary": "Get the Movie Screenings near the user",
+        "description": "Get the Movie Screenings near the user",
         "produces": [
           "application/json"
         ],
         "security": [
           {
             "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Movie Id",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "lat",
+            "description": "Latitude of the user",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "long",
+            "description": "longitude of the user",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "date",
+            "description": "Screening date",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "description": "Order of the screening",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1068,7 +1224,7 @@
             "description": "Error in fetching Comments",
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1screening~1%7Bid%7D/get/responses/500/schema"
+              "$ref": "#/paths/~1screenings~1%7Bid%7D/get/responses/500/schema"
             }
           }
         }
@@ -1302,7 +1458,7 @@
         }
       }
     },
-    "/reservation": {
+    "/reservations": {
       "get": {
         "tags": [
           "Reservation"
@@ -1383,17 +1539,8 @@
                     "F8A7",
                     "F8A8"
                   ]
-                },
-                "active": {
-                  "type": "integer",
-                  "minimum": 0,
-                  "maximum": 1,
-                  "example": 1
                 }
-              },
-              "required": [
-                "id"
-              ]
+              }
             }
           }
         ],
@@ -1424,7 +1571,7 @@
         }
       }
     },
-    "/reservation/{id}": {
+    "/reservations/{id}": {
       "get": {
         "tags": [
           "Reservation"
@@ -1584,7 +1731,7 @@
         }
       }
     },
-    "/room": {
+    "/rooms": {
       "get": {
         "tags": [
           "Room"
@@ -1699,7 +1846,7 @@
         }
       }
     },
-    "/room/{id}": {
+    "/rooms/{id}": {
       "get": {
         "tags": [
           "Room"
@@ -1859,7 +2006,7 @@
         }
       }
     },
-    "/room/{id}/movies": {
+    "/rooms/{id}/movies": {
       "get": {
         "tags": [
           "Room"
@@ -1892,13 +2039,13 @@
             "description": "Error in fetching Movies",
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1movie/get/responses/500/schema"
+              "$ref": "#/paths/~1movies/get/responses/500/schema"
             }
           }
         }
       }
     },
-    "/room/{id}/premiers": {
+    "/rooms/{id}/premiers": {
       "get": {
         "tags": [
           "Room"
@@ -1931,13 +2078,13 @@
             "description": "Error in fetching Movies",
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1movie/get/responses/500/schema"
+              "$ref": "#/paths/~1movies/get/responses/500/schema"
             }
           }
         }
       }
     },
-    "/room/{id}/coming-soon": {
+    "/rooms/{id}/coming-soon": {
       "get": {
         "tags": [
           "Room"
@@ -1970,13 +2117,13 @@
             "description": "Error in fetching Movies",
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1movie/get/responses/500/schema"
+              "$ref": "#/paths/~1movies/get/responses/500/schema"
             }
           }
         }
       }
     },
-    "/screening": {
+    "/screenings": {
       "get": {
         "tags": [
           "Screening"
@@ -2097,7 +2244,7 @@
         }
       }
     },
-    "/screening/{id}": {
+    "/screenings/{id}": {
       "get": {
         "tags": [
           "Screening"
@@ -2257,7 +2404,7 @@
         }
       }
     },
-    "/user": {
+    "/users": {
       "get": {
         "tags": [
           "User"
@@ -2356,7 +2503,7 @@
         }
       }
     },
-    "/user/{id}": {
+    "/users/{id}": {
       "get": {
         "tags": [
           "User"
@@ -2442,6 +2589,9 @@
                 "username": {
                   "type": "string"
                 },
+                "lastname": {
+                  "type": "string"
+                },
                 "email": {
                   "type": "string",
                   "format": "email"
@@ -2451,12 +2601,11 @@
                 },
                 "company": {
                   "type": "string"
+                },
+                "avatarUrl": {
+                  "type": "string"
                 }
-              },
-              "required": [
-                "username",
-                "email"
-              ]
+              }
             }
           }
         ],
@@ -2548,7 +2697,7 @@
         }
       }
     },
-    "/user/${id}/cinemas": {
+    "/users/${id}/cinemas": {
       "get": {
         "tags": [
           "User"
@@ -2586,7 +2735,7 @@
             "description": "Error in fetching User",
             "schema": {
               "type": "object",
-              "$ref": "#/paths/~1user~1%7Bid%7D/get/responses/500/schema"
+              "$ref": "#/paths/~1users~1%7Bid%7D/get/responses/500/schema"
             }
           }
         }
@@ -2881,6 +3030,13 @@
         },
         "company": {
           "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "owner",
+            "client"
+          ]
         }
       },
       "required": [

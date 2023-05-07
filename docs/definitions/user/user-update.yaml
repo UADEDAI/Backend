@@ -2,6 +2,8 @@ type: object
 properties:
   username:
     type: string
+  lastname:
+    type: string
   email:
     type: string
     format: email
@@ -9,6 +11,5 @@ properties:
     type: string
   company:
     type: string
-required:
-  - username
-  - email
+  avatarUrl:
+    type: string

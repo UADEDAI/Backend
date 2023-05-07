@@ -1,0 +1,67 @@
+type: object
+properties:
+  showing: 
+    type: array
+    items:
+      type: object
+      example: 
+        id: 1
+        title: 'The Batman'
+        description: "The film sees Batman , who has been fighting crime in Gotham City for two years, uncover corruption while pursuing the Riddler (Dano), a serial killer who targets Gotham's corrupt elite."
+        duration: 120
+        releaseDate: '2022-03-04'
+        genre: 'Action'
+        director: 'Matt Reeves'
+        cast: 'Robert Pattinson, Zoë Kravitz, Paul Dano, Jeffrey Wright, John Turturro, Peter Sarsgaard, Barry Keoghan, Jayme Lawson, Andy Serkis, Colin Farrell'
+        score: 8
+        certificate: 'PG-13'
+        imageUrl: unsplash.com/example
+        createdAt: '2023-04-24T19:15:00.000Z'
+        updatedAt: '2023-04-24T19:15:00.000Z'
+  comingSoon:
+    type: array
+    items:
+      type: object
+      example:  
+        id: 2
+        title: 'Spiderman: Far From Home'
+        description: 'Following the events of Avengers: Endgame (2019), Spider-Man must step up to take on new threats in a world that has changed forever.'
+        duration: 120
+        releaseDate: '2019-03-04'
+        genre: 'Action'
+        director: 'Jon Watts'
+        cast: 'Tom Holland, Samuel L. Jackson, Jake Gyllenhaal, Marisa Tomei, Jon Favreau, Zendaya, Jacob Batalon, Tony Revolori, Angourie Rice, Remy Hii, Martin Starr, J. B. Smoove, Cobie Smulders, Numan Acar, Jorge Lendeborg Jr., Hemky Madera, Toni Garrn'
+        certificate: 'PG-13'
+        imageUrl: unsplash.com/example
+        createdAt: '2023-04-24T19:15:00.000Z'
+        updatedAt: '2023-04-24T19:15:00.000Z'
+  showingPagination:
+    type: object
+    properties:
+      page:
+        type: integer
+        example: 1
+      limit:
+        type: integer
+        example: 10
+      totalPages:
+        type: integer
+        example: 20
+      totalResults:
+        type: integer
+        example: 200
+  comingSoonPagination:
+    type: object
+    properties:
+      page:
+        type: integer
+        example: 1
+      limit:
+        type: integer
+        example: 5
+      totalPages:
+        type: integer
+        example: 20
+      totalResults:
+        type: integer
+        example: 100
