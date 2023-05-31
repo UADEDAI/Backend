@@ -1,0 +1,8 @@
+type: object
+properties:
+  message:
+    type: string
+    example: "There was a server error saving the movieId 2 in the Room with id 1"
+  code:
+    type: integer
+    example: 500

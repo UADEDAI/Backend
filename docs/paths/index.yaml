@@ -113,6 +113,8 @@
 /rooms/{id}/movies:
   get:
     $ref: ./room/room-movies.yaml
+  post:
+    $ref: ./room/room-add-movie.yaml
 
 /rooms/{id}/premiers:
   get:

@@ -2098,6 +2098,73 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Room"
+        ],
+        "summary": "Save a new movie for a Room",
+        "description": "Save a new movie for a Room",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Room id to add the movie",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "movieId",
+            "description": "Movie id",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "movieId": {
+                  "type": "integer",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie saved successfully",
+            "schema": {
+              "type": "object",
+              "$ref": "#/paths/~1rooms/post/parameters/0/schema"
+            }
+          },
+          "500": {
+            "description": "Error in saving the Movie",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "There was a server error saving the movieId 2 in the Room with id 1"
+                },
+                "code": {
+                  "type": "integer",
+                  "example": 500
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/rooms/{id}/premiers": {
