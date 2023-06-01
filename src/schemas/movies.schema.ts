@@ -14,12 +14,6 @@ export class Movie extends Model {
   @Column
   id: number;
 
-  @Column({ field: 'user_id', type: DataType.INTEGER })
-  userId: number;
-
-  @Column({ field: 'movie_id', type: DataType.INTEGER })
-  movieId: number;
-
   @Column
   title: string;
 

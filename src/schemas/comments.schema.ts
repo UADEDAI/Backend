@@ -1,4 +1,3 @@
-// comment.model.ts
 import {
   Table,
   Column,
@@ -8,6 +7,7 @@ import {
   UpdatedAt,
   ForeignKey,
   BelongsTo,
+  Unique,
 } from 'sequelize-typescript';
 import { Movie } from './movies.schema';
 import { User } from './users.schema';
@@ -22,6 +22,7 @@ export class Comment extends Model {
   })
   id: number;
 
+  @Unique('user_movie_unique')
   @ForeignKey(() => User)
   @Column({
     field: 'user_id',
@@ -30,6 +31,7 @@ export class Comment extends Model {
   })
   userId: number;
 
+  @Unique('user_movie_unique')
   @ForeignKey(() => Movie)
   @Column({
     field: 'movie_id',
