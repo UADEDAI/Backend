@@ -21,6 +21,7 @@ const titleLogger = (title) =>
 const byeLogger = () => console.log('\n👋 Bye!\n');
 const successLogger = (message) => console.log(`\n✅ ${message}`);
 const errorLogger = (error) => console.log(`\n❌ ${error}\n`);
+const skippedLogger = (message) => console.log(`\n⏭️  ${message}`);
 
 //
 // Constants
@@ -53,9 +54,14 @@ function resolveArg(name, defaultValue, required = false) {
 function buildPathToFile(fileName) {
   const path = `${process.cwd()}/${fileName}`;
 
-  if (!fs.existsSync(path)) {
+  if (!fs.existsSync(path) && !path.includes('dummies')) {
     errorLogger(`File ${path} does not exist`);
     process.exit(1);
+  }
+
+  if (!fs.existsSync(path) && path.includes('dummies')) {
+    skippedLogger('Dummies skipped');
+    return null;
   }
 
   return path;
@@ -95,10 +101,12 @@ async function execute(command, successMessage) {
 async function run(fileName, databaseName, successMessage) {
   const path = buildPathToFile(fileName);
 
-  await execute(
-    `mysql -u ${dbUsername} -p${dbPassword} -h ${dbHost} -P ${dbPort} ${databaseName} < ${path}`,
-    successMessage,
-  );
+  if (path) {
+    await execute(
+      `mysql -u ${dbUsername} -p${dbPassword} -h ${dbHost} -P ${dbPort} ${databaseName} < ${path}`,
+      `${successMessage} created`,
+    );
+  }
 }
 
 //
@@ -123,10 +131,10 @@ async function run(fileName, databaseName, successMessage) {
   //
   // script
   //
-  await run('database/scripts/database.sql', dbName, 'Database created');
-  await run('database/scripts/tables.sql', dbName, 'Tables created');
-  await run('database/scripts/basedata.sql', dbName, 'Base data created');
-  await run('database/scripts/dummies.sql', dbName, 'Dummies created');
+  await run('database/scripts/database.sql', dbName, 'Database');
+  await run('database/scripts/tables.sql', dbName, 'Tables');
+  await run('database/scripts/basedata.sql', dbName, 'Base data');
+  await run('database/scripts/dummies.sql', dbName, 'Dummies');
 
   byeLogger();
 })();
