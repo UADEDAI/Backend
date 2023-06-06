@@ -54,14 +54,17 @@ function resolveArg(name, defaultValue, required = false) {
 function buildPathToFile(fileName) {
   const path = `${process.cwd()}/${fileName}`;
 
-  if (!fs.existsSync(path) && !path.includes('dummies')) {
+  try {
+    if (!fs.existsSync(path)) {
+      throw new Error();
+    }
+  } catch (error) {
+    if (path.includes('dummies')) {
+      skippedLogger('Dummies skipped');
+      return null;
+    }
     errorLogger(`File ${path} does not exist`);
     process.exit(1);
-  }
-
-  if (!fs.existsSync(path) && path.includes('dummies')) {
-    skippedLogger('Dummies skipped');
-    return null;
   }
 
   return path;
