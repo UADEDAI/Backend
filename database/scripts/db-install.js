@@ -131,6 +131,8 @@ async function run(fileName, databaseName, successMessage) {
     process.exit(0);
   }
 
+  titleLogger('Database installation');
+
   //
   // script
   //
