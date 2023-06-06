@@ -5,8 +5,8 @@ Cinema:
   $ref: ./cinema/Cinema.yaml
 Movie:
   $ref: ./movie/Movie.yaml
-#OTP:
-##  $ref: ./otp/otp.yaml
+OTP:
+  $ref: ./otp/otp.yaml
 Reservation:
   $ref: ./reservation/Reservation.yaml
 Room:

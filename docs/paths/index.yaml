@@ -11,9 +11,9 @@
   post:
     $ref: ./auth/refresh.yaml
 
-#/auth/register:
-#  post:
-#    $ref: ./auth/register.yaml
+/auth/register:
+  post:
+    $ref: ./auth/register.yaml
 
 /auth/reset:
   post:
@@ -70,16 +70,16 @@
     $ref: ./movie/movie-screenings.yaml
 
 # OTP Endpoints
-#/otp:
-#  get:
-#    $ref: ./otp/otp-list.yaml
-#  post:
-#    $ref: ./otp/otp-save.yaml
-#/otp/{id}:
-#  delete:
-#    $ref: ./otp/otp-delete.yaml
-#  patch:
-#    $ref: ./otp/otp-update.yaml
+/otp:
+  get:
+    $ref: ./otp/otp-list.yaml
+  post:
+    $ref: ./otp/otp-save.yaml
+/otp/{id}:
+  delete:
+    $ref: ./otp/otp-delete.yaml
+  patch:
+    $ref: ./otp/otp-update.yaml
 
 # Reservations
 /reservations:
