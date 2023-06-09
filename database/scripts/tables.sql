@@ -77,7 +77,7 @@ CREATE TABLE movies (
   `title` VARCHAR(255) NOT NULL,
   `description` TEXT,
   `duration` INT,
-  `releaseDate` DATE,
+  `release_date` DATE,
   `genre` VARCHAR(255),
   `director` VARCHAR(255),
   `cast` VARCHAR(255),

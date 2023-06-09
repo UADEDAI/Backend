@@ -21,6 +21,11 @@ import { RoomsModule } from './rooms/rooms.module';
       models: [__dirname + '/**/*.model{.ts,.js}'],
       autoLoadModels: true,
       synchronize: true,
+      define: {
+        underscored: true,
+        freezeTableName: false,
+        timestamps: true,
+      },
     }),
     MoviesModule,
     UsersModule,
@@ -30,4 +35,5 @@ import { RoomsModule } from './rooms/rooms.module';
   controllers: [AppController],
   providers: [AppService],
 })
+
 export class AppModule {}

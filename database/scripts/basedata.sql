@@ -52,7 +52,7 @@ UNLOCK TABLES;
 # =======================================================
 LOCK TABLES `movies` WRITE;
 /*!40000 ALTER TABLE `movies` DISABLE KEYS */;
-INSERT INTO `movies` (`title`, `description`, `duration`, `releaseDate`, `genre`, `director`, `cast`, `score`, `certificate`, `imageUrl`)
+INSERT INTO `movies` (`title`, `description`, `duration`, `release_ate`, `genre`, `director`, `cast`, `score`, `certificate`, `imageUrl`)
 VALUES ('The Batman', 'The film sees Batman, who has been fighting crime in Gotham City for two years, uncover corruption while pursuing the Riddler (Dano), a serial killer who targets Gothams corrupt elite.', 120, '2022-03-04', 'Action', 'Matt Reeves', 'Robert Pattinson, Zoë Kravitz, Paul Dano, Jeffrey Wright, John Turturro, Peter Sarsgaard, Barry Keoghan, Jayme Lawson, Andy Serkis, Colin Farrell', 8, 'PG-13', 'unsplash.com/example');
 /*!40000 ALTER TABLE `movies` ENABLE KEYS */;
 UNLOCK TABLES;
