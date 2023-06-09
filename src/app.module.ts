@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { MoviesModule } from './movies/movies.module';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
       synchronize: true,
     }),
     MoviesModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

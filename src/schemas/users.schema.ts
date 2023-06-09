@@ -5,7 +5,9 @@ import {
   DataType,
   AutoIncrement,
   PrimaryKey,
+  HasMany,
 } from 'sequelize-typescript';
+import { Cinema } from './cinemas.schema';
 
 @Table
 export class User extends Model {
@@ -15,27 +17,18 @@ export class User extends Model {
   id: number;
 
   @Column({
-    type: DataType.STRING,
+    field: 'name',
     allowNull: false,
   })
   username: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
+  @Column({ allowNull: false })
   email: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
+  @Column({ allowNull: false })
   password: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: true,
-  })
+  @Column({ allowNull: true })
   company: string;
 
   @Column({
@@ -44,4 +37,13 @@ export class User extends Model {
     allowNull: true,
   })
   role: 'owner' | 'client';
+
+  @Column({ field: 'created_at', type: DataType.DATE })
+  createdAt: Date;
+
+  @Column({ field: 'updated_at', type: DataType.DATE })
+  updatedAt: Date;
+
+  @HasMany(() => Cinema)
+  cinemas: Cinema[];
 }
