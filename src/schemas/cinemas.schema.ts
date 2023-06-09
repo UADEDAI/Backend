@@ -8,8 +8,10 @@ import {
   ForeignKey,
   BelongsTo,
   Unique,
+  HasMany,
 } from 'sequelize-typescript';
 import { User } from './users.schema';
+import { Room } from './rooms.schema';
 
 @Table
 export class Cinema extends Model {
@@ -43,10 +45,11 @@ export class Cinema extends Model {
   street: string;
 
   @Column({
+    field: 'street_num',
     type: DataType.INTEGER,
     allowNull: false,
   })
-  street_num: number;
+  streetNum: number;
 
   @Column({
     type: DataType.STRING,
@@ -101,4 +104,7 @@ export class Cinema extends Model {
 
   @BelongsTo(() => User)
   user: User;
+
+  @HasMany(() => Room)
+  rooms: Room[];
 }
