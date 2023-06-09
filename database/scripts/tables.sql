@@ -83,7 +83,7 @@ CREATE TABLE movies (
   `cast` VARCHAR(255),
   `score` INT,
   `certificate` VARCHAR(10),
-  `imageUrl` VARCHAR(255),
+  `image_url` VARCHAR(255),
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
