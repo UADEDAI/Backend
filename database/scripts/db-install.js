@@ -29,7 +29,7 @@ const skippedLogger = (message) => console.log(`\n⏭️  ${message}`);
 const help = process.argv.includes('--help');
 const dbName =
   resolveArg('name', process.env.DB_NAME, true) || process.env.DB_NAME;
-const dbHost = resolveArg('host', 'localhost') || process.env.DB_HOST;
+const dbHost = resolveArg('host', process.env.DB_HOST) || 'localhost';
 const dbPort = resolveArg('port', 3306) || process.env.DB_PORT;
 const dbUsername = resolveArg('user', 'root') || process.env.DB_USERNAME;
 const dbPassword = process.env.DB_PASSWORD;
