@@ -48,4 +48,14 @@ export class RoomsController {
   addMovieToRoom(@Param('id') id: string, @Body() body: AddMovieRoomDTO) {
     return this.roomsService.addMovieToRoom(id, body);
   }
+
+  @Get(':id/movies/premiers')
+  findPremieredMovies(@Param('id') id: string) {
+    return this.roomsService.findPremieredMovies(id);
+  }
+
+  @Get(':id/movies/coming-soon')
+  findComingSoonMovies(@Param('id') id: string) {
+    return this.roomsService.findComingSoonMovies(id);
+  }
 }

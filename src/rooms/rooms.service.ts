@@ -5,8 +5,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { MOVIE_STATUS } from '../../constants';
 import { AddMovieRoomDTO, CreateRoomDto, UpdateRoomDto } from 'src/dtos';
 import { Movie, MovieRoom, Room } from 'src/schemas';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class RoomsService {
@@ -111,6 +113,56 @@ export class RoomsService {
     return this.movieRoomModel.create({
       roomId,
       movieId: addMovieRoomDto.movieId,
+    });
+  }
+
+  // Find all the movies that are premiered but where not added to this room
+  async findPremieredMovies(id: string): Promise<Movie[]> {
+    // Find all movie IDs from the MovieRoom table where roomId is not equal to the passed id
+    const movieRooms = await this.movieRoomModel.findAll({
+      where: {
+        roomId: id,
+      },
+    });
+
+    const movieIdsInOtherRooms = movieRooms.map(
+      (movieRoom) => movieRoom.movieId,
+    );
+
+    // Find all movies that were not included in the previous list
+    return this.movieModel.findAll({
+      where: {
+        id: {
+          [Op.notIn]: movieIdsInOtherRooms,
+        },
+        status: MOVIE_STATUS.PREMIERED,
+      },
+    });
+  }
+
+  // Find all the movies that are coming_soon but where not added to this room
+  async findComingSoonMovies(id: string): Promise<Movie[]> {
+    // Find all movie IDs from the MovieRoom table where roomId is not equal to the passed id
+    const movieRooms = await this.movieRoomModel.findAll({
+      where: {
+        roomId: id,
+      },
+    });
+
+    const movieIdsInOtherRooms = movieRooms.map(
+      (movieRoom) => movieRoom.movieId,
+    );
+
+    console.log(movieIdsInOtherRooms);
+
+    // Find all movies that were not included in the previous list
+    return this.movieModel.findAll({
+      where: {
+        id: {
+          [Op.notIn]: movieIdsInOtherRooms,
+        },
+        status: MOVIE_STATUS.COMING_SOON,
+      },
     });
   }
 }

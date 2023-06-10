@@ -47,6 +47,13 @@ export class Movie extends Model {
   @Column(DataType.TEXT)
   imageUrl: string;
 
+  @Column({
+    type: DataType.ENUM,
+    values: ['premiered', 'coming_soon'],
+    allowNull: true,
+  })
+  status: 'premiered' | 'coming_soon';
+
   @Column({ field: 'created_at', type: DataType.DATE })
   createdAt: Date;
 
