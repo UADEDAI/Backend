@@ -1,0 +1,16 @@
+{
+    "apps" : [
+       {
+          "name"          : "Cinemapp",
+          "script"        : "npm",
+          "args"          : "run start:prod",
+          "watch"         : false,
+          "cwd"           : "/home/ubuntu/Backend/",
+          "out_file"      : "/home/ubuntu/Backend.out.log",
+          "err_file"      : "/home/ubuntu/Backend.err.log",
+          "merge_logs"    : true,
+          "instances"     : 1,
+          "exec_mode"     : "cluster"
+       }
+    ]
+  }
