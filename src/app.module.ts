@@ -35,5 +35,4 @@ import { RoomsModule } from './rooms/rooms.module';
   controllers: [AppController],
   providers: [AppService],
 })
-
 export class AppModule {}

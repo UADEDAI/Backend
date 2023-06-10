@@ -89,6 +89,19 @@ CREATE TABLE movies (
 );
 
 # ====================================================
+# Table: movie_rooms
+# ====================================================
+DROP TABLE IF EXISTS `movie_rooms`;
+
+CREATE TABLE movie_rooms (
+  `movie_id` INT,
+  `room_id` INT,
+  PRIMARY KEY (`movie_id`, `room_id`),
+  FOREIGN KEY (movie_id) REFERENCES movies(id),
+  FOREIGN KEY (room_id) REFERENCES rooms(id)
+);
+
+# ====================================================
 # Table: comments
 # ====================================================
 DROP TABLE IF EXISTS `comments`;

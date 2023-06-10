@@ -7,8 +7,11 @@ import {
   UpdatedAt,
   ForeignKey,
   BelongsTo,
+  BelongsToMany,
 } from 'sequelize-typescript';
 import { Cinema } from './cinemas.schema';
+import { MovieRoom } from './movieRoom.schema';
+import { Movie } from './movies.schema';
 
 @Table
 export class Room extends Model {
@@ -70,4 +73,7 @@ export class Room extends Model {
 
   @BelongsTo(() => Cinema)
   cinema: Cinema;
+
+  @BelongsToMany(() => Movie, () => MovieRoom)
+  movies: Movie[];
 }

@@ -1,7 +1,12 @@
-import { ConflictException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateRoomDto, UpdateRoomDto } from 'src/dtos';
-import { Movie, Room } from 'src/schemas';
+import { AddMovieRoomDTO, CreateRoomDto, UpdateRoomDto } from 'src/dtos';
+import { Movie, MovieRoom, Room } from 'src/schemas';
 
 @Injectable()
 export class RoomsService {
@@ -10,6 +15,8 @@ export class RoomsService {
     private roomModel: typeof Room,
     @InjectModel(Movie)
     private movieModel: typeof Movie,
+    @InjectModel(MovieRoom)
+    private movieRoomModel: typeof MovieRoom,
   ) {}
 
   async findAll(): Promise<Room[]> {
@@ -17,11 +24,18 @@ export class RoomsService {
   }
 
   async findOne(id: string): Promise<Room> {
-    return this.roomModel.findOne({
+    const room = await this.roomModel.findOne({
       where: {
         id,
       },
+      include: Movie,
     });
+
+    if (!room) {
+      throw new NotFoundException('Room not found');
+    }
+
+    return room;
   }
 
   async createRoom(createRoomDto: CreateRoomDto): Promise<Room> {
@@ -45,10 +59,8 @@ export class RoomsService {
   }
 
   async updateOne(id: string, updateRoomDto: UpdateRoomDto): Promise<Room> {
-    console.log(id);
     const room = await this.findOne(id);
 
-    console.log(room);
     await room.update(updateRoomDto);
     await room.reload();
 
@@ -75,5 +87,30 @@ export class RoomsService {
       message: 'Room not found',
       statusCode: HttpStatus.NOT_FOUND,
     };
+  }
+
+  async findAllMovies(id: string): Promise<Movie[]> {
+    const room = await this.roomModel.findOne({
+      where: {
+        id,
+      },
+      include: Movie,
+    });
+
+    if (!room) {
+      throw new NotFoundException('Room not found');
+    }
+
+    return room.movies;
+  }
+
+  async addMovieToRoom(
+    roomId: string,
+    addMovieRoomDto: AddMovieRoomDTO,
+  ): Promise<MovieRoom> {
+    return this.movieRoomModel.create({
+      roomId,
+      movieId: addMovieRoomDto.movieId,
+    });
   }
 }

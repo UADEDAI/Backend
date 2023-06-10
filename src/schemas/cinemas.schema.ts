@@ -107,4 +107,11 @@ export class Cinema extends Model {
 
   @HasMany(() => Room)
   rooms: Room[];
+
+  // Virtual Fields
+  @Column({ type: DataType.VIRTUAL })
+  roomsAmount: number;
+
+  @Column({ type: DataType.VIRTUAL })
+  moviesAmount: number;
 }

@@ -5,7 +5,10 @@ import {
   PrimaryKey,
   AutoIncrement,
   DataType,
+  BelongsToMany,
 } from 'sequelize-typescript';
+import { Room } from './rooms.schema';
+import { MovieRoom } from './movieRoom.schema';
 
 @Table
 export class Movie extends Model {
@@ -49,4 +52,7 @@ export class Movie extends Model {
 
   @Column({ field: 'updated_at', type: DataType.DATE })
   updatedAt: Date;
+
+  @BelongsToMany(() => Room, () => MovieRoom)
+  rooms: Room[];
 }

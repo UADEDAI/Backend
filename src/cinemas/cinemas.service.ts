@@ -2,7 +2,12 @@ import { ConflictException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
 import { CreateCinemaDto, UpdateCinemaDto } from 'src/dtos';
-import { Cinema, Room } from 'src/schemas';
+import { Cinema, Movie, Room } from 'src/schemas';
+
+type CinemaWithRoomsAmount = Cinema & {
+  roomsAmount: number;
+  moviesAmount: number;
+};
 
 @Injectable()
 export class CinemasService {
@@ -13,8 +18,32 @@ export class CinemasService {
     private roomModel: typeof Room,
   ) {}
 
-  async findAllCinemas(): Promise<Cinema[]> {
-    return this.cinemaModel.findAll();
+  async findAllCinemas(): Promise<CinemaWithRoomsAmount[]> {
+    const cinemas =
+      (await this.cinemaModel.findAll()) as CinemaWithRoomsAmount[];
+
+    await Promise.all(
+      cinemas.map(async (cinema) => {
+        const rooms = await this.roomModel.findAll({
+          where: {
+            cinemaId: cinema.id,
+          },
+          include: Movie,
+        });
+        const roomsAmount = rooms.length;
+        let moviesAmount = 0;
+        for (const room of rooms) {
+          moviesAmount += room.movies.length;
+        }
+
+        cinema.setDataValue('roomsAmount', roomsAmount);
+        cinema.setDataValue('moviesAmount', moviesAmount);
+
+        return cinema;
+      }),
+    );
+
+    return cinemas;
   }
 
   async findOneCinema(id: string): Promise<Cinema> {
