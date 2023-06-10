@@ -17,7 +17,7 @@ type MoviesPaginated = {
     totalPages: number;
     totalResults: number;
   };
-  premiered: Movie[];
+  showing: Movie[];
   comingSoon: Movie[];
 };
 
@@ -36,7 +36,7 @@ export class MoviesService {
 
     const premieredMovies = await this.movieModel.findAndCountAll({
       where: {
-        status: MOVIE_STATUS.PREMIERED,
+        status: MOVIE_STATUS.SHOWING,
       },
       offset: offsetShowing,
       limit,
@@ -67,7 +67,7 @@ export class MoviesService {
     return {
       showingPagination,
       comingSoonPagination,
-      premiered: premieredMovies.rows,
+      showing: premieredMovies.rows,
       comingSoon: comingSoonMovies.rows,
     };
   }

@@ -49,10 +49,10 @@ export class Movie extends Model {
 
   @Column({
     type: DataType.ENUM,
-    values: ['premiered', 'coming_soon'],
+    values: ['showing', 'coming_soon'],
     allowNull: true,
   })
-  status: 'premiered' | 'coming_soon';
+  status: 'showing' | 'coming_soon';
 
   @Column({ field: 'created_at', type: DataType.DATE })
   createdAt: Date;

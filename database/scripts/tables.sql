@@ -84,7 +84,7 @@ CREATE TABLE movies (
   `score` INT,
   `certificate` VARCHAR(10),
   `image_url` VARCHAR(255),
-  `status` ENUM('premiered', 'coming_soon') NOT NULL DEFAULT 'coming_soon',
+  `status` ENUM('showing', 'coming_soon') NOT NULL DEFAULT 'coming_soon',
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

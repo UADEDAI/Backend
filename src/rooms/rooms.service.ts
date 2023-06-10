@@ -135,7 +135,7 @@ export class RoomsService {
         id: {
           [Op.notIn]: movieIdsInOtherRooms,
         },
-        status: MOVIE_STATUS.PREMIERED,
+        status: MOVIE_STATUS.SHOWING,
       },
     });
   }

@@ -1,4 +1,4 @@
 export const MOVIE_STATUS = {
-  PREMIERED: 'premiered',
+  SHOWING: 'showing',
   COMING_SOON: 'coming_soon',
 };
