@@ -59,3 +59,11 @@ VALUES ('The Batman', 'The film sees Batman, who has been fighting crime in Goth
 
 /*!40000 ALTER TABLE `movies` ENABLE KEYS */;
 UNLOCK TABLES;
+
+# =======================================================
+# screenings
+# =======================================================
+LOCK TABLES `screenings` WRITE;
+/*!40000 ALTER TABLE `screenings` DISABLE KEYS */;
+INSERT INTO screenings (`room_id`, `movie_id`, `format`, `start_at`, `end_at`)
+VALUES (1, 1, 'subs', '2023-06-17 18:00:00', '2023-06-17 20:00:00');

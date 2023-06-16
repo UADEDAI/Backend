@@ -4,3 +4,4 @@ export { User } from './users.schema';
 export { Cinema } from './cinemas.schema';
 export { Room } from './rooms.schema';
 export { MovieRoom } from './movieRoom.schema';
+export { Screening } from './screenings.schema';

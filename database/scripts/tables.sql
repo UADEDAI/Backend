@@ -120,3 +120,21 @@ CREATE TABLE comments (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (movie_id) REFERENCES movies(id) ON DELETE CASCADE
 );
+
+# ====================================================
+# Table: screenings
+# ====================================================
+DROP TABLE IF EXISTS `screenings`;
+
+CREATE TABLE screenings (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `room_id` INT,
+  `movie_id` INT,
+  `format` VARCHAR(255) NOT NULL,
+  `start_at` DATETIME NOT NULL,
+  `end_at` DATETIME NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE,
+  FOREIGN KEY (movie_id) REFERENCES movies(id) ON DELETE CASCADE
+);

@@ -7,6 +7,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { UsersModule } from './users/users.module';
 import { CinemasModule } from './cinemas/cinemas.module';
 import { RoomsModule } from './rooms/rooms.module';
+import { ScreeningsModule } from './screenings/screenings.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { RoomsModule } from './rooms/rooms.module';
     UsersModule,
     CinemasModule,
     RoomsModule,
+    ScreeningsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
