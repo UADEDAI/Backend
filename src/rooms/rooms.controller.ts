@@ -59,4 +59,12 @@ export class RoomsController {
   findComingSoonMovies(@Param('id') id: string) {
     return this.roomsService.findComingSoonMovies(id);
   }
+
+  @Get(':id/screenings/time-available')
+  findTimeAvailable(
+    @Param('id') id: string,
+    @Query('duration') duration: string,
+  ) {
+    return this.roomsService.findAvailableTimes(id, duration);
+  }
 }

@@ -5,11 +5,12 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { MOVIE_STATUS } from '../../constants';
+import { MOVIE_STATUS, TimeAvailable } from '../../constants';
 import { AddMovieRoomDTO, CreateRoomDto, UpdateRoomDto } from 'src/dtos';
-import { Movie, MovieRoom, Room } from 'src/schemas';
+import { Movie, MovieRoom, Room, Screening } from 'src/schemas';
 import { Op } from 'sequelize';
 import { getIncludedModels } from 'helpers';
+import { addMinutes, differenceInMinutes, format, parse } from 'date-fns';
 
 @Injectable()
 export class RoomsService {
@@ -20,6 +21,8 @@ export class RoomsService {
     private movieModel: typeof Movie,
     @InjectModel(MovieRoom)
     private movieRoomModel: typeof MovieRoom,
+    @InjectModel(Screening)
+    private screeningModel: typeof Screening,
   ) {}
 
   async findAll(): Promise<Room[]> {
@@ -169,5 +172,54 @@ export class RoomsService {
         status: MOVIE_STATUS.COMING_SOON,
       },
     });
+  }
+
+  // Find all the available times for a screening in a room
+  async findAvailableTimes(id: string, duration: string): Promise<string[]> {
+    const roomScreenings = await this.screeningModel.findAll({
+      where: {
+        roomId: id,
+      },
+      order: [['startAt', 'ASC']],
+    });
+
+    const availableTimes: string[] = [];
+    const screeningDuration = parseInt(duration, 10);
+    const takenTimes: TimeAvailable[] = [];
+
+    // Loop through all the screenings and find the available times
+    for (const screening of roomScreenings) {
+      takenTimes.push({
+        startAt: format(screening.startAt, 'HH:mm'),
+        endAt: format(screening.endAt, 'HH:mm'),
+      });
+    }
+
+    // Find the available times based on taken times, duration, and intervals
+    let startTime = parse('00:00', 'HH:mm', new Date()); // Set initial start time as 00:00
+
+    while (startTime < parse('23:59', 'HH:mm', new Date())) {
+      const endTime = addMinutes(startTime, screeningDuration);
+      const endTimeString = format(endTime, 'HH:mm');
+
+      // Check if the time slot falls within any taken times
+      const isTimeTaken = takenTimes.some((takenTime) => {
+        const takenStart = parse(takenTime.startAt, 'HH:mm', new Date());
+        const takenEnd = parse(takenTime.endAt, 'HH:mm', new Date());
+        return (
+          (startTime >= takenStart && startTime < takenEnd) ||
+          (endTime > takenStart && endTime <= takenEnd)
+        );
+      });
+
+      // Check if there is enough time after the current start time for the specified duration and it's not taken
+      if (endTimeString <= '23:59' && !isTimeTaken) {
+        availableTimes.push(format(startTime, 'HH:mm'));
+      }
+
+      startTime = addMinutes(startTime, 15); // Increment start time by 15 minutes
+    }
+
+    return availableTimes;
   }
 }
