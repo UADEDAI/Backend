@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { RoomsService } from './rooms.service';
 import { AddMovieRoomDTO, CreateRoomDto, UpdateCinemaDto } from 'src/dtos';
@@ -20,8 +21,8 @@ export class RoomsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.roomsService.findOne(id);
+  findOne(@Param('id') id: string, @Query('includes') includes: string) {
+    return this.roomsService.findOne(id, includes);
   }
 
   @Post()

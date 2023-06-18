@@ -7,6 +7,7 @@ import {
   Table,
   UpdatedAt,
   Model,
+  BelongsTo,
 } from 'sequelize-typescript';
 import { Movie } from './movies.schema';
 import { Room } from './rooms.schema';
@@ -41,4 +42,7 @@ export class Screening extends Model {
   @UpdatedAt
   @Column({ field: 'updated_at', type: DataType.DATE })
   updatedAt: Date;
+
+  @BelongsTo(() => Room)
+  room: Room;
 }

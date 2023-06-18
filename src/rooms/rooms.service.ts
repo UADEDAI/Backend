@@ -9,6 +9,7 @@ import { MOVIE_STATUS } from '../../constants';
 import { AddMovieRoomDTO, CreateRoomDto, UpdateRoomDto } from 'src/dtos';
 import { Movie, MovieRoom, Room } from 'src/schemas';
 import { Op } from 'sequelize';
+import { getIncludedModels } from 'helpers';
 
 @Injectable()
 export class RoomsService {
@@ -25,12 +26,16 @@ export class RoomsService {
     return this.roomModel.findAll();
   }
 
-  async findOne(id: string): Promise<Room> {
+  async findOne(id: string, includes?: string): Promise<Room> {
+    let includedModels = [];
+    if (includes) {
+      includedModels = getIncludedModels(includes);
+    }
     const room = await this.roomModel.findOne({
       where: {
         id,
       },
-      include: Movie,
+      include: includedModels,
     });
 
     if (!room) {

@@ -8,10 +8,12 @@ import {
   ForeignKey,
   BelongsTo,
   BelongsToMany,
+  HasMany,
 } from 'sequelize-typescript';
 import { Cinema } from './cinemas.schema';
 import { MovieRoom } from './movieRoom.schema';
 import { Movie } from './movies.schema';
+import { Screening } from './screenings.schema';
 
 @Table
 export class Room extends Model {
@@ -76,4 +78,7 @@ export class Room extends Model {
 
   @BelongsToMany(() => Movie, () => MovieRoom)
   movies: Movie[];
+
+  @HasMany(() => Screening)
+  screenings: Screening[];
 }
