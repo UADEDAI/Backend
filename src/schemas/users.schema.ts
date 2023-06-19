@@ -8,6 +8,7 @@ import {
   HasMany,
 } from 'sequelize-typescript';
 import { Cinema } from './cinemas.schema';
+import * as bcrypt from 'bcrypt';
 
 @Table
 export class User extends Model {
@@ -46,4 +47,9 @@ export class User extends Model {
 
   @HasMany(() => Cinema)
   cinemas: Cinema[];
+
+  async comparePassword(passwordAttempt: string): Promise<boolean> {
+    //return await bcrypt.compare(passwordAttempt, this.password);
+    return await this.password === passwordAttempt;
+  }
 }

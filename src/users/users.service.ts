@@ -1,8 +1,12 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { CreateUserResultDto } from 'src/dtos/create-user-result.dto';
+import { CreateUserDto } from 'src/dtos/create-user.dto';
 import { UpdateUserDto } from 'src/dtos/update-user.dto';
 import { User } from 'src/schemas';
 import { Cinema } from 'src/schemas/cinemas.schema';
+import { sendEmail } from 'services/mailer';
+
 
 //
 // Constants
@@ -34,6 +38,15 @@ export class UsersService {
     return this.userModel.findOne({
       where: {
         id,
+      },
+      attributes,
+    });
+  }
+
+  findUserByEmail(email: string) {
+    return this.userModel.findOne({
+      where: {
+        email,
       },
       attributes,
     });
@@ -71,6 +84,37 @@ export class UsersService {
       message: `User with id ${id} not found`,
       statusCode: HttpStatus.NOT_FOUND,
     };
+  }
+
+  async create(createUserDto: CreateUserDto): Promise<CreateUserResultDto> {
+
+    const userExists = await this.findUserByEmail(createUserDto.email);
+    if (userExists) {
+      return {
+        error: `User with email ${createUserDto.email} already exists`,
+        status: HttpStatus.CONFLICT,
+      };
+    }
+
+    const newUser = new this.userModel();
+    //const newUser = new User();
+    newUser.username = createUserDto.username;
+    newUser.email = createUserDto.email;
+    newUser.password = createUserDto.password;
+    if (createUserDto.company){
+      newUser.company = createUserDto.company;
+    }
+    newUser.role = createUserDto.role;
+
+    if (newUser.role == 'owner') {
+
+      sendEmail('nicolasbertillod@gmail.com','hello','hello', '<>hello</>').catch(console.error);
+    }
+
+    newUser.save()
+    //newUser.reload();
+    const { password, ...user } = newUser.get();
+    return user as CreateUserResultDto;
   }
 
   async findUserCinemas(id: string): Promise<Cinema[]> {

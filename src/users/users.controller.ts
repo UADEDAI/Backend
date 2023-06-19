@@ -1,8 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from 'src/schemas';
 import { UpdateUserDto } from 'src/dtos/update-user.dto';
 import { Cinema } from 'src/schemas/cinemas.schema';
+import { CreateUserDto } from 'src/dtos/create-user.dto';
+import { CreateUserResultDto } from 'src/dtos/create-user-result.dto';
 
 @Controller('users')
 export class UsersController {
@@ -32,6 +34,12 @@ export class UsersController {
     @Param('id') id: string,
   ): Promise<{ message: string; statusCode: number }> {
     return this.usersService.deleteUser(id);
+  }
+
+  @Post()
+  createOne(@Body() createUserDto: CreateUserDto): Promise<CreateUserResultDto> {
+    console.log(createUserDto)
+    return this.usersService.create(createUserDto);
   }
 
   @Get(':id/cinemas')
