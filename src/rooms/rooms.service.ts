@@ -10,7 +10,7 @@ import { AddMovieRoomDTO, CreateRoomDto, UpdateRoomDto } from 'src/dtos';
 import { Movie, MovieRoom, Room, Screening } from 'src/schemas';
 import { Op } from 'sequelize';
 import { getIncludedModels } from 'helpers';
-import { addMinutes, differenceInMinutes, format, parse } from 'date-fns';
+import { addMinutes, format, parse } from 'date-fns';
 
 @Injectable()
 export class RoomsService {
