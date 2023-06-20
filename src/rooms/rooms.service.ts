@@ -5,7 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { MOVIE_STATUS, TimeAvailable } from '../../constants';
+import { MOVIE_STATUS, MoviesPaginated, TimeAvailable } from '../../constants';
 import { AddMovieRoomDTO, CreateRoomDto, UpdateRoomDto } from 'src/dtos';
 import { Movie, MovieRoom, Room, Screening } from 'src/schemas';
 import { Op } from 'sequelize';
@@ -99,7 +99,11 @@ export class RoomsService {
     };
   }
 
-  async findAllMovies(id: string): Promise<Movie[]> {
+  async findAllMovies(
+    id: string,
+    page = 1,
+    limit = 10,
+  ): Promise<MoviesPaginated> {
     const room = await this.roomModel.findOne({
       where: {
         id,
@@ -111,7 +115,25 @@ export class RoomsService {
       throw new NotFoundException('Room not found');
     }
 
-    return room.movies;
+    const premieredMovies = await this.findPremieredMovies(id, page, limit);
+    const comingSoonMovies = await this.findComingSoonMovies(id, page, limit);
+
+    return {
+      showingPagination: {
+        page,
+        limit,
+        totalPages: Math.ceil(premieredMovies.length / limit),
+        totalResults: premieredMovies.length,
+      },
+      comingSoonPagination: {
+        page,
+        limit,
+        totalPages: Math.ceil(comingSoonMovies.length / limit),
+        totalResults: comingSoonMovies.length,
+      },
+      showing: premieredMovies,
+      comingSoon: comingSoonMovies,
+    };
   }
 
   async addMovieToRoom(
@@ -125,12 +147,19 @@ export class RoomsService {
   }
 
   // Find all the movies that are premiered but where not added to this room
-  async findPremieredMovies(id: string): Promise<Movie[]> {
-    // Find all movie IDs from the MovieRoom table where roomId is not equal to the passed id
+  async findPremieredMovies(
+    id: string,
+    page = 1,
+    limit = 10,
+  ): Promise<Movie[]> {
+    const offset = (page - 1) * limit;
+    // Find all movie IDs from the MovieRoom table where roomId is equal to the passed id
     const movieRooms = await this.movieRoomModel.findAll({
       where: {
         roomId: id,
       },
+      limit,
+      offset,
     });
 
     const movieIdsInOtherRooms = movieRooms.map(
@@ -141,7 +170,7 @@ export class RoomsService {
     return this.movieModel.findAll({
       where: {
         id: {
-          [Op.notIn]: movieIdsInOtherRooms,
+          [Op.in]: movieIdsInOtherRooms,
         },
         status: MOVIE_STATUS.SHOWING,
       },
@@ -149,25 +178,30 @@ export class RoomsService {
   }
 
   // Find all the movies that are coming_soon but where not added to this room
-  async findComingSoonMovies(id: string): Promise<Movie[]> {
-    // Find all movie IDs from the MovieRoom table where roomId is not equal to the passed id
+  async findComingSoonMovies(
+    id: string,
+    page = 1,
+    limit = 10,
+  ): Promise<Movie[]> {
+    const offset = (page - 1) * limit;
+    // Find all movie IDs from the MovieRoom table where roomId is equal to the passed id
     const movieRooms = await this.movieRoomModel.findAll({
       where: {
         roomId: id,
       },
+      limit,
+      offset,
     });
 
     const movieIdsInOtherRooms = movieRooms.map(
       (movieRoom) => movieRoom.movieId,
     );
 
-    console.log(movieIdsInOtherRooms);
-
     // Find all movies that were not included in the previous list
     return this.movieModel.findAll({
       where: {
         id: {
-          [Op.notIn]: movieIdsInOtherRooms,
+          [Op.in]: movieIdsInOtherRooms,
         },
         status: MOVIE_STATUS.COMING_SOON,
       },
@@ -221,5 +255,29 @@ export class RoomsService {
     }
 
     return availableTimes;
+  }
+
+  async deleteMovieFromRoom(
+    roomId: string,
+    movieId: string,
+  ): Promise<{ message: string; statusCode: number }> {
+    const rowsAffected = await this.movieRoomModel.destroy({
+      where: {
+        roomId,
+        movieId,
+      },
+    });
+
+    if (rowsAffected > 0) {
+      return {
+        message: 'Movie deleted from room successfully',
+        statusCode: HttpStatus.OK,
+      };
+    }
+
+    return {
+      message: 'Movie for Room not found',
+      statusCode: HttpStatus.NOT_FOUND,
+    };
   }
 }

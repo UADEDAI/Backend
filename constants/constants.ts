@@ -9,5 +9,5 @@ export const USER_ERROR = {
 };
 
 export const JWT_CONSTANTS = {
-  secret: '668facdaddb1f862ad897ca98afec5e2'
+  secret: '668facdaddb1f862ad897ca98afec5e2',
 };

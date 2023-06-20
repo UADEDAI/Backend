@@ -1,25 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { MOVIE_STATUS } from '../../constants';
+import { MOVIE_STATUS, MoviesPaginated } from '../../constants';
 import { CreateCommentDto } from 'src/dtos/create-comment.dto';
 import { Comment, Movie } from 'src/schemas';
-
-type MoviesPaginated = {
-  showingPagination: {
-    page: number;
-    limit: number;
-    totalPages: number;
-    totalResults: number;
-  };
-  comingSoonPagination: {
-    page: number;
-    limit: number;
-    totalPages: number;
-    totalResults: number;
-  };
-  showing: Movie[];
-  comingSoon: Movie[];
-};
 
 @Injectable()
 export class MoviesService {
