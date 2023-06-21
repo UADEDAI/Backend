@@ -9,6 +9,7 @@ import { CinemasModule } from './cinemas/cinemas.module';
 import { RoomsModule } from './rooms/rooms.module';
 import { ScreeningsModule } from './screenings/screenings.module';
 import { AuthModule } from './auth/auth.module';
+import { OtpModule } from './otp/otp.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { AuthModule } from './auth/auth.module';
     RoomsModule,
     ScreeningsModule,
     AuthModule,
+    OtpModule,
   ],
   controllers: [AppController],
   providers: [AppService],

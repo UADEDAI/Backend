@@ -5,13 +5,13 @@ const OAuth2 = google.auth.OAuth2;
 
 export async function sendEmail(to: string, subject: string, text: string, html: string): Promise<void> {
     const oauth2Client = new OAuth2(
-        '508787215655-bo6hijbstqo80rnp3pic7mosrhoc2g2u.apps.googleusercontent.com', // Replace with your own
-        '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', // Replace with your own
+        '508787215655-p9n86k0eru4mr2v0lp3c1hhjh85p81j9.apps.googleusercontent.com', // Replace with your own
+        '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', // Replace with your own
         'https://developers.google.com/oauthplayground' // Redirect URL
     );
 
     oauth2Client.setCredentials({
-        'refresh_token': '1//0h1gUtgWZmk4FCgYIARAAGBESNwF-L9IrrlTPUBRaRZ5LzOL-iNuiM1Gn2Rauki0kKcuXiRNQQmUn0HQbBnjJJnsDobx2XnPVKhI' // Replace with your own
+        'refresh_token': '1//040qhhSMXxeNWCgYIARAAGAQSNwF-L9IrO1cKGjjFanZJt2gnAGns6QEuEJjDrS1Xod2IhgQhnstS_q5vNFOvrAyotXzViaWybvg' // Replace with your own
     });
 
     const accessToken = oauth2Client.getAccessToken()
@@ -20,10 +20,10 @@ export async function sendEmail(to: string, subject: string, text: string, html:
         service: 'gmail',
         auth: {
             type: 'OAuth2',
-            user: 'YOUR_EMAIL', // Replace with your email
-            clientId: '508787215655-bo6hijbstqo80rnp3pic7mosrhoc2g2u.apps.googleusercontent.com', // Replace with your own
-            clientSecret: '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', // Replace with your own
-            refreshToken: '1//0h1gUtgWZmk4FCgYIARAAGBESNwF-L9IrrlTPUBRaRZ5LzOL-iNuiM1Gn2Rauki0kKcuXiRNQQmUn0HQbBnjJJnsDobx2XnPVKhI', // Replace with your own
+            user: 'cinemappdai@gmail.com', // Replace with your email
+            clientId: '508787215655-p9n86k0eru4mr2v0lp3c1hhjh85p81j9.apps.googleusercontent.com', // Replace with your own
+            clientSecret: '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', // Replace with your own
+            refreshToken: '1//040qhhSMXxeNWCgYIARAAGAQSNwF-L9IrO1cKGjjFanZJt2gnAGns6QEuEJjDrS1Xod2IhgQhnstS_q5vNFOvrAyotXzViaWybvg', // Replace with your own
             accessToken: accessToken
         }
     });

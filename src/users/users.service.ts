@@ -6,6 +6,8 @@ import { UpdateUserDto } from 'src/dtos/update-user.dto';
 import { User } from 'src/schemas';
 import { Cinema } from 'src/schemas/cinemas.schema';
 import { sendEmail } from 'services/mailer';
+import { OtpService } from 'src/otp/otp.service';
+import { OTP_MAIL_CONTENT } from 'constants/';
 
 
 //
@@ -28,6 +30,7 @@ export class UsersService {
     private userModel: typeof User,
     @InjectModel(Cinema)
     private cinemaModel: typeof Cinema,
+    private otpService: OtpService
   ) {}
 
   async findAllUsers(): Promise<User[]> {
@@ -101,19 +104,30 @@ export class UsersService {
     newUser.username = createUserDto.username;
     newUser.email = createUserDto.email;
     newUser.password = createUserDto.password;
+
     if (createUserDto.company){
       newUser.company = createUserDto.company;
     }
+
     newUser.role = createUserDto.role;
 
-    if (newUser.role == 'owner') {
+    await newUser.save()
+    await newUser.reload();
 
-      sendEmail('nicolasbertillod@gmail.com','hello','hello', '<>hello</>').catch(console.error);
-    }
-
-    newUser.save()
-    //newUser.reload();
     const { password, ...user } = newUser.get();
+    console.log(user);
+
+    if (user.role == 'owner') {
+      const otp = await this.otpService.generateOtp(user.id);
+
+      sendEmail(
+        user.email, 
+        OTP_MAIL_CONTENT.subject, 
+        OTP_MAIL_CONTENT.msg + otp.code,
+        `<p>${OTP_MAIL_CONTENT.msg} <b>${otp.code}</b></p>`,
+      ).catch(console.error);
+
+    }
     return user as CreateUserResultDto;
   }
 

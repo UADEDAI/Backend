@@ -13,9 +13,27 @@ export class AuthController {
     return this.authService.login(req.email, req.password);
   }
 
-  @UseGuards(JwtAuthGuard)
+//  @UseGuards(JwtAuthGuard)
   @Post('refresh')
   async refresh(@Request() req) {
     return this.authService.refreshToken(req.email);
+  }
+
+//  @UseGuards(JwtAuthGuard)
+  @Post('reset')
+  async reset(@Body() req) {
+    return this.authService.resetPassword(req.email);
+  }
+
+//  @UseGuards(JwtAuthGuard)
+  @Post('recover')
+  async recover(@Body() req) {
+    return this.authService.recoverPassword(req.password, req.code);
+  }
+
+//  @UseGuards(JwtAuthGuard)
+  @Post('validate')
+  async validate(@Body() req) {
+    return this.authService.validateOtp(req.userId, req.code);
   }
 }

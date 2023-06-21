@@ -1,11 +1,21 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { User } from 'src/schemas';
 import { JwtService } from '@nestjs/jwt';
-import { USER_ERROR } from 'constants/';
+import { OTP_ERROR, PASSWORD_MAIL_CONTENT, USER_ERROR } from 'constants/';
+import { InjectModel } from '@nestjs/sequelize';
+import { Otp } from 'src/schemas/otp.schema';
+import { generateRandomOtp } from 'src/otp/otp.service';
+import { sendEmail } from 'services/mailer';
 
 @Injectable()
 export class AuthService {
-  constructor(private jwtService: JwtService) {}
+  constructor(
+    private jwtService: JwtService,
+    @InjectModel(User)
+    private userModel: typeof User,
+    @InjectModel(Otp)
+    private otpModel: typeof Otp,
+  ) {}
 
   async user(email: string): Promise<any> {
     return await User.findOne({ where: { email } });
@@ -16,7 +26,7 @@ export class AuthService {
     const user = await this.user(email);
 
     if(!user) {
-        return { error: USER_ERROR.INVALID_USER, status: HttpStatus.CONFLICT};
+      return { error: USER_ERROR.INVALID_USER, status: HttpStatus.CONFLICT};
     }
 
     if ( await user.comparePassword(password)) {
@@ -39,4 +49,55 @@ export class AuthService {
       access_token: this.jwtService.sign(payload),
     };
   }
+
+  async resetPassword(email: string) {
+    const user = await this.userModel.findOne({ where: { email } });
+    if (!user) {
+      return { error: USER_ERROR.INVALID_USER, status: HttpStatus.CONFLICT};
+    }
+    const otp = new this.otpModel()
+    otp.code = generateRandomOtp();
+    otp.user = user.id;
+
+    sendEmail(
+      user.email, 
+      PASSWORD_MAIL_CONTENT.subject, 
+      PASSWORD_MAIL_CONTENT.msg + otp.code, 
+      `<p>${PASSWORD_MAIL_CONTENT.msg} <b>${otp.code}</b></p>`,
+    ).catch(console.error);
+
+    return otp.save();
+  }
+
+  async recoverPassword(password: string, code: string) {
+    const otp = await this.otpModel.findOne({ where: { code } });
+    if (!otp) {
+        return { error: OTP_ERROR.INVALID_OTP, status: HttpStatus.CONFLICT};
+    }    
+    const user = await this.userModel.findOne({ where: { id: otp.user } });
+    if (!user) {
+      return { error: USER_ERROR.INVALID_USER, status: HttpStatus.CONFLICT};
+    }
+
+    user.password = password;
+
+    await user.save();
+    await otp.destroy();
+
+    return user;
+  }
+
+  async validateOtp(userId: number, code: string) {
+    const otp = await this.otpModel.findOne({ where: { user: userId } });
+    if (!otp) {
+      return { error: OTP_ERROR.INVALID_OTP, status: HttpStatus.CONFLICT};
+    }
+    const isValid = otp.code === code;
+    if(isValid){
+      await otp.destroy();
+    }
+
+    return isValid;
+  }
 }
+

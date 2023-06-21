@@ -6,9 +6,11 @@ import {
   AutoIncrement,
   PrimaryKey,
   HasMany,
+  HasOne,
+  Unique,
 } from 'sequelize-typescript';
 import { Cinema } from './cinemas.schema';
-import * as bcrypt from 'bcrypt';
+import { Otp } from './otp.schema';
 
 @Table
 export class User extends Model {
@@ -48,8 +50,11 @@ export class User extends Model {
   @HasMany(() => Cinema)
   cinemas: Cinema[];
 
+  @HasOne(() => Otp)
+  otp: Otp;
+
   async comparePassword(passwordAttempt: string): Promise<boolean> {
     //return await bcrypt.compare(passwordAttempt, this.password);
-    return await this.password === passwordAttempt;
+    return this.password === passwordAttempt;
   }
 }

@@ -8,10 +8,11 @@ import { JwtStrategy } from 'src/strategies/jwt.strategy';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from 'src/schemas';
 import { AuthController } from './auth.controller';
+import { Otp } from 'src/schemas/otp.schema';
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([User]),
+    SequelizeModule.forFeature([User, Otp]),
     PassportModule,
     JwtModule.register({
       secret: JWT_CONSTANTS.secret,
