@@ -45,7 +45,12 @@ export class AuthService {
   }
 
   async refreshToken(email: string) {
-    const payload = { email: email };
+    const user = await this.userModel.findOne({ where: { email } });
+    if (!user) {
+      return { error: USER_ERROR.INVALID_USER, status: HttpStatus.CONFLICT};
+    }
+    const payload = { email: email, id: user.id };
+
     return {
       access_token: this.jwtService.sign(payload),
     };
