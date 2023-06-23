@@ -70,6 +70,12 @@ export class Cinema extends Model {
   country: string;
 
   @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  neighborhood: string;
+
+  @Column({
     type: DataType.FLOAT,
     allowNull: false,
   })

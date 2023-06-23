@@ -38,6 +38,10 @@ export class CreateCinemaDto {
   country: string;
 
   @IsNotEmpty()
+  @IsString()
+  neighborhood: string;
+
+  @IsNotEmpty()
   @IsNumber()
   latitude: number;
 

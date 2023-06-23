@@ -36,6 +36,10 @@ export class UpdateCinemaDto {
   country?: string;
 
   @IsOptional()
+  @IsString()
+  neighborhood?: string;
+
+  @IsOptional()
   @IsNumber()
   latitude?: number;
 
