@@ -37,7 +37,8 @@ export class AuthService {
   }
 
   async login(email: string, password: string): Promise<any> {
-    const payload = { email: email, password: password };
+    const user = await this.user(email);
+    const payload = { email: email, id: user.id };
     return await {
       access_token: this.jwtService.sign(payload),
     };
@@ -66,7 +67,11 @@ export class AuthService {
       `<p>${PASSWORD_MAIL_CONTENT.msg} <b>${otp.code}</b></p>`,
     ).catch(console.error);
 
-    return otp.save();
+    await otp.save();
+    await otp.reload();
+
+    const { code, ...response } = otp.get();
+    return response;
   }
 
   async recoverPassword(password: string, code: string) {
@@ -93,10 +98,15 @@ export class AuthService {
       return { error: OTP_ERROR.INVALID_OTP, status: HttpStatus.CONFLICT};
     }
     const isValid = otp.code === code;
+
     if(isValid){
       await otp.destroy();
+      const user = await this.userModel.findOne({ where: { id: userId } });
+      const payload = { email: user.email, id: user.id };
+      return {
+        access_token: this.jwtService.sign(payload),
+      };
     }
-
     return isValid;
   }
 }
