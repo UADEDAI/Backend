@@ -40,7 +40,7 @@ CREATE TABLE cinemas (
   `state` VARCHAR(255),
   `country` VARCHAR(255),
   `city` VARCHAR(255),
-  `neighborhood` VARCHAR(255),
+  `neighbourhood` VARCHAR(255),
   `latitude` DECIMAL(11, 8),
   `longitude` DECIMAL(11, 8),
   `price` DECIMAL(10,2),

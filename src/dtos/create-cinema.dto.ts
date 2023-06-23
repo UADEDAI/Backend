@@ -39,7 +39,7 @@ export class CreateCinemaDto {
 
   @IsNotEmpty()
   @IsString()
-  neighborhood: string;
+  neighbourhood: string;
 
   @IsNotEmpty()
   @IsNumber()

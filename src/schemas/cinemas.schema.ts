@@ -73,7 +73,7 @@ export class Cinema extends Model {
     type: DataType.STRING,
     allowNull: false,
   })
-  neighborhood: string;
+  neighbourhood: string;
 
   @Column({
     type: DataType.FLOAT,

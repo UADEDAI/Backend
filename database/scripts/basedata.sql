@@ -21,7 +21,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `cinemas` WRITE;
 /*!40000 ALTER TABLE `cinemas` DISABLE KEYS */;
-INSERT INTO `cinemas` (`user_id`, `name`, `street`, `street_num`, `state`, `country`, `city`, `neighborhood`, `latitude`, `longitude`, `price`, `enabled`)
+INSERT INTO `cinemas` (`user_id`, `name`, `street`, `street_num`, `state`, `country`, `city`, `neighbourhood`, `latitude`, `longitude`, `price`, `enabled`)
 VALUES (1, 'Cinema 1', 'Street 1', '123', 'State 1', 'Country 1', 'City 1', 'Neighborhood 1', 1.111111, 1.111111, 10.00, true),
        (1, 'Cinema 2', 'Street 2', '456', 'State 2', 'Country 2', 'City 2', 'Neighborhood 2', 2.222222, 2.222222, 20.00, true),
        (1, 'Cinema 3', 'Street 3', '789', 'State 3', 'Country 3', 'City 3', 'Neighborhood 3', 3.333333, 3.333333, 30.00, true);

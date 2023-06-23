@@ -37,7 +37,7 @@ export class UpdateCinemaDto {
 
   @IsOptional()
   @IsString()
-  neighborhood?: string;
+  neighbourhood?: string;
 
   @IsOptional()
   @IsNumber()
