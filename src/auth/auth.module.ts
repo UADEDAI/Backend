@@ -3,7 +3,6 @@ import { AuthService } from './auth.service';
 import { LocalStrategy } from 'src/strategies/local.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { JWT_CONSTANTS } from 'constants/';
 import { JwtStrategy } from 'src/strategies/jwt.strategy';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from 'src/schemas';
@@ -15,7 +14,7 @@ import { Otp } from 'src/schemas/otp.schema';
     SequelizeModule.forFeature([User, Otp]),
     PassportModule,
     JwtModule.register({
-      secret: JWT_CONSTANTS.secret,
+      secret: process.env.JWT_SECRET || 'secret',
       signOptions: { expiresIn: '60m' },
     }),
   ],
