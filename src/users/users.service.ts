@@ -15,7 +15,7 @@ import { OTP_MAIL_CONTENT } from 'constants/';
 const attributes = [
   'id',
   'email',
-  'name',
+  'username',
   'company',
   'role',
   'createdAt',
