@@ -280,4 +280,16 @@ export class RoomsService {
       statusCode: HttpStatus.NOT_FOUND,
     };
   }
+
+  async findMovieScreenings(
+    roomId: string,
+    movieId: string,
+  ): Promise<Screening[]> {
+    return this.screeningModel.findAll({
+      where: {
+        roomId,
+        movieId,
+      },
+    });
+  }
 }

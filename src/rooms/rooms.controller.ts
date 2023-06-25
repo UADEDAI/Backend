@@ -75,4 +75,12 @@ export class RoomsController {
   ) {
     return this.roomsService.deleteMovieFromRoom(id, movieId);
   }
+
+  @Get(':id/movie-screenings/:movieId')
+  findMovieScreenings(
+    @Param('id') id: string,
+    @Param('movieId') movieId: string,
+  ) {
+    return this.roomsService.findMovieScreenings(id, movieId);
+  }
 }
