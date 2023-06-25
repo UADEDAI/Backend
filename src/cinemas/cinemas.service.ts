@@ -113,6 +113,7 @@ export class CinemasService {
       where: {
         cinemaId: id,
       },
+      include: Movie,
     });
   }
 }
