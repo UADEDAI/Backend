@@ -47,7 +47,7 @@ CREATE TABLE cinemas (
   `enabled` BOOLEAN DEFAULT true,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users(id)
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 # ====================================================
@@ -64,7 +64,7 @@ CREATE TABLE rooms (
   `enabled` BOOLEAN DEFAULT true,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (cinema_id) REFERENCES cinemas(id)
+  FOREIGN KEY (cinema_id) REFERENCES cinemas(id) ON DELETE CASCADE
 );
 
 # ====================================================
@@ -98,8 +98,8 @@ CREATE TABLE movie_rooms (
   `movie_id` INT,
   `room_id` INT,
   PRIMARY KEY (`movie_id`, `room_id`),
-  FOREIGN KEY (movie_id) REFERENCES movies(id),
-  FOREIGN KEY (room_id) REFERENCES rooms(id)
+  FOREIGN KEY (movie_id) REFERENCES movies(id) ON DELETE CASCADE,
+  FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE
 );
 
 # ====================================================
