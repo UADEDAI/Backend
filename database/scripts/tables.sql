@@ -139,3 +139,21 @@ CREATE TABLE screenings (
   FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE,
   FOREIGN KEY (movie_id) REFERENCES movies(id) ON DELETE CASCADE
 );
+
+# ====================================================
+# Table: reservations
+# ====================================================
+
+DROP TABLE IF EXISTS `reservations`;
+
+CREATE TABLE reservations (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `user_id` INT,
+  `screening_id` INT,
+  `seat_row` INT,
+  `seat_column` INT,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (screening_id) REFERENCES screenings(id) ON DELETE CASCADE
+);

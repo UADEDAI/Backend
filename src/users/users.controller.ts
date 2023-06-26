@@ -56,7 +56,9 @@ export class UsersController {
       return res.status(201).json(createUserResultDto);
     } catch (error) {
       console.error(error);
-      return res.status(409).json({ message: 'Error while creating user', error: error.message });
+      return res
+        .status(409)
+        .json({ message: 'Error while creating user', error: error.message });
     }
   }
 
