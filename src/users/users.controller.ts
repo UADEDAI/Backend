@@ -6,13 +6,14 @@ import {
   Param,
   Post,
   Put,
+  Res,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from 'src/schemas';
 import { UpdateUserDto } from 'src/dtos/update-user.dto';
 import { Cinema } from 'src/schemas/cinemas.schema';
 import { CreateUserDto } from 'src/dtos/create-user.dto';
-import { CreateUserResultDto } from 'src/dtos/create-user-result.dto';
+import { Response } from 'express';
 
 @Controller('users')
 export class UsersController {
@@ -45,11 +46,18 @@ export class UsersController {
   }
 
   @Post()
-  createOne(
+  async createOne(
     @Body() createUserDto: CreateUserDto,
-  ): Promise<CreateUserResultDto> {
-    console.log(createUserDto);
-    return this.usersService.create(createUserDto);
+    @Res() res: Response,
+  ): Promise<any> {
+    try {
+      console.log(createUserDto);
+      const createUserResultDto = await this.usersService.create(createUserDto);
+      return res.status(201).json(createUserResultDto);
+    } catch (error) {
+      console.error(error);
+      return res.status(409).json({ message: 'Error while creating user', error: error.message });
+    }
   }
 
   @Get(':id/cinemas')

@@ -6,6 +6,7 @@ export const MOVIE_STATUS = {
 export const USER_ERROR = {
   INVALID_USER: 'User not found',
   INVALID_PASSWORD: 'Invalid password',
+  UNVERIFIED_USER: 'User not verified',
 };
 
 export const OTP_ERROR = {

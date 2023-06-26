@@ -52,6 +52,9 @@ export class User extends Model {
 
   @HasOne(() => Otp)
   otp: Otp;
+  
+  @Column({ field: 'verified', type: DataType.BOOLEAN })
+  verified: boolean;
 
   async comparePassword(passwordAttempt: string): Promise<boolean> {
     //return await bcrypt.compare(passwordAttempt, this.password);

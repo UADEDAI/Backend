@@ -29,6 +29,10 @@ export class AuthService {
       return { error: USER_ERROR.INVALID_USER, status: HttpStatus.CONFLICT};
     }
 
+    if(!user.verified) {
+      return { error: USER_ERROR.UNVERIFIED_USER, status: HttpStatus.CONFLICT};
+    }
+
     if ( await user.comparePassword(password)) {
       const { password, ...result } = user.get({ plain: true });
       return result;
@@ -108,6 +112,8 @@ export class AuthService {
       await otp.destroy();
       const user = await this.userModel.findOne({ where: { id: userId } });
       const payload = { email: user.email, id: user.id };
+      user.verified = true;
+      await user.save();
       return {
         access_token: this.jwtService.sign(payload),
       };

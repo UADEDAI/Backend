@@ -93,14 +93,10 @@ export class UsersService {
   async create(createUserDto: CreateUserDto): Promise<CreateUserResultDto> {
     const userExists = await this.findUserByEmail(createUserDto.email);
     if (userExists) {
-      return {
-        error: `User with email ${createUserDto.email} already exists`,
-        status: HttpStatus.CONFLICT,
-      };
+      throw new Error(`User with email ${createUserDto.email} already exists`);
     }
 
     const newUser = new this.userModel();
-    //const newUser = new User();
     newUser.username = createUserDto.username;
     newUser.email = createUserDto.email;
     newUser.password = createUserDto.password;
@@ -119,14 +115,12 @@ export class UsersService {
 
     if (user.role == 'owner') {
       const otp = await this.otpService.generateOtp(user.id);
-      console.log('BP1');
       sendEmail(
         user.email,
         OTP_MAIL_CONTENT.subject,
         OTP_MAIL_CONTENT.msg + otp.code,
         `<p>${OTP_MAIL_CONTENT.msg} <b>${otp.code}</b></p>`,
       ).catch(console.error);
-      console.log('BP2');
     }
     return user as CreateUserResultDto;
   }
