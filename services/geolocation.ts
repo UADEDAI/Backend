@@ -1,19 +1,21 @@
-import { createClient, ClientResponse, GeocodingResponse, Client, AddressComponent } from '@google/maps';
+import { Client, GeocodeRequest } from "@googlemaps/google-maps-services-js";
 
-console.log('APIKEY' + process.env.GOOGLE_MAPS_API_KEY);
-// Create a client
-const googleMapsClient: Client = createClient({
-  key: 'AIzaSyDxc_387lQc-rD1r4DwUVUcmSsNaQycCps',
-  Promise: Promise
-});
+const client = new Client({});
 
-export async function getGeocode(address: string): Promise<{ lat: number, lng: number }> {
-  const response: ClientResponse<GeocodingResponse> = await googleMapsClient.geocode({ address }).asPromise();
-
-  if (response.json.status === 'OK') {
-    const { lat, lng } = response.json.results[0].geometry.location;
+async function getGeocode(address: string): Promise<{ lat: number; lng: number }> {
+  try {
+    const response = await client.geocode({
+      params: {
+        address: address,
+        key: process.env.GOOGLE_MAPS_API_KEY,
+      },
+    });
+    const { lat, lng } = response.data.results[0].geometry.location;
     return { lat, lng };
-  } else {
-    throw new Error('Invalid address');
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error fetching geolocation");
   }
 }
+
+export { getGeocode };
