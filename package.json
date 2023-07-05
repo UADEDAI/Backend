@@ -12,6 +12,7 @@
     "start:prod": "node dist/src/main.js"
   },
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.3.32",
     "@nestjs/common": "^9.4.2",
     "@nestjs/config": "^2.3.2",
     "@nestjs/core": "^9.4.2",
