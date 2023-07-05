@@ -1,6 +1,7 @@
 import { ConflictException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Op } from 'sequelize';
+import { Op, Sequelize} from 'sequelize';
+import { getGeocode } from 'services/geolocation';
 import { CreateCinemaDto, UpdateCinemaDto } from 'src/dtos';
 import { Cinema, Movie, Room } from 'src/schemas';
 
@@ -55,8 +56,19 @@ export class CinemasService {
   }
 
   async createCinema(createCinemaDto: CreateCinemaDto): Promise<Cinema> {
-    const { name, latitude, longitude, userId } = createCinemaDto;
+    const { name, street, streetNum, city, state, country, neighbourhood, userId } = createCinemaDto;
+  
+    // Create the full address string
+    const address = `${street} ${streetNum}, ${neighbourhood}, ${city}, ${state}, ${country}`;
+  
+    const { lat: latitude, lng: longitude } = await getGeocode(address);
 
+    if  (!latitude || !longitude) {
+      throw new ConflictException(
+        'Invalid address. Please make sure you have entered the correct address.',
+      );
+    }
+  
     const existingCinema = await this.cinemaModel.findOne({
       where: {
         [Op.or]: [
@@ -65,13 +77,20 @@ export class CinemasService {
         ],
       },
     });
-
+  
     if (existingCinema) {
       throw new ConflictException(
         'A cinema with the same name and userId or exact lat and long location already exists.',
       );
     }
-    return this.cinemaModel.create(createCinemaDto as any);
+  
+    const cinemaData = {
+      ...createCinemaDto,
+      latitude,
+      longitude,
+    };
+  
+    return this.cinemaModel.create(cinemaData as any);
   }
 
   async updateCinema(
@@ -114,6 +133,18 @@ export class CinemasService {
         cinemaId: id,
       },
       include: Movie,
+    });
+  }
+
+  async findNearestCinemas(lat: number, long: number, radius: number): Promise<Cinema[]> {
+    const distanceLimitDegree = radius / 111.32;  // 1 grado de latitud aprox 111.32 km
+    console.log(distanceLimitDegree);
+    return this.cinemaModel.findAll({
+      where: Sequelize.where(
+        Sequelize.literal(`POW((latitude - ${lat}),2) + POW((longitude - ${long}),2)`),
+        '<=',
+        Math.pow(distanceLimitDegree, 2)
+      )
     });
   }
 }

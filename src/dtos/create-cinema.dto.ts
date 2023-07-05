@@ -41,13 +41,13 @@ export class CreateCinemaDto {
   @IsString()
   neighbourhood: string;
 
-  @IsNotEmpty()
-  @IsNumber()
-  latitude: number;
+ // @IsNotEmpty()
+ // @IsNumber()
+ // latitude: number;
 
-  @IsNotEmpty()
-  @IsNumber()
-  longitude: number;
+ // @IsNotEmpty()
+ // @IsNumber()
+ // longitude: number;
 
   @IsNotEmpty()
   @IsNumber()

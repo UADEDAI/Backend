@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { CinemasService } from './cinemas.service';
 import { CreateCinemaDto, UpdateCinemaDto } from 'src/dtos';
@@ -18,6 +19,15 @@ export class CinemasController {
   @Get()
   findAll(): Promise<Cinema[]> {
     return this.cinemasService.findAllCinemas();
+  }
+
+  @Get('nearest')
+  findNearest(
+    @Query('lat') lat: number,
+    @Query('long') long: number,
+    @Query('distance') distance: number,
+  ): Promise<Cinema[]> {
+    return this.cinemasService.findNearestCinemas(lat, long, distance);
   }
 
   @Get(':id')
