@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { User } from 'src/schemas';
 import { JwtService } from '@nestjs/jwt';
 import { OTP_ERROR, PASSWORD_MAIL_CONTENT, USER_ERROR } from 'constants/';
@@ -6,6 +6,9 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Otp } from 'src/schemas/otp.schema';
 import { generateRandomOtp } from 'src/otp/otp.service';
 import { sendEmail } from 'services/mailer';
+import * as admin from 'firebase-admin';
+import { CreateCinemaDto } from 'src/dtos';
+import { CreateUserDto } from 'src/dtos/create-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -119,6 +122,43 @@ export class AuthService {
       };
     }
     return isValid;
+  }
+
+  async verifyFirebaseToken(idToken) {
+    // Initialize Firebase Admin SDK
+    const firebasePrivateKey = process.env.FIREBASE_PRIVATE_KEY;
+    const projectId = process.env.FIREBASE_PROJECT_ID;
+    const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+    
+    console.log('firebasePrivateKey: ' + firebasePrivateKey);
+    console.log('projectId: ' + projectId);
+    console.log('clientEmail: ' + clientEmail);
+
+    if (!admin.apps.length) {
+      admin.initializeApp({
+        credential: admin.credential.cert({
+          projectId,
+          clientEmail,
+          privateKey: firebasePrivateKey.replace(/\\n/g, '\n'),
+        }),
+      });
+    }
+    console.log('LOG: ' + idToken);
+    try {
+      const decodedToken = await admin.auth().verifyIdToken(idToken);
+      return decodedToken;
+    } catch (error) {
+      throw new UnauthorizedException('Invalid token: ' + error.message);
+    }
+  }
+  
+  async createGoogleUser(email: string): Promise<any> {
+    return this.userModel.create({
+      email: email,
+      verified: true,
+      role: 'client',
+      password: 'default',
+    });
   }
 }
 

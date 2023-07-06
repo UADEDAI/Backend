@@ -21,7 +21,7 @@ export class User extends Model {
 
   @Column({
     field: 'name',
-    allowNull: false,
+    allowNull: true,
   })
   username: string;
 
