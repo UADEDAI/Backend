@@ -7,12 +7,18 @@ export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
   @Get()
-  findAll(@Query('page') sPage: number, @Query('limit') limit: number) {
+  findAll(
+    @Query('page') sPage: number,
+    @Query('limit') limit: number,
+    @Query('title') title: string,
+    @Query('genre') genre: string,
+    @Query('score') score: number,
+  ) {
     // Coerce the page and limit parameters to numbers and provide default values
     sPage = +sPage || 1;
     limit = +limit || 10;
 
-    return this.moviesService.findAll(sPage, limit);
+    return this.moviesService.findAll(sPage, limit, title, genre, score);
   }
 
   @Get(':id')

@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { CinemasService } from './cinemas.service';
 import { CreateCinemaDto, UpdateCinemaDto } from 'src/dtos';
-import { Cinema, Room } from 'src/schemas';
+import { Cinema, Room, Screening } from 'src/schemas';
 
 @Controller('cinemas')
 export class CinemasController {
@@ -58,5 +58,13 @@ export class CinemasController {
   @Get(':id/rooms')
   findCinemaRooms(@Param('id') id: string): Promise<Room[]> {
     return this.cinemasService.findAllRooms(id);
+  }
+
+  @Get(':id/screenings')
+  findCinemaScreenings(
+    @Param('id') id: string,
+    @Query('date') date: string,
+  ): Promise<Screening[]> {
+    return this.cinemasService.findCinemaScreenings(id, date);
   }
 }

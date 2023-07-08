@@ -1,9 +1,10 @@
 import { ConflictException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Op, Sequelize} from 'sequelize';
+import { endOfDay, startOfDay } from 'date-fns';
+import { Op, Sequelize } from 'sequelize';
 import { getGeocode } from 'services/geolocation';
 import { CreateCinemaDto, UpdateCinemaDto } from 'src/dtos';
-import { Cinema, Movie, Room } from 'src/schemas';
+import { Cinema, Movie, Room, Screening } from 'src/schemas';
 
 type CinemaWithRoomsAmount = Cinema & {
   roomsAmount: number;
@@ -17,6 +18,8 @@ export class CinemasService {
     private cinemaModel: typeof Cinema,
     @InjectModel(Room)
     private roomModel: typeof Room,
+    @InjectModel(Screening)
+    private screeningModel: typeof Screening,
   ) {}
 
   async findAllCinemas(): Promise<CinemaWithRoomsAmount[]> {
@@ -56,19 +59,28 @@ export class CinemasService {
   }
 
   async createCinema(createCinemaDto: CreateCinemaDto): Promise<Cinema> {
-    const { name, street, streetNum, city, state, country, neighbourhood, userId } = createCinemaDto;
-  
+    const {
+      name,
+      street,
+      streetNum,
+      city,
+      state,
+      country,
+      neighbourhood,
+      userId,
+    } = createCinemaDto;
+
     // Create the full address string
     const address = `${street} ${streetNum}, ${neighbourhood}, ${city}, ${state}, ${country}`;
-  
+
     const { lat: latitude, lng: longitude } = await getGeocode(address);
 
-    if  (!latitude || !longitude) {
+    if (!latitude || !longitude) {
       throw new ConflictException(
         'Invalid address. Please make sure you have entered the correct address.',
       );
     }
-  
+
     const existingCinema = await this.cinemaModel.findOne({
       where: {
         [Op.or]: [
@@ -77,19 +89,19 @@ export class CinemasService {
         ],
       },
     });
-  
+
     if (existingCinema) {
       throw new ConflictException(
         'A cinema with the same name and userId or exact lat and long location already exists.',
       );
     }
-  
+
     const cinemaData = {
       ...createCinemaDto,
       latitude,
       longitude,
     };
-  
+
     return this.cinemaModel.create(cinemaData as any);
   }
 
@@ -136,15 +148,48 @@ export class CinemasService {
     });
   }
 
-  async findNearestCinemas(lat: number, long: number, radius: number): Promise<Cinema[]> {
-    const distanceLimitDegree = radius / 111.32;  // 1 grado de latitud aprox 111.32 km
+  async findNearestCinemas(
+    lat: number,
+    long: number,
+    radius: number,
+  ): Promise<Cinema[]> {
+    const distanceLimitDegree = radius / 111.32; // 1 grado de latitud aprox 111.32 km
     console.log(distanceLimitDegree);
     return this.cinemaModel.findAll({
       where: Sequelize.where(
-        Sequelize.literal(`POW((latitude - ${lat}),2) + POW((longitude - ${long}),2)`),
+        Sequelize.literal(
+          `POW((latitude - ${lat}),2) + POW((longitude - ${long}),2)`,
+        ),
         '<=',
-        Math.pow(distanceLimitDegree, 2)
-      )
+        Math.pow(distanceLimitDegree, 2),
+      ),
+    });
+  }
+
+  async findCinemaScreenings(id: string, date: string): Promise<Screening[]> {
+    const rooms = this.findAllRooms(id);
+
+    const roomsIds = (await rooms).map((room) => room.id);
+
+    const where = {
+      roomId: {
+        [Op.in]: roomsIds,
+      },
+    };
+
+    const dateStart = new Date(date);
+
+    if (dateStart.toString() !== 'Invalid Date') {
+      const startAt = startOfDay(dateStart);
+      const endAt = endOfDay(dateStart);
+      where['startAt'] = {
+        [Op.between]: [startAt, endAt],
+      };
+    }
+
+    return this.screeningModel.findAll({
+      where,
+      include: [Movie, { model: Room, include: [Cinema] }],
     });
   }
 }

@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { MOVIE_STATUS, MoviesPaginated } from '../../constants';
 import { CreateCommentDto } from 'src/dtos/create-comment.dto';
 import { Comment, Movie } from 'src/schemas';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class MoviesService {
@@ -13,22 +14,53 @@ export class MoviesService {
     private commentModel: typeof Comment,
   ) {}
 
-  async findAll(page = 1, limit = 10): Promise<MoviesPaginated> {
+  async findAll(
+    page = 1,
+    limit = 10,
+    title,
+    genre,
+    score,
+  ): Promise<MoviesPaginated> {
     const offsetShowing = (page - 1) * limit;
     const offsetComingSoon = (page - 1) * limit;
+    const whereShowing = {
+      status: MOVIE_STATUS.SHOWING,
+    };
+    const whereComingSoon = {
+      status: MOVIE_STATUS.COMING_SOON,
+    };
+
+    if (title) {
+      whereShowing['title'] = {
+        [Op.like]: `%${title}%`,
+      };
+      whereComingSoon['title'] = {
+        [Op.like]: `%${title}%`,
+      };
+    }
+
+    if (genre) {
+      whereShowing['genre'] = {
+        [Op.like]: `%${genre}%`,
+      };
+      whereComingSoon['genre'] = {
+        [Op.like]: `%${genre}%`,
+      };
+    }
+
+    if (score) {
+      whereShowing['score'] = score;
+      whereComingSoon['score'] = score;
+    }
 
     const premieredMovies = await this.movieModel.findAndCountAll({
-      where: {
-        status: MOVIE_STATUS.SHOWING,
-      },
+      where: whereShowing,
       offset: offsetShowing,
       limit,
     });
 
     const comingSoonMovies = await this.movieModel.findAndCountAll({
-      where: {
-        status: MOVIE_STATUS.COMING_SOON,
-      },
+      where: whereComingSoon,
       offset: offsetComingSoon,
       limit,
     });
