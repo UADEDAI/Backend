@@ -43,9 +43,7 @@ export class ReservationsService {
     });
   }
 
-  async create(
-    createReservationDto: CreateReservationDto,
-  ): Promise<Reservation> {
+  async create(createReservationDto: CreateReservationDto) {
     const createReservationObject = JSON.parse(
       JSON.stringify(createReservationDto),
     );
@@ -55,6 +53,7 @@ export class ReservationsService {
       where: {
         id: createReservationDto.screeningId,
       },
+      include: [{ model: Room, include: [Cinema] }],
     });
 
     if (!screening) {
@@ -110,6 +109,15 @@ export class ReservationsService {
       });
     }
 
-    return reservation;
+    const reservationInfo = {
+      reservation,
+      screening,
+      seats,
+      cinemaName: screening.room.cinema.name,
+      roomName: screening.room.name,
+      price: screening.room.cinema.price,
+    };
+
+    return reservationInfo;
   }
 }

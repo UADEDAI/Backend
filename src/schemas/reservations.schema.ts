@@ -43,6 +43,12 @@ export class Reservation extends Model<Reservation> {
   @BelongsTo(() => User)
   public user: User;
 
+  @Column({
+    type: DataType.DATE,
+    allowNull: false,
+  })
+  public time: Date;
+
   // Add other reservation-related columns as needed
 
   @HasMany(() => ReservationSeat)
