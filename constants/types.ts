@@ -12,12 +12,12 @@ export type MoviesPaginated = {
     totalPages: number;
     totalResults: number;
   };
-  comingSoonPagination: {
+  comingSoonPagination?: {
     page: number;
     limit: number;
     totalPages: number;
     totalResults: number;
   };
   showing: Movie[];
-  comingSoon: Movie[];
+  comingSoon?: Movie[];
 };

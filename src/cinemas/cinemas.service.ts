@@ -155,29 +155,29 @@ export class CinemasService {
     movie: number,
   ): Promise<Cinema[]> {
     const distanceLimitDegree = radius / 111.32; // 1 degree of latitude approx 111.32 km
-  
+
     // 1. Find the IDs of rooms that have screenings for this movie
     const screeningsWithMovie = await this.screeningModel.findAll({
       where: { movie_id: movie },
       attributes: ['roomId'],
-      raw: true,  // Returns plain JavaScript objects, not Sequelize instances
+      raw: true, // Returns plain JavaScript objects, not Sequelize instances
     });
-    console.log(screeningsWithMovie);
-  
-    // Extract the room IDs
-    const roomIdsWithMovie = screeningsWithMovie.map(screening => screening.roomId);
 
-    console.log(roomIdsWithMovie);
+    // Extract the room IDs
+    const roomIdsWithMovie = screeningsWithMovie.map(
+      (screening) => screening.roomId,
+    );
+
     // 2. Find the IDs of cinemas corresponding to these rooms
     const rooms = await this.roomModel.findAll({
-      where: { id: { [Op.in]: roomIdsWithMovie }},
+      where: { id: { [Op.in]: roomIdsWithMovie } },
       attributes: ['cinemaId'],
       raw: true,
     });
-  
+
     // Extract the cinema IDs
-    const cinemaIdsWithMovie = rooms.map(room => room.cinemaId);
-  
+    const cinemaIdsWithMovie = rooms.map((room) => room.cinemaId);
+
     // 3. Find cinemas within the radius that also have the movie
     const cinemasWithinRadiusWithMovie = await this.cinemaModel.findAll({
       where: {
@@ -191,10 +191,9 @@ export class CinemasService {
         ),
       },
     });
-  
+
     return cinemasWithinRadiusWithMovie;
   }
-  
 
   async findCinemaScreenings(id: string, date: string): Promise<Screening[]> {
     const rooms = this.findAllRooms(id);

@@ -2,8 +2,8 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { MOVIE_STATUS, MoviesPaginated } from '../../constants';
 import { CreateCommentDto } from 'src/dtos/create-comment.dto';
-import { Comment, Movie } from 'src/schemas';
-import { Op } from 'sequelize';
+import { Cinema, Comment, Movie, Room, Screening } from 'src/schemas';
+import { Op, Sequelize } from 'sequelize';
 
 @Injectable()
 export class MoviesService {
@@ -12,6 +12,12 @@ export class MoviesService {
     private movieModel: typeof Movie,
     @InjectModel(Comment)
     private commentModel: typeof Comment,
+    @InjectModel(Cinema)
+    private cinemaModel: typeof Cinema,
+    @InjectModel(Room)
+    private roomModel: typeof Room,
+    @InjectModel(Screening)
+    private screeningModel: typeof Screening,
   ) {}
 
   async findAll(
@@ -114,5 +120,96 @@ export class MoviesService {
       }
       throw err;
     }
+  }
+
+  async findPremieredMoviesHome(
+    lat: number,
+    lng: number,
+    radius: number,
+    page = 1,
+    limit = 10,
+    title,
+    genre,
+    score,
+  ): Promise<MoviesPaginated> {
+    const distanceLimitDegree = radius / 111.32; // 1 degree of latitude approx 111.32 km
+    const offset = (page - 1) * limit;
+
+    const where = {
+      status: MOVIE_STATUS.SHOWING,
+    };
+
+    const whereCinemas = {};
+
+    if (title) {
+      where['title'] = {
+        [Op.like]: `%${title}%`,
+      };
+    }
+
+    if (genre) {
+      where['genre'] = {
+        [Op.like]: `%${genre}%`,
+      };
+    }
+
+    if (score) {
+      where['score'] = score;
+    }
+
+    if (lat && lng) {
+      whereCinemas[Op.and] = Sequelize.where(
+        Sequelize.literal(
+          `POW((latitude - ${lat}),2) + POW((longitude - ${lng}),2)`,
+        ),
+        '<=',
+        Math.pow(distanceLimitDegree, 2),
+      );
+    }
+
+    // 1. Find all cinemas that are near the user
+    const cinemas = await this.cinemaModel.findAll({
+      where: whereCinemas,
+    });
+
+    // 2. Find all rooms that belong to these cinemas
+    const rooms = await this.roomModel.findAll({
+      where: {
+        cinemaId: {
+          [Op.in]: cinemas.map((cinema) => cinema.id),
+        },
+      },
+    });
+
+    // 3. Find all movies that are shown in these rooms
+    const screenings = await this.screeningModel.findAll({
+      where: {
+        roomId: {
+          [Op.in]: rooms.map((room) => room.id),
+        },
+      },
+    });
+
+    where['id'] = {
+      [Op.in]: screenings.map((screening) => screening.movieId),
+    };
+
+    const moviesNear = await this.movieModel.findAndCountAll({
+      where,
+      offset,
+      limit,
+    });
+
+    const showingPagination = {
+      page,
+      limit,
+      totalPages: Math.ceil(moviesNear.count / limit),
+      totalResults: moviesNear.count,
+    };
+
+    return {
+      showing: moviesNear.rows,
+      showingPagination,
+    };
   }
 }
