@@ -143,17 +143,48 @@ CREATE TABLE screenings (
 # ====================================================
 # Table: reservations
 # ====================================================
-
 DROP TABLE IF EXISTS `reservations`;
 
 CREATE TABLE reservations (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `user_id` INT,
   `screening_id` INT,
-  `seat_row` INT,
-  `seat_column` INT,
+  `year` INT NOT NULL,
+  `month` INT NOT NULL,
+  `day` INT NOT NULL,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (screening_id) REFERENCES screenings(id) ON DELETE CASCADE
+);
+
+# ====================================================
+# Table: seats
+# ====================================================
+DROP TABLE IF EXISTS `seats`;
+
+CREATE TABLE seats (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `room_id` INT,
+  `row` INT,
+  `number` INT,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE
+);
+
+# ====================================================
+# Table: reservation_seats
+# ====================================================
+DROP TABLE IF EXISTS `reservation_seats`;
+
+CREATE TABLE reservation_seats (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `screening_id` INT,
+  `reservation_id` INT,
+  `seat_id` INT,
+  UNIQUE KEY `screening_reservation_seat_unique` (`screening_id`, `reservation_id`, `seat_id`),
+  FOREIGN KEY (reservation_id) REFERENCES reservations(id) ON DELETE CASCADE,
+  FOREIGN KEY (screening_id) REFERENCES screenings(id) ON DELETE CASCADE,
+  FOREIGN KEY (seat_id) REFERENCES seats(id) ON DELETE CASCADE
 );

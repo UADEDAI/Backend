@@ -5,7 +5,7 @@ import {
   Get,
   Param,
   Post,
-  Put,
+  Query,
 } from '@nestjs/common';
 import { ScreeningsService } from './screenings.service';
 import { Screening } from 'src/schemas';
@@ -37,5 +37,20 @@ export class ScreeningsController {
     @Param('id') id: string,
   ): Promise<{ message: string; statusCode: number }> {
     return this.screeningsService.deleteScreening(id);
+  }
+
+  @Get(':id/available-seats')
+  findAvailableSeats(
+    @Param('id') id: string,
+    @Query('year') year: string,
+    @Query('month') month: string,
+    @Query('day') day: string,
+  ): Promise<any> {
+    return this.screeningsService.findAvailableSeats(
+      id,
+      parseInt(year),
+      parseInt(month),
+      parseInt(day),
+    );
   }
 }
