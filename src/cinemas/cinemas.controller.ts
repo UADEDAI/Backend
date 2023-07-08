@@ -24,10 +24,11 @@ export class CinemasController {
   @Get('nearest')
   findNearest(
     @Query('lat') lat: number,
-    @Query('long') long: number,
+    @Query('lng') lng: number,
     @Query('distance') distance: number,
+    @Query('movie') movie: number,
   ): Promise<Cinema[]> {
-    return this.cinemasService.findNearestCinemas(lat, long, distance);
+    return this.cinemasService.findNearestCinemas(lat, lng, distance, movie);
   }
 
   @Get(':id')
