@@ -8,5 +8,6 @@ export { UpdateRoomDto } from './update-room.dto';
 export { CreateRoomDto } from './create-room.dto';
 export { AddMovieRoomDTO } from './add-movie-room.dto';
 export { CreateScreeningDto } from './create-screening.dto';
+export { CreateReservationDto } from './create-reservation.dto';
 // export { UpdateMovieDto } from './update-movie.dto';
 // export { UpdateScreeningDto } from './update-screening.dto';

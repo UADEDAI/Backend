@@ -8,6 +8,7 @@ import {
 } from 'sequelize-typescript';
 import { Seat } from './seats.schema';
 import { Reservation } from './reservations.schema';
+import { Screening } from './screenings.schema';
 
 @Table({
   tableName: 'reservation_seats',
@@ -42,4 +43,15 @@ export class ReservationSeat extends Model {
 
   @BelongsTo(() => Seat)
   public seat: Seat;
+
+  @ForeignKey(() => Screening)
+  @Column({
+    field: 'screening_id',
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  public screeningId: number;
+
+  @BelongsTo(() => Screening)
+  public screening: Screening;
 }

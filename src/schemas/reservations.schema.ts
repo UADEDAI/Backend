@@ -9,6 +9,7 @@ import {
 } from 'sequelize-typescript';
 import { Screening } from './screenings.schema';
 import { ReservationSeat } from './reservationSeats.schema';
+import { User } from './users.schema';
 
 @Table({
   tableName: 'reservations',
@@ -32,23 +33,15 @@ export class Reservation extends Model<Reservation> {
   @BelongsTo(() => Screening)
   public screening: Screening;
 
+  @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  public year: number;
+  public userId: number;
 
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-  })
-  public month: number;
-
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-  })
-  public day: number;
+  @BelongsTo(() => User)
+  public user: User;
 
   // Add other reservation-related columns as needed
 

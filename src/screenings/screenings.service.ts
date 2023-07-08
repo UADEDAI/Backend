@@ -97,7 +97,7 @@ export class ScreeningsService {
     const screening = await this.findOneScreening(id);
     // Validate that the given date is valid
     const date = new Date(year, month, day);
-    // const date = new Date(year, month - 1, day);
+
     if (date.toString() === 'Invalid Date') {
       throw new Error('Invalid date');
     }
@@ -105,9 +105,6 @@ export class ScreeningsService {
     const reservations = await this.reservationModel.findAll({
       where: {
         screeningId: id,
-        year,
-        month,
-        day,
       },
     });
 
