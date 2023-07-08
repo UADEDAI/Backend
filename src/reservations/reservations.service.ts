@@ -1,7 +1,15 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateReservationDto } from 'src/dtos';
-import { Reservation, ReservationSeat, Screening, Seat } from 'src/schemas';
+import {
+  Cinema,
+  Movie,
+  Reservation,
+  ReservationSeat,
+  Room,
+  Screening,
+  Seat,
+} from 'src/schemas';
 
 @Injectable()
 export class ReservationsService {
@@ -17,7 +25,14 @@ export class ReservationsService {
   ) {}
 
   async findAllReservations(): Promise<Reservation[]> {
-    return this.reservationModel.findAll();
+    return this.reservationModel.findAll({
+      include: [
+        {
+          model: Screening,
+          include: [Movie, { model: Room, include: [Cinema] }],
+        },
+      ],
+    });
   }
 
   async findOne(id: string): Promise<Reservation> {

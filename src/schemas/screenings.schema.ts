@@ -45,4 +45,7 @@ export class Screening extends Model {
 
   @BelongsTo(() => Room)
   room: Room;
+
+  @BelongsTo(() => Movie)
+  movie: Movie;
 }
