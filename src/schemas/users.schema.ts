@@ -52,7 +52,7 @@ export class User extends Model {
 
   @HasOne(() => Otp)
   otp: Otp;
-  
+
   @Column({ field: 'verified', type: DataType.BOOLEAN })
   verified: boolean;
 

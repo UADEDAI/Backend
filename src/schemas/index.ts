@@ -5,3 +5,6 @@ export { Cinema } from './cinemas.schema';
 export { Room } from './rooms.schema';
 export { MovieRoom } from './movieRoom.schema';
 export { Screening } from './screenings.schema';
+export { Seat } from './seats.schema';
+export { Reservation } from './reservations.schema';
+export { ReservationSeat } from './reservationSeats.schema';

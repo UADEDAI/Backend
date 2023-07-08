@@ -2,13 +2,19 @@ import { ConflictException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
 import { CreateScreeningDto } from 'src/dtos';
-import { Screening } from 'src/schemas';
+import { Reservation, ReservationSeat, Screening, Seat } from 'src/schemas';
 
 @Injectable()
 export class ScreeningsService {
   constructor(
     @InjectModel(Screening)
     private screeningModel: typeof Screening,
+    @InjectModel(Seat)
+    private seatModel: typeof Seat,
+    @InjectModel(ReservationSeat)
+    private reservationSeatModel: typeof ReservationSeat,
+    @InjectModel(Reservation)
+    private reservationModel: typeof Reservation,
   ) {}
 
   async findAllScreenings(): Promise<Screening[]> {
@@ -80,5 +86,49 @@ export class ScreeningsService {
         statusCode: HttpStatus.NOT_FOUND,
       };
     }
+  }
+
+  async findAvailableSeats(
+    id: string,
+    year: number,
+    month: number,
+    day: number,
+  ): Promise<Seat[]> {
+    const screening = await this.findOneScreening(id);
+    // Validate that the given date is valid
+    const date = new Date(year, month, day);
+    // const date = new Date(year, month - 1, day);
+    if (date.toString() === 'Invalid Date') {
+      throw new Error('Invalid date');
+    }
+
+    const reservations = await this.reservationModel.findAll({
+      where: {
+        screeningId: id,
+        year,
+        month,
+        day,
+      },
+    });
+
+    const reservedSeats = await this.reservationSeatModel.findAll({
+      where: {
+        reservationId: reservations.map((reservation) => reservation.id),
+      },
+    });
+
+    const allSeats = await this.seatModel.findAll({
+      where: {
+        roomId: screening.roomId,
+      },
+    });
+
+    const availableSeats = allSeats.filter((seat) => {
+      return !reservedSeats.some((reservedSeat) => {
+        return reservedSeat.seatId === seat.id;
+      });
+    });
+
+    return availableSeats;
   }
 }

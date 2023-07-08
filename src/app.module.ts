@@ -10,6 +10,7 @@ import { RoomsModule } from './rooms/rooms.module';
 import { ScreeningsModule } from './screenings/screenings.module';
 import { AuthModule } from './auth/auth.module';
 import { OtpModule } from './otp/otp.module';
+import { ReservationsModule } from './reservations/reservations.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { OtpModule } from './otp/otp.module';
     ScreeningsModule,
     AuthModule,
     OtpModule,
+    ReservationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

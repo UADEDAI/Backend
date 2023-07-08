@@ -7,7 +7,7 @@ import {
 import { InjectModel } from '@nestjs/sequelize';
 import { MOVIE_STATUS, MoviesPaginated, TimeAvailable } from '../../constants';
 import { AddMovieRoomDTO, CreateRoomDto, UpdateRoomDto } from 'src/dtos';
-import { Movie, MovieRoom, Room, Screening } from 'src/schemas';
+import { Movie, MovieRoom, Room, Screening, Seat } from 'src/schemas';
 import { Op } from 'sequelize';
 import { getIncludedModels } from 'helpers';
 import { addMinutes, format, parse } from 'date-fns';
@@ -23,6 +23,8 @@ export class RoomsService {
     private movieRoomModel: typeof MovieRoom,
     @InjectModel(Screening)
     private screeningModel: typeof Screening,
+    @InjectModel(Seat)
+    private seatModel: typeof Seat,
   ) {}
 
   async findAll(): Promise<Room[]> {
@@ -65,7 +67,23 @@ export class RoomsService {
     // Convert the CreateRoomDto class instance to a plain object
     const createRoomObject = JSON.parse(JSON.stringify(createRoomDto));
 
-    return this.roomModel.create(createRoomObject);
+    const room = await this.roomModel.create(createRoomObject);
+
+    // Create the seats for the room
+    const seats = [];
+    for (let i = 0; i < createRoomObject.numRows; i++) {
+      for (let j = 0; j < createRoomObject.seats; j++) {
+        seats.push({
+          row: i + 1,
+          number: j + 1,
+          roomId: room.id,
+        });
+      }
+    }
+
+    await this.seatModel.bulkCreate(seats);
+
+    return room;
   }
 
   async updateOne(id: string, updateRoomDto: UpdateRoomDto): Promise<Room> {
