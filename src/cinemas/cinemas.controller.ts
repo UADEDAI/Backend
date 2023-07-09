@@ -65,7 +65,8 @@ export class CinemasController {
   findCinemaScreenings(
     @Param('id') id: string,
     @Query('date') date: string,
+    @Query('movie') movie: string,
   ): Promise<Screening[]> {
-    return this.cinemasService.findCinemaScreenings(id, date);
+    return this.cinemasService.findCinemaScreenings(id, date, movie);
   }
 }

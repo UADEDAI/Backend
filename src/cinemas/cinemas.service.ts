@@ -197,7 +197,11 @@ export class CinemasService {
     return cinemasWithinRadiusWithMovie;
   }
 
-  async findCinemaScreenings(id: string, date: string): Promise<Screening[]> {
+  async findCinemaScreenings(
+    id: string,
+    date: string,
+    movieId: string,
+  ): Promise<Screening[]> {
     const rooms = this.findAllRooms(id);
 
     const roomsIds = (await rooms).map((room) => room.id);
@@ -216,6 +220,10 @@ export class CinemasService {
       where['startAt'] = {
         [Op.between]: [startAt, endAt],
       };
+    }
+
+    if (movieId) {
+      where['movieId'] = movieId;
     }
 
     const screenings = await this.screeningModel.findAll({
