@@ -22,6 +22,7 @@ CREATE TABLE `users` (
   `company` varchar(255),
   `role` ENUM('owner', 'client') NOT NULL DEFAULT 'client',
   `verified` BOOLEAN DEFAULT false,
+  `avatar` MEDIUMTEXT DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   UNIQUE KEY `email` (`email`)

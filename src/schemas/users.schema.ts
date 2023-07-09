@@ -41,6 +41,10 @@ export class User extends Model {
   })
   role: 'owner' | 'client';
 
+  @Column({ field: 'avatar', allowNull: true })
+  avatar: string;
+
+
   @Column({ field: 'created_at', type: DataType.DATE })
   createdAt: Date;
 

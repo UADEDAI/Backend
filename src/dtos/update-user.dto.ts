@@ -26,6 +26,11 @@ export class UpdateUserDto {
   role?: 'owner' | 'client';
 
   @IsOptional()
+  @IsString()
+  @Column({ field: 'avatar' })
+  avatar?: string;
+
+  @IsOptional()
   @IsDate()
   createdAt?: Date;
 
