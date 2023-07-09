@@ -22,3 +22,8 @@ export const PASSWORD_MAIL_CONTENT = {
   subject: 'CinemApp password recovery',
   msg: 'The code to complete the password recovery process is: ',
 };
+
+export const RESERVATION_MAIL_CONTENT = {
+  subject: 'CinemApp reservation',
+  msg: 'Your reservation has been completed successfully. The reservation code is: ',
+};
