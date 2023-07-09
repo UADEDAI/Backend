@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { MOVIE_STATUS, MoviesPaginated } from '../../constants';
 import { CreateCommentDto } from 'src/dtos/create-comment.dto';
-import { Cinema, Comment, Movie, Room, Screening } from 'src/schemas';
+import { Cinema, Comment, Movie, Room, Screening, User } from 'src/schemas';
 import { Op, Sequelize } from 'sequelize';
 
 @Injectable()
@@ -18,6 +18,8 @@ export class MoviesService {
     private roomModel: typeof Room,
     @InjectModel(Screening)
     private screeningModel: typeof Screening,
+    @InjectModel(User)
+    private userModel: typeof User,
   ) {}
 
   async findAll(
@@ -106,6 +108,12 @@ export class MoviesService {
       where: {
         movieId: id,
       },
+      include: [
+        {
+          model: User,
+          attributes: ['username', 'id'],
+        },
+      ],
     });
   }
 
