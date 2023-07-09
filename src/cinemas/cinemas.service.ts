@@ -4,7 +4,7 @@ import { endOfDay, startOfDay } from 'date-fns';
 import { Op, Sequelize } from 'sequelize';
 import { getGeocode } from 'services/geolocation';
 import { CreateCinemaDto, UpdateCinemaDto } from 'src/dtos';
-import { Cinema, Movie, Room, Screening } from 'src/schemas';
+import { Cinema, Movie, ReservationSeat, Room, Screening } from 'src/schemas';
 
 type CinemaWithRoomsAmount = Cinema & {
   roomsAmount: number;
@@ -20,6 +20,8 @@ export class CinemasService {
     private roomModel: typeof Room,
     @InjectModel(Screening)
     private screeningModel: typeof Screening,
+    @InjectModel(ReservationSeat)
+    private reservationSeatModel: typeof ReservationSeat,
   ) {}
 
   async findAllCinemas(): Promise<CinemaWithRoomsAmount[]> {
@@ -216,9 +218,26 @@ export class CinemasService {
       };
     }
 
-    return this.screeningModel.findAll({
+    const screenings = await this.screeningModel.findAll({
       where,
       include: [Movie, { model: Room, include: [Cinema] }],
     });
+
+    for (const screening of screenings) {
+      const reservedSeats = await this.reservationSeatModel.findAll({
+        where: {
+          screeningId: screening.id,
+        },
+      });
+
+      const roomSeats = screening.room.seats * screening.room.numRows;
+
+      screening.setDataValue(
+        'availableSeats',
+        roomSeats - reservedSeats.length,
+      );
+    }
+
+    return screenings;
   }
 }

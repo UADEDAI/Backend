@@ -111,7 +111,38 @@ export class MoviesService {
 
   async createComment(createCommentDto: CreateCommentDto): Promise<Comment> {
     try {
-      return await this.commentModel.create<any>(createCommentDto as any);
+      const comment = await this.commentModel.create<any>(
+        createCommentDto as any,
+      );
+
+      // find all the comments for this movie
+      const comments = await this.commentModel.findAll({
+        where: {
+          movieId: createCommentDto.movieId,
+        },
+      });
+
+      // calculate the score total
+      const score = comments.reduce((acc, comment) => {
+        return acc + comment.rating;
+      }, 0);
+
+      // calculate the average score
+      const averageScore = score / comments.length;
+
+      // modify the movie score
+      await this.movieModel.update(
+        {
+          score: averageScore,
+        },
+        {
+          where: {
+            id: createCommentDto.movieId,
+          },
+        },
+      );
+
+      return comment;
     } catch (err) {
       if (err.name === 'SequelizeUniqueConstraintError') {
         throw new BadRequestException(
@@ -154,7 +185,9 @@ export class MoviesService {
     }
 
     if (score) {
-      where['score'] = score;
+      where['score'] = {
+        [Op.gte]: score,
+      };
     }
 
     if (lat && lng) {
