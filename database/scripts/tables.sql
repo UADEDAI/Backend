@@ -141,6 +141,20 @@ CREATE TABLE screenings (
 );
 
 # ====================================================
+# Table: otp
+# ====================================================
+DROP TABLE IF EXISTS `otp_reservations`;
+
+CREATE TABLE otp_reservations (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `user_id` INT,
+  `code` VARCHAR(255) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+# ====================================================
 # Table: reservations
 # ====================================================
 DROP TABLE IF EXISTS `reservations`;
@@ -149,10 +163,12 @@ CREATE TABLE reservations (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `user_id` INT,
   `screening_id` INT,
+  `otp_id` INT,
   `time` DATETIME NOT NULL,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (otp_id) REFERENCES otp_reservations(id) ON DELETE CASCADE,
   FOREIGN KEY (screening_id) REFERENCES screenings(id) ON DELETE CASCADE
 );
 

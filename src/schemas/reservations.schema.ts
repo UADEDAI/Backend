@@ -10,6 +10,7 @@ import {
 import { Screening } from './screenings.schema';
 import { ReservationSeat } from './reservationSeats.schema';
 import { User } from './users.schema';
+import { OtpReservation } from './otpReservation.schema';
 
 @Table({
   tableName: 'reservations',
@@ -42,6 +43,16 @@ export class Reservation extends Model<Reservation> {
 
   @BelongsTo(() => User)
   public user: User;
+
+  @ForeignKey(() => OtpReservation)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  public otpId: number;
+
+  @BelongsTo(() => OtpReservation)
+  public otp: OtpReservation;
 
   @Column({
     type: DataType.DATE,

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import {
   Cinema,
   Movie,
+  OtpReservation,
   Reservation,
   ReservationSeat,
   Room,
@@ -12,8 +13,6 @@ import {
 import { ReservationsController } from './reservations.controller';
 import { ReservationsService } from './reservations.service';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Otp } from 'src/schemas/otp.schema';
-import { OtpService } from 'src/otp/otp.service';
 
 @Module({
   imports: [
@@ -26,11 +25,11 @@ import { OtpService } from 'src/otp/otp.service';
       Cinema,
       Movie,
       User,
-      Otp,
+      OtpReservation,
     ]),
   ],
   controllers: [ReservationsController],
-  providers: [ReservationsService, OtpService],
+  providers: [ReservationsService],
   exports: [ReservationsService],
 })
 export class ReservationsModule {}

@@ -8,3 +8,4 @@ export { Screening } from './screenings.schema';
 export { Seat } from './seats.schema';
 export { Reservation } from './reservations.schema';
 export { ReservationSeat } from './reservationSeats.schema';
+export { OtpReservation } from './otpReservation.schema';

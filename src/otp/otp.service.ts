@@ -3,7 +3,7 @@ import { Otp } from 'src/schemas/otp.schema';
 import { randomBytes } from 'crypto';
 import { InjectModel } from '@nestjs/sequelize';
 
-export function generateRandomOtp(length: number = 6): string {
+export function generateRandomOtp(length = 6): string {
   const buffer = randomBytes(Math.ceil(length / 2));
   const otp = buffer.toString('hex').slice(0, length);
   return otp;
@@ -17,7 +17,7 @@ export class OtpService {
   ) {}
 
   async generateOtp(userId: number): Promise<Otp> {
-    const otp = new this.otpModel()
+    const otp = new this.otpModel();
     otp.code = generateRandomOtp();
     otp.user = userId;
 
