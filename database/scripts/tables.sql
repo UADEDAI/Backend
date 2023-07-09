@@ -82,7 +82,7 @@ CREATE TABLE movies (
   `genre` VARCHAR(255),
   `director` VARCHAR(255),
   `cast` VARCHAR(255),
-  `score` INT,
+  `score` INT DEFAULT 0,
   `certificate` VARCHAR(10),
   `image_url` VARCHAR(255),
   `status` ENUM('showing', 'coming_soon') NOT NULL DEFAULT 'coming_soon',
