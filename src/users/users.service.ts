@@ -18,6 +18,7 @@ const attributes = [
   'username',
   'company',
   'role',
+  'avatar',
   'createdAt',
   'updatedAt',
 ];
