@@ -20,6 +20,6 @@ export class CreateCommentDto {
   @IsNotEmpty()
   @IsInt()
   @Min(1)
-  @Max(5)
+  @Max(10)
   rating: number;
 }
