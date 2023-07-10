@@ -9,12 +9,12 @@ import { User } from 'src/schemas';
 export class ReservationsController {
   constructor(private readonly reservationsService: ReservationsService) {}
 
-@UseGuards(JwtAuthGuard)
-@Get()
-findAll(@Req() req: any) {
-  console.log('User id requesting reservations: ' + req.user.id);
-  return this.reservationsService.findAllReservations(req.user.id);
-}
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  findAll(@Req() req: any) {
+    console.log('User id requesting reservations: ' + req.user.id);
+    return this.reservationsService.findAllReservations(req.user.id);
+  }
 
 
   @Get(':id')
