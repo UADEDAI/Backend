@@ -12,8 +12,8 @@ export class ReservationsController {
 @UseGuards(JwtAuthGuard)
 @Get()
 findAll(@Req() req: any) {
-  console.log('User id requesting reservations: ' + req.id);
-  return this.reservationsService.findAllReservations(req.id);
+  console.log('User id requesting reservations: ' + req.user.id);
+  return this.reservationsService.findAllReservations(req.user.id);
 }
 
 
