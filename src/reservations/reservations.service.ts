@@ -15,7 +15,7 @@ import {
   Seat,
   User,
 } from 'src/schemas';
-import { format } from 'date-fns';
+import { format, isSameDay } from 'date-fns';
 import { es } from 'date-fns/locale';
 
 @Injectable()
@@ -116,9 +116,15 @@ export class ReservationsService {
           seatId: seat,
           screeningId: createReservationDto.screeningId,
         },
+        include: [Reservation],
       });
 
-      if (reservationSeat) {
+      const reservedDate = new Date(reservationSeat.reservation.time);
+      const newReservationDate = new Date(createReservationObject.time);
+
+      const isSameYearMonthDay = isSameDay(reservedDate, newReservationDate);
+
+      if (reservationSeat && isSameYearMonthDay) {
         seatsTaken = true;
         break;
       }
