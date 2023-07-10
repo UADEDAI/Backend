@@ -35,8 +35,11 @@ export class ReservationsService {
     private otpModel: typeof OtpReservation,
   ) {}
 
-  async findAllReservations(): Promise<Reservation[]> {
+  async findAllReservations(userId: number): Promise<Reservation[]> {
     return this.reservationModel.findAll({
+      where: {
+        userId: userId,
+      },
       include: [
         OtpReservation,
         {
@@ -46,6 +49,7 @@ export class ReservationsService {
       ],
     });
   }
+  
 
   async findOne(id: string) {
     const reservation = await this.reservationModel.findOne({
