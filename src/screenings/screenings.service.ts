@@ -96,11 +96,8 @@ export class ScreeningsService {
     day: number,
   ): Promise<Seat[]> {
     const screening = await this.findOneScreening(id);
-    console.log('year', year);
-    console.log('month', month);
-    console.log('day', day);
     // Validate that the given date is valid
-    const date = new Date(year, month - 1, day);
+    const date = new Date(year, month, day);
 
     if (date.toString() === 'Invalid Date') {
       throw new Error('Invalid date');
