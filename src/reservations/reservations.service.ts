@@ -119,6 +119,10 @@ export class ReservationsService {
         include: [Reservation],
       });
 
+      if (!reservationSeat) {
+        continue;
+      }
+
       const reservedDate = new Date(reservationSeat.reservation.time);
       const newReservationDate = new Date(createReservationObject.time);
 
@@ -172,8 +176,6 @@ export class ReservationsService {
     reservation.setDataValue('screening', screening);
 
     reservation.setDataValue('otp', otp);
-
-    console.log(reservation);
 
     // Create the reservation seats
     for (const seat of createReservationDto.seats) {
