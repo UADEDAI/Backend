@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import {
   Cinema,
+  Reservation,
   ReservationSeat,
   Room,
   Screening,
@@ -20,6 +21,7 @@ import { CinemasService } from './cinemas.service';
       Screening,
       Seat,
       ReservationSeat,
+      Reservation,
     ]),
   ],
   controllers: [CinemasController],

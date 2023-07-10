@@ -4,7 +4,14 @@ import { endOfDay, startOfDay } from 'date-fns';
 import { Op, Sequelize } from 'sequelize';
 import { getGeocode } from 'services/geolocation';
 import { CreateCinemaDto, UpdateCinemaDto } from 'src/dtos';
-import { Cinema, Movie, ReservationSeat, Room, Screening } from 'src/schemas';
+import {
+  Cinema,
+  Movie,
+  Reservation,
+  ReservationSeat,
+  Room,
+  Screening,
+} from 'src/schemas';
 
 type CinemaWithRoomsAmount = Cinema & {
   roomsAmount: number;
@@ -22,6 +29,8 @@ export class CinemasService {
     private screeningModel: typeof Screening,
     @InjectModel(ReservationSeat)
     private reservationSeatModel: typeof ReservationSeat,
+    @InjectModel(Reservation)
+    private reservationModel: typeof Reservation,
   ) {}
 
   async findAllCinemas(): Promise<CinemaWithRoomsAmount[]> {
@@ -214,13 +223,13 @@ export class CinemasService {
 
     const dateStart = new Date(date);
 
-    if (dateStart.toString() !== 'Invalid Date') {
-      const startAt = startOfDay(dateStart);
-      const endAt = endOfDay(dateStart);
-      where['startAt'] = {
-        [Op.between]: [startAt, endAt],
-      };
-    }
+    // if (dateStart.toString() !== 'Invalid Date') {
+    //   const startAt = startOfDay(dateStart);
+    //   const endAt = endOfDay(dateStart);
+    //   where['startAt'] = {
+    //     [Op.between]: [startAt, endAt],
+    //   };
+    // }
 
     if (movieId) {
       where['movieId'] = movieId;
@@ -231,19 +240,53 @@ export class CinemasService {
       include: [Movie, { model: Room, include: [Cinema] }],
     });
 
+    console.log('screenings', screenings);
     for (const screening of screenings) {
-      const reservedSeats = await this.reservationSeatModel.findAll({
-        where: {
-          screeningId: screening.id,
-        },
+      const whereRes = {
+        screeningId: screening.id,
+      };
+      if (dateStart.toString() !== 'Invalid Date') {
+        const startAt = startOfDay(dateStart);
+        const endAt = endOfDay(dateStart);
+        whereRes['time'] = {
+          [Op.between]: [startAt, endAt],
+        };
+      }
+      const reservations = await this.reservationModel.findAll({
+        where: whereRes,
       });
 
-      const roomSeats = screening.room.seats * screening.room.numRows;
+      console.log('reservation', reservations);
 
-      screening.setDataValue(
-        'availableSeats',
-        roomSeats - reservedSeats.length,
-      );
+      if (reservations) {
+        const reservedSeats = await this.reservationSeatModel.findAll({
+          where: {
+            reservationId: {
+              [Op.in]: reservations.map((reservation) => reservation.id),
+            },
+          },
+        });
+
+        const roomSeats = screening.room.seats * screening.room.numRows;
+
+        screening.setDataValue(
+          'availableSeats',
+          roomSeats - reservedSeats.length,
+        );
+      } else {
+        const reservedSeats = await this.reservationSeatModel.findAll({
+          where: {
+            screeningId: screening.id,
+          },
+        });
+
+        const roomSeats = screening.room.seats * screening.room.numRows;
+
+        screening.setDataValue(
+          'availableSeats',
+          roomSeats - reservedSeats.length,
+        );
+      }
     }
 
     return screenings;
