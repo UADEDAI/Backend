@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { ReservationsService } from './reservations.service';
 import { CreateReservationDto } from 'src/dtos';
 import { JwtAuthGuard } from 'src/auth/auth.jwt.guard';
@@ -11,7 +11,8 @@ export class ReservationsController {
 
 @UseGuards(JwtAuthGuard)
 @Get()
-findAll(@Body() req: any) {
+findAll(@Req() req: any) {
+  console.log('User id requesting reservations: ' + req.id);
   return this.reservationsService.findAllReservations(req.id);
 }
 
