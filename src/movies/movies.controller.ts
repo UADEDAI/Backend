@@ -16,7 +16,7 @@ export class MoviesController {
   ) {
     // Coerce the page and limit parameters to numbers and provide default values
     sPage = +sPage || 1;
-    limit = +limit || 10;
+    limit = +limit || 100;
 
     return this.moviesService.findAll(sPage, limit, title, genre, score);
   }
@@ -35,7 +35,7 @@ export class MoviesController {
     console.log('aca: ', lat, lng);
     // Coerce the page and limit parameters to numbers and provide default values
     sPage = +sPage || 1;
-    limit = +limit || 10;
+    limit = +limit || 100;
 
     return this.moviesService.findPremieredMoviesHome(
       lat,
