@@ -223,14 +223,6 @@ export class CinemasService {
 
     const dateStart = new Date(date);
 
-    // if (dateStart.toString() !== 'Invalid Date') {
-    //   const startAt = startOfDay(dateStart);
-    //   const endAt = endOfDay(dateStart);
-    //   where['startAt'] = {
-    //     [Op.between]: [startAt, endAt],
-    //   };
-    // }
-
     if (movieId) {
       where['movieId'] = movieId;
     }
@@ -240,7 +232,6 @@ export class CinemasService {
       include: [Movie, { model: Room, include: [Cinema] }],
     });
 
-    console.log('screenings', screenings);
     for (const screening of screenings) {
       const whereRes = {
         screeningId: screening.id,
@@ -255,8 +246,6 @@ export class CinemasService {
       const reservations = await this.reservationModel.findAll({
         where: whereRes,
       });
-
-      console.log('reservation', reservations);
 
       if (reservations) {
         const reservedSeats = await this.reservationSeatModel.findAll({

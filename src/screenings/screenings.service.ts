@@ -1,5 +1,6 @@
 import { ConflictException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { endOfDay, startOfDay } from 'date-fns';
 import { Op } from 'sequelize';
 import { CreateScreeningDto } from 'src/dtos';
 import { Reservation, ReservationSeat, Screening, Seat } from 'src/schemas';
@@ -95,16 +96,25 @@ export class ScreeningsService {
     day: number,
   ): Promise<Seat[]> {
     const screening = await this.findOneScreening(id);
+    console.log('year', year);
+    console.log('month', month);
+    console.log('day', day);
     // Validate that the given date is valid
-    const date = new Date(year, month, day);
+    const date = new Date(year, month - 1, day);
 
     if (date.toString() === 'Invalid Date') {
       throw new Error('Invalid date');
     }
 
+    const startAt = startOfDay(date);
+    const endAt = endOfDay(date);
+
     const reservations = await this.reservationModel.findAll({
       where: {
         screeningId: id,
+        time: {
+          [Op.between]: [startAt, endAt],
+        },
       },
     });
 
