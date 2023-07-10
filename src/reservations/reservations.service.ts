@@ -188,7 +188,7 @@ export class ReservationsService {
       RESERVATION_MAIL_CONTENT.subject,
       RESERVATION_MAIL_CONTENT.msg + otp.code,
       `<div>
-        <h2>${RESERVATION_MAIL_CONTENT.msg}</h2>
+        <h2>${RESERVATION_MAIL_CONTENT.msg} para ${screening.movie.title}</h2>
         <p>Cine: ${screening.room.cinema.name}</p>
         <p>Sala: ${screening.room.name}</p>
         <p>Dirección: ${screening.room.cinema.street} ${screening.room.cinema.streetNum}</p>

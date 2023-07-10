@@ -25,5 +25,5 @@ export const PASSWORD_MAIL_CONTENT = {
 
 export const RESERVATION_MAIL_CONTENT = {
   subject: 'CinemApp reservation',
-  msg: 'Tu reserva se ha realizado exitosamente. ',
+  msg: 'Tu reserva se ha realizado exitosamente',
 };
