@@ -8,13 +8,14 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from 'src/schemas';
 import { AuthController } from './auth.controller';
 import { Otp } from 'src/schemas/otp.schema';
+require('dotenv').config();
 
 @Module({
   imports: [
     SequelizeModule.forFeature([User, Otp]),
     PassportModule,
     JwtModule.register({
-      secret: process.env.JWT_SECRET || 'secret',
+      secret: 'secret',
       signOptions: { expiresIn: '60m' },
     }),
   ],

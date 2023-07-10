@@ -9,10 +9,10 @@ import { User } from 'src/schemas';
 export class ReservationsController {
   constructor(private readonly reservationsService: ReservationsService) {}
 
-@Get()
 @UseGuards(JwtAuthGuard)
-findAll(@GetUser() user: any) {
-  return this.reservationsService.findAllReservations(user.id);
+@Get()
+findAll(@Body() req: any) {
+  return this.reservationsService.findAllReservations(req.id);
 }
 
 
